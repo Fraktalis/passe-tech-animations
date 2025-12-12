@@ -1,0 +1,22 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "libreoffice",
+      "targetTime": 3.04210432297249
+    },
+    {
+      "name": "OpenTofu",
+      "targetTime": 11.643783494105044
+    },
+    {
+      "name": "redis",
+      "targetTime": 13.80187566988211
+    },
+    {
+      "name": "valkey",
+      "targetTime": 16.272257949267605
+    }
+  ],
+  "seed": 2808437427
+}
