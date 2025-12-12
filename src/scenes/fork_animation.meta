@@ -3,19 +3,19 @@
   "timeEvents": [
     {
       "name": "libreoffice",
-      "targetTime": 3.04210432297249
+      "targetTime": 2.9
     },
     {
       "name": "OpenTofu",
-      "targetTime": 11.643783494105044
+      "targetTime": 11.300000000000002
     },
     {
       "name": "redis",
-      "targetTime": 13.80187566988211
+      "targetTime": 13.200000000000005
     },
     {
       "name": "valkey",
-      "targetTime": 16.272257949267605
+      "targetTime": 15.400000000000006
     }
   ],
   "seed": 2808437427
