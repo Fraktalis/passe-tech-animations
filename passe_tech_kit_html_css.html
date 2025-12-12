@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Passe Tech – Brand Kit</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --pt-rose:#e42951;          /* Rouge Pastèque */
+      --pt-green:#1c5c0e;         /* Vert Écorce */
+      --pt-green-light:#A5D6A7;   /* Vert Clair */
+      --pt-ink:#1B1F23;           /* Noir Bleuté */
+      --pt-cream:#F9F9F6;         /* Blanc Crème */
+      --pt-gray:#6E7681;          /* Gris Froid */
+      --pt-blue:#0099FF;          /* Bleu Digital */
+
+      --bg:var(--pt-cream);
+      --fg:var(--pt-ink);
+      --muted:var(--pt-gray);
+      --card: #ffffff;
+      --border: #e6e6e6;
+      --shadow: 0 8px 30px rgba(0,0,0,.07);
+      --radius: 18px;
+    }
+
+    /* Dark theme */
+    .theme-dark{
+      --bg:#0f1215;
+      --fg:#e9eef3;
+      --muted:#9aa3ad;
+      --card:#14181d;
+      --border:#20252b;
+      --shadow: 0 10px 40px rgba(0,0,0,.45);
+    }
+
+    html,body{height:100%;}
+    body{
+      margin:0; background:var(--bg); color:var(--fg);
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      line-height:1.6; letter-spacing:.1px;
+    }
+    .container{max-width:1100px; margin:0 auto; padding:28px 20px 80px;}
+
+    /* Header */
+    header{display:flex; align-items:center; justify-content:space-between; gap:20px; margin-bottom:28px;}
+    .brand{display:flex; align-items:center; gap:16px;}
+    .logo{width:56px; height:56px; border-radius:16px; box-shadow:var(--shadow); background:linear-gradient(135deg, #ff6b7d, var(--pt-rose)); position:relative; overflow:hidden;}
+    .logo svg{position:absolute; inset:0;}
+    .title{font-family:Poppins, sans-serif; font-weight:800; font-size:28px; letter-spacing:.3px;}
+    .tagline{font-size:14px; color:var(--muted); margin-top:-6px}
+
+    /* Theme toggle */
+    .toggle{display:flex; gap:10px; align-items:center; background:var(--card); border:1px solid var(--border); padding:8px 12px; border-radius:999px; box-shadow:var(--shadow)}
+    .toggle button{appearance:none; border:0; background:var(--pt-ink); color:#fff; padding:8px 14px; border-radius:999px; font-weight:600; cursor:pointer}
+    .toggle button.alt{background:transparent; color:var(--fg)}
+
+    /* Sections */
+    section{background:var(--card); border:1px solid var(--border); border-radius:var(--radius); padding:22px; margin:18px 0; box-shadow:var(--shadow)}
+    h2{font-family:Poppins, sans-serif; font-weight:800; letter-spacing:.3px; margin:0 0 14px;}
+    h3{font-family:Poppins, sans-serif; font-weight:700; margin:18px 0 8px;}
+    .grid{display:grid; grid-template-columns:repeat(12,1fr); gap:14px}
+    .col-6{grid-column:span 6}
+    .col-4{grid-column:span 4}
+    .col-3{grid-column:span 3}
+    .pill{display:inline-flex; align-items:center; gap:8px; padding:6px 10px; background:rgba(0,0,0,.05); border-radius:999px; border:1px solid var(--border)}
+    .meta{color:var(--muted); font-size:13px}
+
+    /* Palette */
+    .swatch{border-radius:14px; overflow:hidden; border:1px solid var(--border); box-shadow:var(--shadow)}
+    .swatch .tone{height:86px}
+    .swatch .meta{padding:10px 12px; display:flex; align-items:center; justify-content:space-between}
+
+    .tone.rose{background:var(--pt-rose)}
+    .tone.green{background:var(--pt-green)}
+    .tone.green-light{background:var(--pt-green-light)}
+    .tone.ink{background:var(--pt-ink)}
+    .tone.cream{background:var(--pt-cream)}
+    .tone.gray{background:var(--pt-gray)}
+    .tone.blue{background:var(--pt-blue)}
+
+    /* Typography showcase */
+    .typo-sample{display:grid; grid-template-columns:1fr 1fr; gap:16px}
+    .typo-card{border:1px solid var(--border); border-radius:14px; padding:16px; background:var(--card)}
+    .typo-title{font-family:Poppins, sans-serif; font-weight:800; font-size:34px}
+    .typo-sub{font-family:Poppins, sans-serif; font-weight:600; font-size:20px}
+    .typo-body{font-family:Inter, sans-serif;}
+
+    /* Components */
+    .btn{display:inline-flex; align-items:center; gap:8px; border-radius:12px; padding:10px 16px; font-weight:700; border:1px solid transparent; cursor:pointer; text-decoration:none}
+    .btn.primary{background:var(--pt-rose); color:#fff}
+    .btn.secondary{background:transparent; color:var(--fg); border-color:var(--border)}
+    .btn.glow{background:linear-gradient(135deg,var(--pt-rose), var(--pt-blue)); color:#fff; box-shadow:0 8px 30px rgba(255,79,100,.25)}
+
+    .card{border:1px solid var(--border); border-radius:16px; padding:16px; background:var(--card)}
+
+    /* Thumbnail template */
+    .thumb{position:relative; height:220px; border-radius:18px; overflow:hidden; border:1px solid var(--border); box-shadow:var(--shadow); display:flex; align-items:flex-end}
+    .thumb .bg{position:absolute; inset:0; background:linear-gradient(145deg, var(--pt-rose), var(--pt-green))}
+    .thumb .label{position:relative; padding:16px;}
+    .thumb h4{font-family:Poppins, sans-serif; font-size:28px; line-height:1; margin:0; color:white; text-shadow:0 2px 14px rgba(0,0,0,.35)}
+    .badge{display:inline-block; padding:6px 10px; border-radius:999px; background:rgba(0,0,0,.35); color:#fff; font-weight:700; font-size:12px; margin-bottom:6px}
+
+    /* Logo panel with variants */
+    .logo-variants{display:grid; grid-template-columns:repeat(4,1fr); gap:12px}
+    .logo-box{background:var(--card); border:1px solid var(--border); border-radius:16px; padding:12px; display:flex; align-items:center; justify-content:center; height:86px}
+
+    /* Utilities */
+    .row{display:flex; gap:12px; flex-wrap:wrap}
+    .kbd{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; background:rgba(0,0,0,.06); padding:2px 6px; border-radius:6px; border:1px solid var(--border)}
+    .spacer{height:6px}
+
+    /* Responsive */
+    @media (max-width: 860px){
+      .grid{grid-template-columns:repeat(6,1fr)}
+      .col-6{grid-column:span 6}
+      .col-4{grid-column:span 6}
+      .col-3{grid-column:span 3}
+      .logo-variants{grid-template-columns:repeat(2,1fr)}
+      .typo-sample{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="app">
+    <header>
+      <div class="brand">
+        <!-- SVG LOGO -->
+        <div class="logo" aria-label="Logo Passe Tech">
+          <svg viewBox="0 0 120 120" role="img" aria-hidden="true">
+            <defs>
+              <clipPath id="r">
+                <rect x="8" y="8" width="104" height="104" rx="24" ry="24" />
+              </clipPath>
+            </defs>
+            <g clip-path="url(#r)">
+              <rect x="0" y="0" width="120" height="120" fill="transparent" />
+              <!-- Slice -->
+              <path d="M16 72a44 44 0 0 0 88 0v-4H16v4z" fill="#1B1F23" opacity="0.1"/>
+              <path d="M16 70a44 44 0 0 0 88 0v-6H16v6z" fill="#1c5c0e"/>
+              <path d="M20 68a40 40 0 0 0 80 0v-6H20v6z" fill="#A5D6A7"/>
+              <path d="M24 64a36 36 0 0 0 72 0V36H24v28z" fill="#e42951"/>
+              <!-- seeds -->
+              <g fill="#1B1F23">
+                <ellipse cx="44" cy="56" rx="3.4" ry="5"/>
+                <ellipse cx="60" cy="50" rx="3.2" ry="5.2"/>
+                <ellipse cx="78" cy="56" rx="3.4" ry="5"/>
+              </g>
+              <!-- tiny circuit dot -->
+              <circle cx="84" cy="40" r="4" fill="#0099FF"/>
+            </g>
+          </svg>
+        </div>
+        <div>
+          <div class="title">PASSE TECH</div>
+          <div class="tagline">Charte graphique • HTML/CSS</div>
+        </div>
+      </div>
+      <div class="toggle" role="group" aria-label="Theme">
+        <button id="darkBtn" class="alt" title="Activer le thème sombre">Sombre</button>
+        <button id="lightBtn" title="Activer le thème clair">Clair</button>
+      </div>
+    </header>
+
+    <!-- Palette -->
+    <section>
+      <h2>Palette de couleurs</h2>
+      <p class="meta">Copiez les variables CSS ci‑dessous : <span class="kbd">:root{ --pt-rose:#e42951; --pt-green:#1c5c0e; --pt-green-light:#A5D6A7; --pt-ink:#1B1F23; --pt-cream:#F9F9F6; --pt-gray:#6E7681; --pt-blue:#0099FF; }</span></p>
+      <div class="grid">
+        <div class="swatch col-3"><div class="tone rose"></div><div class="meta"><strong>Rouge Pastèque</strong><span>#e42951</span></div></div>
+        <div class="swatch col-3"><div class="tone green"></div><div class="meta"><strong>Vert Écorce</strong><span>#1c5c0e</span></div></div>
+        <div class="swatch col-3"><div class="tone green-light"></div><div class="meta"><strong>Vert Clair</strong><span>#A5D6A7</span></div></div>
+        <div class="swatch col-3"><div class="tone blue"></div><div class="meta"><strong>Bleu Digital</strong><span>#0099FF</span></div></div>
+        <div class="swatch col-3"><div class="tone ink"></div><div class="meta"><strong>Noir Bleuté</strong><span>#1B1F23</span></div></div>
+        <div class="swatch col-3"><div class="tone cream"></div><div class="meta"><strong>Blanc Crème</strong><span>#F9F9F6</span></div></div>
+        <div class="swatch col-3"><div class="tone gray"></div><div class="meta"><strong>Gris Froid</strong><span>#6E7681</span></div></div>
+        <div class="swatch col-3"><div class="tone" style="background:linear-gradient(135deg,var(--pt-rose),var(--pt-blue))"></div><div class="meta"><strong>Dégradé</strong><span>rose → bleu</span></div></div>
+      </div>
+    </section>
+
+    <!-- Typo -->
+    <section>
+      <h2>Typographies</h2>
+      <div class="typo-sample">
+        <div class="typo-card">
+          <div class="typo-title">Titres & Logos – Poppins ExtraBold</div>
+          <div class="spacer"></div>
+          <div class="typo-sub">Sous‑titres – Poppins SemiBold</div>
+          <p class="meta">Import Google Fonts : <span class="kbd">font-family: Poppins, sans-serif;</span></p>
+        </div>
+        <div class="typo-card">
+          <div style="font-weight:600">Texte long & UI – Inter</div>
+          <p class="typo-body">Inter Regular / 16–18px pour la lisibilité. Exemple : « Passe Tech tranche dans le jargon avec humour et rigueur. »</p>
+          <p class="meta">Import Google Fonts : <span class="kbd">font-family: Inter, sans-serif;</span></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Logo variants -->
+    <section>
+      <h2>Logo & Variantes rapides</h2>
+      <div class="logo-variants">
+        <div class="logo-box" style="background:#fff"><span class="pill"><span style="width:10px;height:10px;background:var(--pt-rose);border-radius:50%"></span> Carré clair</span></div>
+        <div class="logo-box theme-dark"><span class="pill" style="background:rgba(255,255,255,.06)"><span style="width:10px;height:10px;background:#fff;border-radius:50%"></span> Carré sombre</span></div>
+        <div class="logo-box"><span class="pill">Icône seule</span></div>
+        <div class="logo-box"><span class="pill">Logo + texte</span></div>
+      </div>
+      <p class="meta">Le SVG ci‑dessus est librement réutilisable. Remplacez‑le par vos rendus Blender si besoin.</p>
+    </section>
+
+    <!-- Components -->
+    <section>
+      <h2>Composants UI</h2>
+      <div class="row">
+        <a class="btn primary" href="#">Bouton Principal</a>
+        <a class="btn secondary" href="#">Bouton Secondaire</a>
+        <a class="btn glow" href="#">Bouton Dégradé</a>
+        <span class="pill">Badge neutre</span>
+        <span class="pill" style="background:rgba(255,79,100,.12); border-color: rgba(255,79,100,.4); color:var(--pt-rose)">Badge rose</span>
+      </div>
+      <div class="spacer"></div>
+      <div class="grid">
+        <div class="col-6 card">
+          <h3>Carte de contenu</h3>
+          <p class="meta">Pour des encadrés pédagogiques, timestamps, ou notes d’épisode.</p>
+          <p>La tech, sans jargon : objectifs, définitions, limites, et démonstrations visuelles.</p>
+        </div>
+        <div class="col-6">
+          <div class="thumb">
+            <div class="bg"></div>
+            <div class="label">
+              <div class="badge">YOUTUBE • 10:32</div>
+              <h4>Le chiffrement expliqué</h4>
+            </div>
+          </div>
+          <p class="meta" style="margin-top:8px">Modèle de miniature : dégradé rose→vert, titre court en Poppins ExtraBold, pictogramme 3D optionnel.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Usage notes -->
+    <section>
+      <h2>Guidelines rapides</h2>
+      <ul>
+        <li>Utilisez <strong>8–12px</strong> d’espacement interne minimum dans les éléments, coins <strong>18px</strong>.</li>
+        <li>Privilégiez des textes courts et contrastés. Évitez plus de <strong>4 mots</strong> sur les miniatures.</li>
+        <li>Animations : transitions douces (200–300ms), lueurs légères sur les accents.</li>
+        <li>Compatibilité sombre/clair via la classe <span class="kbd">.theme-dark</span> portée sur <span class="kbd">&lt;body&gt;</span>.</li>
+      </ul>
+    </section>
+  </div>
+
+  <script>
+    const root = document.body;
+    const darkBtn = document.getElementById('darkBtn');
+    const lightBtn = document.getElementById('lightBtn');
+    darkBtn.addEventListener('click',()=>{root.classList.add('theme-dark')});
+    lightBtn.addEventListener('click',()=>{root.classList.remove('theme-dark')});
+  </script>
+</body>
+</html>
