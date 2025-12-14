@@ -1,7 +1,7 @@
 import {makeProject} from '@motion-canvas/core';
 
-import mainScene from './scenes/timeline-web?scene';
+import mainScene from './scenes/rsc-explained?scene';
 
 export default makeProject({
-  scenes: [mainScene],
+  scenes: [mainScene]
 });
