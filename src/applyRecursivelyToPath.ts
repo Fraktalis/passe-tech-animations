@@ -1,4 +1,4 @@
-import { Node, Path, PossibleCanvasStyle, SVG, SVGProps } from "@motion-canvas/2d"
+import { Path, SVG, SVGProps } from "@motion-canvas/2d"
 
 type ModifiableSVGProps = Omit<SVGProps, 'svg'>;
 

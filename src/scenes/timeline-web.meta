@@ -1,5 +1,26 @@
 {
   "version": 0,
-  "timeEvents": [],
+  "timeEvents": [
+    {
+      "name": "1991",
+      "targetTime": 2.2037870668095714
+    },
+    {
+      "name": "1996",
+      "targetTime": 10.139442658092191
+    },
+    {
+      "name": "1997",
+      "targetTime": 19.89419085869777
+    },
+    {
+      "name": "2000",
+      "targetTime": 40.11312619274565
+    },
+    {
+      "name": "2010",
+      "targetTime": 64.61473390978747
+    }
+  ],
   "seed": 1200172365
 }
