@@ -1,7 +1,9 @@
 import {makeProject} from '@motion-canvas/core';
 
-import mainScene from './scenes/llmstxt?scene';
+import mainScene from './scenes/tailwindVSshadcn?scene';
+// import audio from './audio/off2_TREATED.wav';
 
 export default makeProject({
-  scenes: [mainScene]
+  scenes: [mainScene],
+  // audio: audio
 });

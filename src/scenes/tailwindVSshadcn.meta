@@ -1,0 +1,18 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "startNpmInstall",
+      "targetTime": 2.412004287245443
+    },
+    {
+      "name": "endNpmInstall",
+      "targetTime": 7.5115755627009575
+    },
+    {
+      "name": "startCopyPaste",
+      "targetTime": 10.699999999999994
+    }
+  ],
+  "seed": 1380220739
+}

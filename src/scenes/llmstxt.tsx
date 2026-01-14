@@ -1,5 +1,5 @@
 import { Circle, Grid, Layout, Line, makeScene2D, Rect, Txt, SVG } from '@motion-canvas/2d';
-import { all, createRef, easeInCubic, easeOutCubic, sequence, chain, waitFor } from '@motion-canvas/core';
+import { all, createRef, easeInCubic, easeOutCubic, sequence, chain, waitFor, waitUntil, createSignal } from '@motion-canvas/core';
 
 export default makeScene2D(function* (view) {
     const grid = createRef<Grid>();
@@ -26,7 +26,8 @@ export default makeScene2D(function* (view) {
                 stroke={COLORS.grid}
                 lineWidth={2}
                 spacing={80}
-                opacity={0.2}
+                end={0}
+                opacity={1}
             />
 
             <Rect fill={COLORS.bg} width={'100%'} height={'100%'} zIndex={-1} />
@@ -39,6 +40,7 @@ export default makeScene2D(function* (view) {
                 lineWidth={8}
                 fill={COLORS.bg}
                 zIndex={10}
+                scale={0}
             >
                 <Txt fontFamily="monospace"text="LLM" fill={COLORS.white} fontSize={200} fontWeight={1200} />
             </Circle>
@@ -153,28 +155,66 @@ await cache.set('key', 'value');
         </Layout>
     );
 
+
+    // 1. Création du signal pour animer le nombre
+    const tokenCount = createSignal(0);
+    const tokenTxt = createRef<Txt>();
+
+
+
+
+
+    yield* grid().end(1, 1);
+
+    yield* waitUntil("startWebsite")
     // 1. Initialisation Grid
     yield* all(
-        grid().opacity(0.5, 1),
+        
         llmCircle().scale(0, 0).to(1, 0.6, easeOutCubic),
         websiteRect().opacity(1, 0.5),
         websiteRect().position([-1200, 0], 0.5),
     );
 
+        view.add(
+  <Layout position={[0, 450]} layout direction={'row'} alignItems={'center'} gap={20}>
+    <Txt 
+      text="CONTEXT SIZE:" 
+      fill={COLORS.grid} 
+      fontFamily={'JetBrains Mono, monospace'} 
+      fontSize={50} 
+    />
+    <Txt 
+      ref={tokenTxt}
+      // Le texte se met à jour automatiquement quand le signal change
+      text={() => `${Math.floor(tokenCount()).toLocaleString()} tokens`} 
+      fill={COLORS.white} 
+      fontFamily={'JetBrains Mono, monospace'}
+      fontWeight={700}
+       
+    />
+  </Layout>
+);
+
     // 2. Scénario "Bruit" : Le site web sature l'IA
     const noiseDots: Circle[] = [];
     for (let i = 0; i < 12; i++) {
-        const dot = (<Circle width={20} height={20} fill={COLORS.red} position={[websiteRect().x() + websiteRect().width() / 2, 0]} />) as Circle;
+        const dot = (<Circle width={50} height={50} fill={COLORS.red} position={[websiteRect().x() + websiteRect().width() / 2, 0]} />) as Circle;
         noiseDots.push(dot);
         container().add(dot);
     }
 
-    yield* sequence(0.15, ...noiseDots.map(dot =>
-        chain(
-            dot.position([-100, Math.random() * 100 - 50], 0.5, easeInCubic),
-            all(dot.scale(0, 0.2), llmCircle().stroke(COLORS.red, 0.1).to(COLORS.white, 0.1))
-        )
-    ));
+    yield* all(
+        sequence(0.20, ...noiseDots.map(dot =>
+            chain(
+                dot.position([-100, Math.random() * 100 - 50], 0.5, easeInCubic),
+                all(dot.scale(0, 0.2), llmCircle().stroke(COLORS.red, 0.1).to(COLORS.white, 0.1), )
+            )
+        )),
+    tokenCount(18000, 2.4),
+    tokenTxt().fill(COLORS.red, 2.4)
+    );
+
+    yield* waitUntil("endWebsite")
 
     yield* websiteRect().opacity(0.3, 0.5); // On grise le mauvais élève
 
@@ -187,18 +227,21 @@ await cache.set('key', 'value');
     // 4. Scénario "Efficacité" : Flux propre
     const cleanDots: Circle[] = [];
     for (let i = 0; i < 5; i++) {
-        const dot = (<Circle width={25} height={25} fill={COLORS.green} position={[llmsFileRect().x() - llmsFileRect().width() / 2, 0]} />) as Circle;
+        const dot = (<Circle width={50} height={50} fill={COLORS.green} position={[llmsFileRect().x() - llmsFileRect().width() / 2, 0]} />) as Circle;
         cleanDots.push(dot);
         container().add(dot);
     }
 
-    yield* sequence(0.15, ...cleanDots.map(dot =>
+    yield* all(sequence(0.30, ...cleanDots.map(dot =>
         all(
             dot.position([0, 0], 0.6, easeOutCubic),
             dot.scale(0, 0.8),
             llmCircle().fill(COLORS.green, 0.2).to(COLORS.bg, 0.4)
         )
-    ));
+    )),
+    tokenCount(450, 1.5),
+    tokenTxt().fill(COLORS.green, 1.5)
+);
 
     // Conclusion : L'IA est "boostée"
     yield* all(
@@ -207,5 +250,5 @@ await cache.set('key', 'value');
         llmsFileRect().scale(1.1, 0.3).to(1, 0.3),
     );
 
-    yield* waitFor(2);
+    yield* waitFor(3);
 });
