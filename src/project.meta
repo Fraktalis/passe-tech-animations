@@ -10,7 +10,7 @@
       "x": 3840,
       "y": 2160
     },
-    "audioOffset": -1.9248043736608818
+    "audioOffset": -1.4141493811401684
   },
   "preview": {
     "fps": 30,
@@ -24,7 +24,7 @@
       "name": "@motion-canvas/ffmpeg",
       "options": {
         "fastStart": true,
-        "includeAudio": true
+        "includeAudio": false
       }
     }
   }

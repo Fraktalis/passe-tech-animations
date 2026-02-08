@@ -1,0 +1,54 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "showGateway",
+      "targetTime": 0
+    },
+    {
+      "name": "showUserChat",
+      "targetTime": 3
+    },
+    {
+      "name": "showHeartbeat",
+      "targetTime": 6
+    },
+    {
+      "name": "showCron",
+      "targetTime": 10
+    },
+    {
+      "name": "showHooks",
+      "targetTime": 13
+    },
+    {
+      "name": "flowUserToGateway",
+      "targetTime": 17
+    },
+    {
+      "name": "flowHeartbeatToGateway",
+      "targetTime": 20
+    },
+    {
+      "name": "showLLM",
+      "targetTime": 23
+    },
+    {
+      "name": "showReActLoop",
+      "targetTime": 27
+    },
+    {
+      "name": "showSkills",
+      "targetTime": 35
+    },
+    {
+      "name": "flowFullDemo",
+      "targetTime": 40
+    },
+    {
+      "name": "endScene",
+      "targetTime": 55
+    }
+  ],
+  "seed": 806180006
+}

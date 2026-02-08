@@ -1,0 +1,14 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "startBitShift",
+      "targetTime": 6.250397718821314
+    },
+    {
+      "name": "endOfScene",
+      "targetTime": 25.804332802628107
+    }
+  ],
+  "seed": 3959578723
+}
