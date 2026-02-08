@@ -1,0 +1,38 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "intro",
+      "targetTime": 0
+    },
+    {
+      "name": "sqlExample",
+      "targetTime": 10.419551605829067
+    },
+    {
+      "name": "httpExample",
+      "targetTime": 16.44415556045557
+    },
+    {
+      "name": "llmBreaks",
+      "targetTime": 21.81105426631822
+    },
+    {
+      "name": "attackAppears",
+      "targetTime": 24.795617712150207
+    },
+    {
+      "name": "barrierBreaks",
+      "targetTime": 30.58591027155799
+    },
+    {
+      "name": "conclusion",
+      "targetTime": 35.78591027155798
+    },
+    {
+      "name": "endScene",
+      "targetTime": 44.365910271557894
+    }
+  ],
+  "seed": 419283756
+}
