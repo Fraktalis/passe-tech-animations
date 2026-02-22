@@ -1,0 +1,34 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "introCgroups",
+      "targetTime": 0
+    },
+    {
+      "name": "showMemory",
+      "targetTime": 5
+    },
+    {
+      "name": "showOOM",
+      "targetTime": 10
+    },
+    {
+      "name": "showCPU",
+      "targetTime": 15
+    },
+    {
+      "name": "showBlkio",
+      "targetTime": 21
+    },
+    {
+      "name": "showConclusion",
+      "targetTime": 27
+    },
+    {
+      "name": "endScene",
+      "targetTime": 33
+    }
+  ],
+  "seed": 582934710
+}

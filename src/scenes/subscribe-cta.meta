@@ -1,0 +1,14 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "introCTA",
+      "targetTime": 0
+    },
+    {
+      "name": "endScene",
+      "targetTime": 6
+    }
+  ],
+  "seed": 194827653
+}

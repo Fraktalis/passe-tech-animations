@@ -1,0 +1,42 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "introNamespaces",
+      "targetTime": 0
+    },
+    {
+      "name": "showPID",
+      "targetTime": 3.5904037854025885
+    },
+    {
+      "name": "showNET",
+      "targetTime": 7.5904037854025885
+    },
+    {
+      "name": "showMount",
+      "targetTime": 9.4996223294302
+    },
+    {
+      "name": "showUser",
+      "targetTime": 12.9996223294302
+    },
+    {
+      "name": "showRootless",
+      "targetTime": 16.9996223294302
+    },
+    {
+      "name": "showIPC",
+      "targetTime": 20.999622329430203
+    },
+    {
+      "name": "showUTS",
+      "targetTime": 24.999622329430203
+    },
+    {
+      "name": "endScene",
+      "targetTime": 29.999622329430203
+    }
+  ],
+  "seed": 291748503
+}
