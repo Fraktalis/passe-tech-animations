@@ -1,0 +1,30 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "intro",
+      "targetTime": 0.531439799928546
+    },
+    {
+      "name": "membrane",
+      "targetTime": 4.590425151839943
+    },
+    {
+      "name": "atp",
+      "targetTime": 7.62695605573419
+    },
+    {
+      "name": "dna",
+      "targetTime": 11.62216863165416
+    },
+    {
+      "name": "apoptose",
+      "targetTime": 16.68774562343694
+    },
+    {
+      "name": "endScene",
+      "targetTime": 23.502745623436983
+    }
+  ],
+  "seed": 3438510274
+}

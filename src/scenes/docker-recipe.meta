@@ -1,0 +1,30 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "intro",
+      "targetTime": 0.6562343694176493
+    },
+    {
+      "name": "step1",
+      "targetTime": 3.471579302278739
+    },
+    {
+      "name": "step2",
+      "targetTime": 6.036904263782448
+    },
+    {
+      "name": "step3",
+      "targetTime": 8.996904263782447
+    },
+    {
+      "name": "step4",
+      "targetTime": 11.296904263782446
+    },
+    {
+      "name": "endScene",
+      "targetTime": 14.636904263782444
+    }
+  ],
+  "seed": 2268590757
+}

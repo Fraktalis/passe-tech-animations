@@ -1,0 +1,26 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "intro",
+      "targetTime": 0
+    },
+    {
+      "name": "unix",
+      "targetTime": 2
+    },
+    {
+      "name": "vms",
+      "targetTime": 14
+    },
+    {
+      "name": "docker",
+      "targetTime": 25
+    },
+    {
+      "name": "endScene",
+      "targetTime": 38
+    }
+  ],
+  "seed": 1872304951
+}
