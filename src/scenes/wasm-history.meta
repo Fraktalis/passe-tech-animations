@@ -1,0 +1,50 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "intro",
+      "targetTime": 0
+    },
+    {
+      "name": "axisAppears",
+      "targetTime": 1.9
+    },
+    {
+      "name": "javaBar",
+      "targetTime": 3.1999999999999993
+    },
+    {
+      "name": "flashBar",
+      "targetTime": 4.8
+    },
+    {
+      "name": "naclBar",
+      "targetTime": 6.5
+    },
+    {
+      "name": "flashZoom",
+      "targetTime": 8.4
+    },
+    {
+      "name": "jobsLetter",
+      "targetTime": 9.8
+    },
+    {
+      "name": "flashEol",
+      "targetTime": 11.700000000000001
+    },
+    {
+      "name": "zoomOut",
+      "targetTime": 13.600000000000001
+    },
+    {
+      "name": "summaryTable",
+      "targetTime": 15.3
+    },
+    {
+      "name": "endScene",
+      "targetTime": 20.698713826366557
+    }
+  ],
+  "seed": 1792054841
+}

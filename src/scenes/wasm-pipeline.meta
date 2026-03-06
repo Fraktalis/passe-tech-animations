@@ -1,0 +1,46 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "intro",
+      "targetTime": 0
+    },
+    {
+      "name": "sourcesAppear",
+      "targetTime": 2.4
+    },
+    {
+      "name": "compilerAppears",
+      "targetTime": 3.96
+    },
+    {
+      "name": "arrowsIn",
+      "targetTime": 4.86
+    },
+    {
+      "name": "wasmAppears",
+      "targetTime": 6.923701321900678
+    },
+    {
+      "name": "binaryDetail",
+      "targetTime": 9.549049660593067
+    },
+    {
+      "name": "browserSection",
+      "targetTime": 14.93947481243301
+    },
+    {
+      "name": "jitCompile",
+      "targetTime": 18.63947481243301
+    },
+    {
+      "name": "portabilityNote",
+      "targetTime": 23.407302608074314
+    },
+    {
+      "name": "endScene",
+      "targetTime": 28.356641657734908
+    }
+  ],
+  "seed": 4241722420
+}

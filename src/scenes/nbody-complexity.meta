@@ -1,0 +1,38 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "intro",
+      "targetTime": 0
+    },
+    {
+      "name": "linearAppear",
+      "targetTime": 2.2
+    },
+    {
+      "name": "linearSweep",
+      "targetTime": 3.1
+    },
+    {
+      "name": "onLabel",
+      "targetTime": 7.079999999999996
+    },
+    {
+      "name": "gridTransition",
+      "targetTime": 9.079999999999995
+    },
+    {
+      "name": "gridSweep",
+      "targetTime": 10.579999999999995
+    },
+    {
+      "name": "on2Label",
+      "targetTime": 14.76000000000001
+    },
+    {
+      "name": "endScene",
+      "targetTime": 17.260000000000012
+    }
+  ],
+  "seed": 3443003607
+}

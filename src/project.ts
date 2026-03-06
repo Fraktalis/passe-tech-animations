@@ -7,9 +7,15 @@ import namespacePid from './scenes/namespace-pid?scene';
 import namespaceNet from './scenes/namespace-net?scene';
 import cgroups from './scenes/cgroups?scene';
 import subscribeCta from './scenes/subscribe-cta?scene';
-import audio from './audio/introduction_p1.wav';
+import dockerRecipe from './scenes/docker-recipe?scene';
+import bioDocker from './scenes/bio-docker?scene';
+import isolationEras from './scenes/isolation-eras?scene';
+import wasmPipeline from './scenes/wasm-pipeline?scene';
+import nbodyComplexity from './scenes/nbody-complexity?scene';
+import wasmHistory from './scenes/wasm-history?scene';
+import audio from './audio/docker_process.wav';
 
 export default makeProject({
-  scenes: [subscribeCta],
+  scenes: [wasmHistory],
   audio
 });
