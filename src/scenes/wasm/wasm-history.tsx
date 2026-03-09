@@ -16,7 +16,7 @@ export default makeScene2D(function* (view) {
   const COLORS = {
     bg:    '#0D1117',
     cream: '#F9F9F6',
-    ghost: '#484F58',
+    ghost: '#707781ff',
     java:  '#FFE14D',
     flash: '#FF3E6C',
     nacl:  '#58A6FF',
@@ -72,7 +72,7 @@ export default makeScene2D(function* (view) {
   view.add(
     <Camera ref={camera}>
       <Rect width={'100%'} height={'100%'} fill={COLORS.bg} zIndex={-2} />
-      <Grid ref={gridBg} width={'100%'} height={'100%'} stroke={COLORS.ghost} end={0} opacity={0.5} lineWidth={1} spacing={() => vW() * 0.055} zIndex={-1} />
+      <Grid ref={gridBg} width={'100%'} height={'100%'} stroke={COLORS.ghost} end={0} opacity={0.18} lineWidth={1} spacing={() => vW() * 0.055} zIndex={-1} />
 
       {/* Title */}
       <Txt ref={titleRef}    text="AVANT WASM"                    fill={COLORS.cream} fontSize={() => vW() * 0.042} fontWeight={800} fontFamily={'Space Grotesk'} y={() => vH() * -0.41} opacity={0} />
@@ -98,7 +98,7 @@ export default makeScene2D(function* (view) {
       <Rect
         ref={javaBar}
         x={xyr(1995)} y={JAVA_Y} width={0} height={BAR_H}
-        fill={`${COLORS.java}22`} stroke={COLORS.java} lineWidth={2}
+        fill={`${COLORS.java}22`} stroke={COLORS.java} lineWidth={0}
         radius={() => vW() * 0.004} opacity={1}
       />
       <Txt ref={javaLabel}   text="JAVA APPLETS" fill={COLORS.java}  fontSize={() => vW() * 0.016} fontWeight={700} fontFamily={'Space Grotesk'} x={() => vW() * xf(1995)} y={JAVA_Y}  opacity={0} />
@@ -108,7 +108,7 @@ export default makeScene2D(function* (view) {
       <Rect
         ref={flashBar}
         x={xyr(1996)} y={FLASH_Y} width={0} height={BAR_H}
-        fill={`${COLORS.flash}22`} stroke={COLORS.flash} lineWidth={2}
+        fill={`${COLORS.flash}22`} stroke={COLORS.flash} lineWidth={0}
         radius={() => vW() * 0.004} opacity={1}
       />
       <Txt ref={flashLabel}   text="FLASH"   fill={COLORS.flash} fontSize={() => vW() * 0.016} fontWeight={700} fontFamily={'Space Grotesk'} x={() => vW() * xf(1996)} y={FLASH_Y} opacity={0} />
@@ -118,7 +118,7 @@ export default makeScene2D(function* (view) {
       <Rect
         ref={naclBar}
         x={xyr(2008)} y={NACL_Y} width={0} height={BAR_H}
-        fill={`${COLORS.nacl}22`} stroke={COLORS.nacl} lineWidth={2}
+        fill={`${COLORS.nacl}22`} stroke={COLORS.nacl} lineWidth={0}
         radius={() => vW() * 0.004} opacity={1}
       />
       <Txt ref={naclLabel}   text="NaCl (Google)" fill={COLORS.nacl}  fontSize={() => vW() * 0.016} fontWeight={700} fontFamily={'Space Grotesk'} x={() => vW() * xf(2008)} y={NACL_Y}  opacity={0} />
@@ -180,7 +180,7 @@ export default makeScene2D(function* (view) {
         fontSize={() => vW() * 0.018} fontWeight={700} fontFamily={'Space Grotesk'}
         x={() => vW() * -0.3} y={() => vH() * -0.075} opacity={0} />
       <Txt ref={javaCardBody}
-        text={'1995 – 2017\n\nSécurité catastrophique.\nOracle en a fait\nun boulet de CVE.'}
+        text={'1995 – 2017\n\nSécurité catastrophique.\nPerformances décevantes'}
         fill={COLORS.cream} fontSize={() => vW() * 0.013} fontFamily={'Space Grotesk'} textAlign={'center'}
         x={() => vW() * -0.3} y={() => vH() * 0.085} opacity={0} />
 
@@ -262,6 +262,7 @@ export default makeScene2D(function* (view) {
     yield* all(
       javaBar().x(cx, 0.7, easeOutCubic),
       javaBar().width(w, 0.7, easeOutCubic),
+      javaBar().lineWidth(2, 0.2, easeOutCubic)
     );
     javaLabel().x(cx);
     yield* all(javaLabel().opacity(1, 0.4), javaEndMark().opacity(1, 0.4));
@@ -276,33 +277,19 @@ export default makeScene2D(function* (view) {
     yield* all(
       flashBar().x(cx, 0.8, easeOutCubic),
       flashBar().width(w, 0.8, easeOutCubic),
+      flashBar().lineWidth(2, 0.2, easeOutCubic)
     );
     flashLabel().x(cx);
     yield* all(flashLabel().opacity(1, 0.4), flashEndMark().opacity(1, 0.4));
-  }
-  yield* waitFor(0.5);
-
-  // ─── NaCl bar draws in (2008 → 2017) ───
-  yield* waitUntil('naclBar');
-  {
-    const w = (xf(2017) - xf(2008)) * vW();
-    const cx = (xf(2008) + xf(2017)) / 2 * vW();
-    yield* all(
-      naclBar().x(cx, 0.5, easeOutCubic),
-      naclBar().width(w, 0.5, easeOutCubic),
-    );
-    naclLabel().x(cx);
-    yield* all(naclLabel().opacity(1, 0.4), naclEndMark().opacity(1, 0.4));
   }
   yield* waitFor(1.0);
 
   // ─── Zoom on Flash story ───
   yield* waitUntil('flashZoom');
 
-  // Dim Java and NaCl
+  // Dim Java
   yield* all(
     javaBar().opacity(0.2, 0.4),   javaLabel().opacity(0.2, 0.4),
-    naclBar().opacity(0.2, 0.4),   naclLabel().opacity(0.2, 0.4),
     yr1995().opacity(0.2, 0.3),    yr2005().opacity(0.2, 0.3),
   );
 
@@ -332,11 +319,25 @@ export default makeScene2D(function* (view) {
   yield* all(
     camera().reset(0.7, easeInOutCubic),
     javaBar().opacity(1, 0.5),    javaLabel().opacity(1, 0.5),
-    naclBar().opacity(1, 0.5),    naclLabel().opacity(1, 0.5),
     yr1995().opacity(1, 0.4),     yr2005().opacity(1, 0.4),
     all(eolTick().opacity(0, 0.4), eolLabel().opacity(0, 0.4)),
     all(jobsTick().opacity(0, 0.4), jobsLabel().opacity(0, 0.4))
   );
+  yield* waitFor(0.5);
+
+  // ─── NaCl bar draws in (2008 → 2017) ───
+  yield* waitUntil('naclBar');
+  {
+    const w = (xf(2017) - xf(2008)) * vW();
+    const cx = (xf(2008) + xf(2017)) / 2 * vW();
+    yield* all(
+      naclBar().x(cx, 0.5, easeOutCubic),
+      naclBar().width(w, 0.5, easeOutCubic),
+      naclBar().lineWidth(2, 0.2, easeOutCubic)
+    );
+    naclLabel().x(cx);
+    yield* all(naclLabel().opacity(1, 0.4), naclEndMark().opacity(1, 0.4));
+  }
   yield* waitFor(1.0);
 
   // ─── Transition to summary table ───

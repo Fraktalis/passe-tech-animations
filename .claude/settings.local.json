@@ -5,7 +5,11 @@
       "Bash(git -C \"E:\\\\WS\\\\passe-tech-animations\" diff \"E:\\\\WS\\\\passe-tech-animations\\\\src\\\\project.ts\")",
       "Bash(git -C \"E:\\\\WS\\\\passe-tech-animations\" add \"E:\\\\WS\\\\passe-tech-animations\\\\src\\\\scenes\\\\openclaw-flow.tsx\" \"E:\\\\WS\\\\passe-tech-animations\\\\src\\\\scenes\\\\openclaw-flow.meta\" \"E:\\\\WS\\\\passe-tech-animations\\\\CLAUDE.md\" \"E:\\\\WS\\\\passe-tech-animations\\\\src\\\\project.ts\" \"E:\\\\WS\\\\passe-tech-animations\\\\src\\\\project.meta\" \"E:\\\\WS\\\\passe-tech-animations\\\\src\\\\scenes\\\\bitShift.tsx\" \"E:\\\\WS\\\\passe-tech-animations\\\\src\\\\scenes\\\\bitShift.meta\" \"E:\\\\WS\\\\passe-tech-animations\\\\src\\\\scenes\\\\nibblesVariationSelector.tsx\" \"E:\\\\WS\\\\passe-tech-animations\\\\src\\\\scenes\\\\nibblesVariationSelector.meta\" \"E:\\\\WS\\\\passe-tech-animations\\\\.gitignore\")",
       "Bash(npm run build:*)",
-      "Bash(findstr:*)"
+      "Bash(findstr:*)",
+      "mcp__blender__get_scene_info",
+      "mcp__blender__get_viewport_screenshot",
+      "mcp__blender__get_object_info",
+      "Bash(npm list:*)"
     ]
   }
 }

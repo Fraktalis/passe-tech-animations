@@ -297,13 +297,13 @@ export default makeScene2D(function* (view) {
     yield* resetGrid();
     rowHint().text(`particule ${r + 1} vérifie les ${N * N - 1} autres`);
 
-    cells[r * N + r]().stroke(COLORS.self);
-    cells[r * N + r]().fill(COLORS.self);
+    cells[r]().stroke(COLORS.self);
+    cells[r]().fill(COLORS.self);
 
     // Sweep entire grid cell by cell, row by row
     for (let i = 0; i < N; i++) {
       for (let j = 0; j < N; j++) {
-        if (i === r && j === r) continue;
+        if ((i * N + j) === r) continue;
         cells[i * N + j]().stroke(COLORS.vert);
         yield* cells[i * N + j]().fill(COLORS.active, 0.02);
       }
@@ -313,16 +313,16 @@ export default makeScene2D(function* (view) {
 
   // Remaining particles: flash each one quickly then leave grid fully lit
   yield* resetGrid();
-  for (let r = 3; r < N; r++) {
+  for (let r = 3; r < N*N; r++) {
     rowHint().text(`particule ${r + 1} vérifie les ${N * N - 1} autres`);
-    cells[r * N + r]().stroke(COLORS.self);
-    cells[r * N + r]().fill(COLORS.self);
+    cells[r]().stroke(COLORS.self);
+    cells[r]().fill(COLORS.self);
     yield* all(
       ...cells
         .filter((_, idx) => idx !== r * N + r)
         .map(c => { c().stroke(COLORS.vert); return c().fill(COLORS.active, 0.04); }),
     );
-    yield* waitFor(0.08);
+    yield* waitFor(0.01);
   }
 
   yield* rowHint().opacity(0, 0.3);
