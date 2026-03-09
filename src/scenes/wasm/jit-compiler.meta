@@ -1,0 +1,34 @@
+{
+  "version": 1,
+  "timeEvents": [
+    {
+      "name": "intro",
+      "targetTime": 0
+    },
+    {
+      "name": "line1",
+      "targetTime": 2.9
+    },
+    {
+      "name": "line2",
+      "targetTime": 4.199999999999999
+    },
+    {
+      "name": "line3",
+      "targetTime": 5.499999999999999
+    },
+    {
+      "name": "line6",
+      "targetTime": 6.799999999999999
+    },
+    {
+      "name": "deopt",
+      "targetTime": 8.099999999999998
+    },
+    {
+      "name": "endScene",
+      "targetTime": 13.271800643086813
+    }
+  ],
+  "seed": 3446836098
+}

@@ -1,21 +1,26 @@
 import {makeProject} from '@motion-canvas/core';
+import {Code, LezerHighlighter} from '@motion-canvas/2d';
+import {parser} from '@lezer/javascript';
 
-import mainScene from './scenes/openclaw-flow?scene';
-import mainScene2 from './scenes/bitShift?scene';
-import controlVsData from './scenes/llm-control-vs-data?scene';
-import namespacePid from './scenes/namespace-pid?scene';
-import namespaceNet from './scenes/namespace-net?scene';
-import cgroups from './scenes/cgroups?scene';
-import subscribeCta from './scenes/subscribe-cta?scene';
-import dockerRecipe from './scenes/docker-recipe?scene';
-import bioDocker from './scenes/bio-docker?scene';
-import isolationEras from './scenes/isolation-eras?scene';
-import wasmPipeline from './scenes/wasm-pipeline?scene';
-import nbodyComplexity from './scenes/nbody-complexity?scene';
-import wasmHistory from './scenes/wasm-history?scene';
+Code.defaultHighlighter = new LezerHighlighter(parser);
+
+import mainScene from './scenes/_misc/openclaw-flow?scene';
+import mainScene2 from './scenes/_misc/bitShift?scene';
+import controlVsData from './scenes/_misc/llm-control-vs-data?scene';
+import namespacePid from './scenes/docker/namespace-pid?scene';
+import namespaceNet from './scenes/docker/namespace-net?scene';
+import cgroups from './scenes/docker/cgroups?scene';
+import subscribeCta from './scenes/_shared/subscribe-cta?scene';
+import dockerRecipe from './scenes/docker/docker-recipe?scene';
+import bioDocker from './scenes/docker/bio-docker?scene';
+import isolationEras from './scenes/docker/isolation-eras?scene';
+import wasmPipeline from './scenes/wasm/wasm-pipeline?scene';
+import nbodyComplexity from './scenes/wasm/nbody-complexity?scene';
+import wasmHistory from './scenes/wasm/wasm-history?scene';
+import jitCompiler from './scenes/wasm/jit-compiler?scene';
 import audio from './audio/docker_process.wav';
 
 export default makeProject({
-  scenes: [wasmHistory],
+  scenes: [jitCompiler],
   audio
 });
