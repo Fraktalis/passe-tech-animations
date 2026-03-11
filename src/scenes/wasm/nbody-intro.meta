@@ -1,0 +1,30 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "intro",
+      "targetTime": 0
+    },
+    {
+      "name": "formulaAppear",
+      "targetTime": 2.368167202572347
+    },
+    {
+      "name": "particlesAppear",
+      "targetTime": 11.260557341907823
+    },
+    {
+      "name": "bruteForce",
+      "targetTime": 14.56055734190783
+    },
+    {
+      "name": "positionUpdate",
+      "targetTime": 22.660557341907783
+    },
+    {
+      "name": "endScene",
+      "targetTime": 24.260557341907784
+    }
+  ],
+  "seed": 3248723986
+}

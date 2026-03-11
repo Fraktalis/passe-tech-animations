@@ -78,7 +78,7 @@ export default makeScene2D(function* (view) {
       <Txt ref={minLabel}   text="min"               fill={COLORS.jaune} fontSize={() => vW() * 0.014} fontWeight={700} fontFamily={'Space Grotesk'} y={() => vH() * -0.135} opacity={0} />
       <Txt ref={counterTxt} text=""                  fill={COLORS.ghost} fontSize={() => vW() * 0.018} fontFamily={'DM Mono, monospace'} y={() => vH() * 0.15} opacity={0} />
       <Txt ref={onLabel}    text="O(n)"              fill={COLORS.vert}  fontSize={() => vW() * 0.065} fontWeight={800} fontFamily={'Space Grotesk'} y={() => vH() * 0.27} opacity={0} />
-      <Txt ref={onDesc}     text="linéaire — N opérations" fill={COLORS.ghost} fontSize={() => vW() * 0.018} fontFamily={'Space Grotesk'} y={() => vH() * 0.35} opacity={0} />
+      <Txt ref={onDesc}     text="linéaire — N opérations" fill={COLORS.ghost} fontSize={() => vW() * 0.018} fontFamily={'Space Grotesk'} y={() => vH() * 0.40} opacity={0} />
 
       {/* ══ GRID CELLS — row 0 ══ */}
       <Rect ref={cells[0]}  x={cellX(0)} y={cellY(0)} width={() => vW() * 0.038} height={() => vH() * 0.05} fill={COLORS.dim} stroke={COLORS.ghost} lineWidth={1} radius={() => vW() * 0.003} opacity={0} />
