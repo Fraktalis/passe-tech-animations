@@ -19,8 +19,9 @@ import nbodyComplexity from './scenes/wasm/nbody-complexity?scene';
 import wasmHistory from './scenes/wasm/wasm-history?scene';
 import jitCompiler from './scenes/wasm/jit-compiler?scene';
 import nbodyIntro from './scenes/wasm/nbody-intro?scene';
+import cl1Pipeline from './scenes/cl1/cl1-pipeline?scene';
 import audio from './audio/docker_process.wav';
 
 export default makeProject({
-  scenes: [nbodyComplexity],
+  scenes: [cl1Pipeline],
 });

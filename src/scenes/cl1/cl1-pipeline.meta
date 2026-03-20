@@ -1,0 +1,46 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "intro",
+      "targetTime": 0
+    },
+    {
+      "name": "block1",
+      "targetTime": 2.2
+    },
+    {
+      "name": "block2",
+      "targetTime": 3.3000000000000003
+    },
+    {
+      "name": "block3",
+      "targetTime": 4.8
+    },
+    {
+      "name": "block4",
+      "targetTime": 7.1
+    },
+    {
+      "name": "feedbackLoop",
+      "targetTime": 8.6
+    },
+    {
+      "name": "dataLabels",
+      "targetTime": 10.6
+    },
+    {
+      "name": "courtCircuit",
+      "targetTime": 12.8
+    },
+    {
+      "name": "ablation",
+      "targetTime": 16.9
+    },
+    {
+      "name": "endScene",
+      "targetTime": 24.2
+    }
+  ],
+  "seed": 2083009560
+}

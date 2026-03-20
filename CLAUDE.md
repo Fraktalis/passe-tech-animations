@@ -132,6 +132,15 @@ Reveal.initialize({
 
 ---
 
+## Animations Motion Canvas
+
+### Règles impératives
+
+- **INTERDIT : `fill={'transparent'}`** — format non reconnu. Utiliser `fill={'#00000000'}` pour un fond sans couleur.
+- Toutes les dimensions, positions et tailles de fonte doivent utiliser `vW()` / `vH()` (cf. mémoire projet).
+
+---
+
 ## Notes de production (dans `.ft-note`)
 
 Les pieds de slides contiennent des notes destinées à Alex uniquement (pas à l'audience). Exemples de patterns utiles :
