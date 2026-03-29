@@ -1,0 +1,42 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "intro",
+      "targetTime": 0
+    },
+    {
+      "name": "pmAppear",
+      "targetTime": 1.85
+    },
+    {
+      "name": "spAppear",
+      "targetTime": 3.1
+    },
+    {
+      "name": "pthAppear",
+      "targetTime": 4.79
+    },
+    {
+      "name": "pythonAppear",
+      "targetTime": 6.039999999999999
+    },
+    {
+      "name": "fileContent",
+      "targetTime": 9.79
+    },
+    {
+      "name": "annotExec",
+      "targetTime": 12.239999999999997
+    },
+    {
+      "name": "annotBase64",
+      "targetTime": 13.439999999999998
+    },
+    {
+      "name": "endScene",
+      "targetTime": 15.839999999999998
+    }
+  ],
+  "seed": 984028825
+}

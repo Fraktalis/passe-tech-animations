@@ -1,0 +1,30 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "intro",
+      "targetTime": 0
+    },
+    {
+      "name": "chainReveal",
+      "targetTime": 1.9500000000000002
+    },
+    {
+      "name": "pthPivot",
+      "targetTime": 4.85
+    },
+    {
+      "name": "phaseLabels",
+      "targetTime": 11.299999999999997
+    },
+    {
+      "name": "insight",
+      "targetTime": 12.899999999999997
+    },
+    {
+      "name": "endScene",
+      "targetTime": 15.899999999999997
+    }
+  ],
+  "seed": 935898934
+}

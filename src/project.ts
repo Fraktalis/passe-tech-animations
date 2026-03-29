@@ -21,9 +21,12 @@ import jitCompiler from './scenes/wasm/jit-compiler?scene';
 import nbodyIntro from './scenes/wasm/nbody-intro?scene';
 import cl1Pipeline from './scenes/cl1/cl1-pipeline?scene';
 import cl1DlVsBio from './scenes/cl1/cl1-dl-vs-bio?scene';
+import pthDiagram from './scenes/litellm/pth-diagram?scene';
+import pthExecChain from './scenes/litellm/pth-exec-chain?scene';
+import payloadFiles from './scenes/litellm/payload-files?scene';
+import kubePwn from './scenes/litellm/kube-pwn?scene';
 import audio from './audio/voiceover_training.wav';
 
 export default makeProject({
-  scenes: [cl1Pipeline],
-  audio
+  scenes: [pthDiagram, pthExecChain],
 });

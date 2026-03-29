@@ -1,0 +1,42 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "intro",
+      "targetTime": 0
+    },
+    {
+      "name": "clusterReveal",
+      "targetTime": 1.85
+    },
+    {
+      "name": "step1",
+      "targetTime": 4.32
+    },
+    {
+      "name": "step2",
+      "targetTime": 6.620000000000001
+    },
+    {
+      "name": "step3",
+      "targetTime": 8.870000000000001
+    },
+    {
+      "name": "step4",
+      "targetTime": 11.309999999999999
+    },
+    {
+      "name": "step5",
+      "targetTime": 14.159999999999998
+    },
+    {
+      "name": "exfil",
+      "targetTime": 20.190000000000005
+    },
+    {
+      "name": "endScene",
+      "targetTime": 23.19000000000001
+    }
+  ],
+  "seed": 131007862
+}

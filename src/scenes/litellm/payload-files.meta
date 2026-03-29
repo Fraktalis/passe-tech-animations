@@ -1,0 +1,34 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "intro",
+      "targetTime": 0
+    },
+    {
+      "name": "aspiration",
+      "targetTime": 1.75
+    },
+    {
+      "name": "gitconfigNote",
+      "targetTime": 3.3199999999999994
+    },
+    {
+      "name": "scanComplete",
+      "targetTime": 5.143972774673632
+    },
+    {
+      "name": "chiffrement",
+      "targetTime": 7.4439727746736315
+    },
+    {
+      "name": "persistance",
+      "targetTime": 13.993972774673631
+    },
+    {
+      "name": "endScene",
+      "targetTime": 20.343972774673627
+    }
+  ],
+  "seed": 353693914
+}
