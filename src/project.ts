@@ -20,8 +20,10 @@ import wasmHistory from './scenes/wasm/wasm-history?scene';
 import jitCompiler from './scenes/wasm/jit-compiler?scene';
 import nbodyIntro from './scenes/wasm/nbody-intro?scene';
 import cl1Pipeline from './scenes/cl1/cl1-pipeline?scene';
-import audio from './audio/docker_process.wav';
+import cl1DlVsBio from './scenes/cl1/cl1-dl-vs-bio?scene';
+import audio from './audio/voiceover_training.wav';
 
 export default makeProject({
   scenes: [cl1Pipeline],
+  audio
 });
