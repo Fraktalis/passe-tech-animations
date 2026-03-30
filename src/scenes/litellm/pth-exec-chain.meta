@@ -14,8 +14,12 @@
       "targetTime": 4.85
     },
     {
-      "name": "phaseLabels",
-      "targetTime": 11.299999999999997
+      "name": "fork",
+      "targetTime": 6.35
+    },
+    {
+      "name": "childChain",
+      "targetTime": 8.5
     },
     {
       "name": "insight",
