@@ -1,6 +1,6 @@
 // litellm/pth-diagram.tsx
-// CUT 1 — pip/uv/conda → site-packages → .pth → Python
-// CUT 2 — litellm_init.pth file content with annotations
+// CUT 1 - pip/uv/conda → site-packages → .pth → Python
+// CUT 2 - litellm_init.pth file content with annotations
 
 import {makeScene2D} from '@motion-canvas/2d';
 import {Grid, Layout, Rect, Txt, Line} from '@motion-canvas/2d/lib/components';
@@ -40,17 +40,17 @@ export default makeScene2D(function* (view) {
   const title     = createRef<Txt>();
   const subtitle  = createRef<Txt>();
 
-  // Phase 1 — package managers
+  // Phase 1 - package managers
   const pm0       = createRef<Rect>();
   const pm1       = createRef<Rect>();
   const pm2       = createRef<Rect>();
 
-  // Phase 1 — arrows pm → sp
+  // Phase 1 - arrows pm → sp
   const aPmSp0    = createRef<Line>();
   const aPmSp1    = createRef<Line>();
   const aPmSp2    = createRef<Line>();
 
-  // Phase 1 — site-packages boxes
+  // Phase 1 - site-packages boxes
   const sp0       = createRef<Rect>();
   const sp1       = createRef<Rect>();
   const sp2       = createRef<Rect>();
@@ -60,16 +60,16 @@ export default makeScene2D(function* (view) {
   const pth1      = createRef<Txt>();
   const pth2      = createRef<Txt>();
 
-  // Phase 1 — arrows sp → python (converging)
+  // Phase 1 - arrows sp → python (converging)
   const aSpPy0    = createRef<Line>();
   const aSpPy1    = createRef<Line>();
   const aSpPy2    = createRef<Line>();
 
-  // Phase 1 — Python box
+  // Phase 1 - Python box
   const pyBox     = createRef<Rect>();
   const autoLabel = createRef<Txt>();
 
-  // Phase 2 — file content
+  // Phase 2 - file content
   const fileCard   = createRef<Rect>();
   const codeLayout = createRef<Layout>();
   const fnLabel    = createRef<Txt>();
@@ -78,14 +78,11 @@ export default makeScene2D(function* (view) {
   const cl3        = createRef<Txt>(); // base64.b64decode(
   const cl4        = createRef<Txt>(); // b'...'
 
-  // Phase 2 — annotations
+  // Phase 2 - annotations
   const ab1        = createRef<Rect>(); // 2× base64
   const ab2        = createRef<Rect>(); // exec auto
   const aLine1     = createRef<Line>();
   const aLine2     = createRef<Line>();
-  const ab1txt     = createRef<Txt>();
-  const ab2txt     = createRef<Txt>();
-
   // ──────────────────────────────────────────────
   // SCENE TREE
   // ──────────────────────────────────────────────
@@ -112,7 +109,7 @@ export default makeScene2D(function* (view) {
       />
       <Txt
         ref={subtitle}
-        text="exécutés automatiquement au démarrage — peu importe le gestionnaire"
+        text="exécutés automatiquement au démarrage - peu importe le gestionnaire"
         fill={C.ghost}
         fontSize={() => vW() * 0.017}
         fontFamily={'DM Mono, monospace'}
@@ -267,7 +264,7 @@ export default makeScene2D(function* (view) {
       {/* ── auto-exec label ── */}
       <Txt
         ref={autoLabel}
-        text="exécuté automatiquement — sans permission, sans exception"
+        text="exécuté automatiquement - sans permission, sans exception"
         fill={C.jaune}
         fontSize={() => vW() * 0.017}
         fontWeight={600}
@@ -281,7 +278,7 @@ export default makeScene2D(function* (view) {
       {/* file name label */}
       <Txt
         ref={fnLabel}
-        text="litellm_init.pth — contenu réel"
+        text="litellm_init.pth - contenu réel"
         fill={C.ghost}
         fontSize={() => vW() * 0.016}
         fontFamily={'DM Mono, monospace'}
@@ -299,7 +296,7 @@ export default makeScene2D(function* (view) {
         opacity={0}
       />
 
-      {/* code lines — left-aligned via Layout */}
+      {/* code lines - left-aligned via Layout */}
       <Layout
         ref={codeLayout}
         x={() => vW() * -0.1} y={() => vH() * 0.03}
@@ -335,7 +332,7 @@ export default makeScene2D(function* (view) {
         />
       </Layout>
 
-      {/* annotation — exec auto */}
+      {/* annotation - exec auto */}
       <Rect
         ref={ab2}
         x={() => vW() * 0.35} y={() => vH() * -0.07}
@@ -348,7 +345,7 @@ export default makeScene2D(function* (view) {
         <Txt text="à chaque python" fill={C.danger} fontSize={() => vW() * 0.012} fontFamily={'DM Mono, monospace'} opacity={0.85} />
       </Rect>
 
-      {/* annotation — double base64 */}
+      {/* annotation - double base64 */}
       <Rect
         ref={ab1}
         x={() => vW() * 0.35} y={() => vH() * 0.1}
@@ -449,69 +446,5 @@ export default makeScene2D(function* (view) {
   yield* autoLabel().opacity(1, 0.5);
   yield* waitFor(1.8);
 
-  // ─── Transition: Phase 1 → Phase 2 ───
-  yield* waitUntil('fileContent');
-  yield* all(
-    pm0().opacity(0, 0.35),
-    pm1().opacity(0, 0.35),
-    pm2().opacity(0, 0.35),
-    sp0().opacity(0, 0.35),
-    sp1().opacity(0, 0.35),
-    sp2().opacity(0, 0.35),
-    aPmSp0().opacity(0, 0.25),
-    aPmSp1().opacity(0, 0.25),
-    aPmSp2().opacity(0, 0.25),
-    aSpPy0().opacity(0, 0.25),
-    aSpPy1().opacity(0, 0.25),
-    aSpPy2().opacity(0, 0.25),
-    pyBox().opacity(0, 0.35),
-    autoLabel().opacity(0, 0.25),
-    subtitle().opacity(0, 0.25),
-  );
-
-  // Title pivot
-  yield* title().opacity(0, 0.2);
-  title().text('CONTENU DU FICHIER');
-  yield* all(
-    title().opacity(1, 0.35),
-    fnLabel().opacity(1, 0.35),
-  );
-  yield* waitFor(0.2);
-
-  // Reveal code card + lines
-  yield* all(
-    fileCard().opacity(1, 0.45),
-    codeLayout().opacity(1, 0.45),
-  );
-  yield* waitFor(0.9);
-
-  // Exec annotation (points to line 2 — the exec call)
-  yield* waitUntil('annotExec');
-  yield* all(
-    ab2().opacity(1, 0.4),
-    aLine2().opacity(0.7, 0.35),
-  );
-  yield* waitFor(0.8);
-
-  // Base64 annotation (points to line 4 — the encoded payload)
-  yield* waitUntil('annotBase64');
-  yield* all(
-    ab1().opacity(1, 0.4),
-    aLine1().opacity(0.7, 0.35),
-  );
-  yield* waitFor(2.0);
-
-  // ─── End ───
-  yield* waitUntil('endScene');
-  yield* all(
-    grid().opacity(0, 0.5),
-    title().opacity(0, 0.5),
-    fnLabel().opacity(0, 0.5),
-    fileCard().opacity(0, 0.5),
-    codeLayout().opacity(0, 0.5),
-    ab1().opacity(0, 0.4),
-    ab2().opacity(0, 0.4),
-    aLine1().opacity(0, 0.3),
-    aLine2().opacity(0, 0.3),
-  );
+ 
 });
