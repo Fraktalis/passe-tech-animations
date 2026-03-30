@@ -138,6 +138,8 @@ Reveal.initialize({
 
 - **INTERDIT : `fill={'transparent'}`** — format non reconnu. Utiliser `fill={'#00000000'}` pour un fond sans couleur.
 - Toutes les dimensions, positions et tailles de fonte doivent utiliser `vW()` / `vH()` (cf. mémoire projet).
+- **Avant de créer un composant**, vérifier qu'il n'existe pas déjà dans `src/components/`. Lister les fichiers existants et lire le composant candidat avant toute création.
+- **Noms de variables en toutes lettres** — pas d'abréviations cryptiques. `cur` → `activeCursor`, `idx` → `lineIndex`, `ref` → `lineRef` / `nodeRef`, etc. Les boucles courtes peuvent garder un compteur classique comme `i`, `j` ou `k`.
 
 ---
 
