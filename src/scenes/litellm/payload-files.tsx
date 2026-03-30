@@ -1,7 +1,7 @@
 // litellm/payload-files.tsx
-// CUT A — liste animée des fichiers aspirés (Étape 1)
-// CUT B — chiffrement + exfil vers models.litellm.cloud (Étape 2)
-// CUT C — porte dérobée sysmon.py + systemd (Étape 3)
+// CUT A - liste animée des fichiers aspirés (Étape 1)
+// CUT B - chiffrement + exfil vers models.litellm.cloud (Étape 2)
+// CUT C - porte dérobée sysmon.py + systemd (Étape 3)
 
 import {makeScene2D} from '@motion-canvas/2d';
 import {Grid, Layout, Rect, Txt, Line} from '@motion-canvas/2d/lib/components';
@@ -51,7 +51,7 @@ export default makeScene2D(function* (view) {
   const grid    = createRef<Grid>();
   const title   = createRef<Txt>();
 
-  // Phase 1 — file rows (9 individual refs)
+  // Phase 1 - file rows (9 individual refs)
   const r0 = createRef<Layout>(), r1 = createRef<Layout>(), r2 = createRef<Layout>();
   const r3 = createRef<Layout>(), r4 = createRef<Layout>(), r5 = createRef<Layout>();
   const r6 = createRef<Layout>(), r7 = createRef<Layout>(), r8 = createRef<Layout>();
@@ -63,7 +63,7 @@ export default makeScene2D(function* (view) {
   // Summary badge
   const summaryBadge = createRef<Rect>();
 
-  // Phase 2 — encryption chain
+  // Phase 2 - encryption chain
   const archiveBox   = createRef<Rect>();
   const encryptBox   = createRef<Rect>();
   const domainBox    = createRef<Rect>();
@@ -71,7 +71,7 @@ export default makeScene2D(function* (view) {
   const arr2b        = createRef<Line>();
   const p2Note       = createRef<Txt>();
 
-  // Phase 3 — backdoor
+  // Phase 3 - backdoor
   const sysmonPath   = createRef<Rect>();
   const systemdBadge = createRef<Rect>();
   const killSwitch   = createRef<Rect>();
@@ -92,7 +92,7 @@ export default makeScene2D(function* (view) {
       {/* ── TITLE (shared, text swaps between phases) ── */}
       <Txt
         ref={title}
-        text="ÉTAPE 1 — ASPIRATION"
+        text="ÉTAPE 1 - ASPIRATION"
         fill={C.cream}
         fontSize={() => vW() * 0.038}
         fontWeight={800}
@@ -102,68 +102,68 @@ export default makeScene2D(function* (view) {
       />
 
       {/* ══════════════════════ PHASE 1 ══════════════════════ */}
-      {/* Rows positioned independently — column Layout containers collapse to
+      {/* Rows positioned independently - column Layout containers collapse to
           zero when children have opacity=0, so we use absolute y per row.
           Step: 0.055 vH · range: -0.225 → +0.215                           */}
 
       <Layout ref={r0} x={0} y={() => vH() * -0.225} width={() => vW() * 0.85} direction={'row'} alignItems={'center'} justifyContent={'start'} gap={80} opacity={0}>
         <Rect width={9} height={9} fill={C.blue} radius={4} />
         <Txt text="~/.ssh/id_rsa  ·  ~/.ssh/config" fill={C.blue} fontSize={() => vW() * 0.017} fontFamily={'DM Mono, monospace'} />
-        <Txt text="— clés SSH" fill={`${C.blue}70`} fontSize={() => vW() * 0.013} fontFamily={'DM Mono, monospace'} />
+        <Txt text="- clés SSH" fill={`${C.blue}70`} fontSize={() => vW() * 0.013} fontFamily={'DM Mono, monospace'} />
       </Layout>
 
       <Layout ref={r1} x={0} y={() => vH() * -0.170} width={() => vW() * 0.85} direction={'row'} alignItems={'center'} justifyContent={'start'} gap={80} opacity={0}>
         <Rect width={9} height={9} fill={C.vert} radius={4} />
         <Txt text=".env  (tous vos projets)" fill={C.vert} fontSize={() => vW() * 0.017} fontFamily={'DM Mono, monospace'} />
-        <Txt text="— variables d'env" fill={`${C.vert}70`} fontSize={() => vW() * 0.013} fontFamily={'DM Mono, monospace'} />
+        <Txt text="- variables d'env" fill={`${C.vert}70`} fontSize={() => vW() * 0.013} fontFamily={'DM Mono, monospace'} />
       </Layout>
 
       <Layout ref={r2} x={0} y={() => vH() * -0.115} width={() => vW() * 0.85} direction={'row'} alignItems={'center'} justifyContent={'start'} gap={80} opacity={0}>
         <Rect width={9} height={9} fill={C.jaune} radius={4} />
         <Txt text="~/.aws/credentials" fill={C.jaune} fontSize={() => vW() * 0.017} fontFamily={'DM Mono, monospace'} />
-        <Txt text="— Amazon Web Services" fill={`${C.jaune}70`} fontSize={() => vW() * 0.013} fontFamily={'DM Mono, monospace'} />
+        <Txt text="- Amazon Web Services" fill={`${C.jaune}70`} fontSize={() => vW() * 0.013} fontFamily={'DM Mono, monospace'} />
       </Layout>
 
       <Layout ref={r3} x={0} y={() => vH() * -0.060} width={() => vW() * 0.85} direction={'row'} alignItems={'center'} justifyContent={'start'} gap={80} opacity={0}>
         <Rect width={9} height={9} fill={C.jaune} radius={4} />
         <Txt text="~/.config/gcloud/  ·  ~/.azure/" fill={C.jaune} fontSize={() => vW() * 0.017} fontFamily={'DM Mono, monospace'} />
-        <Txt text="— GCP · Azure" fill={`${C.jaune}70`} fontSize={() => vW() * 0.013} fontFamily={'DM Mono, monospace'} />
+        <Txt text="- GCP · Azure" fill={`${C.jaune}70`} fontSize={() => vW() * 0.013} fontFamily={'DM Mono, monospace'} />
       </Layout>
 
       <Layout ref={r4} x={0} y={() => vH() * -0.005} width={() => vW() * 0.85} direction={'row'} alignItems={'center'} justifyContent={'start'} gap={80} opacity={0}>
         <Rect width={9} height={9} fill={C.rose} radius={4} />
         <Txt text="~/.kube/config" fill={C.rose} fontSize={() => vW() * 0.017} fontFamily={'DM Mono, monospace'} />
-        <Txt text="— Kubernetes" fill={`${C.rose}70`} fontSize={() => vW() * 0.013} fontFamily={'DM Mono, monospace'} />
+        <Txt text="- Kubernetes" fill={`${C.rose}70`} fontSize={() => vW() * 0.013} fontFamily={'DM Mono, monospace'} />
       </Layout>
 
       <Layout ref={r5} x={0} y={() => vH() * 0.050} width={() => vW() * 0.85} direction={'row'} alignItems={'center'} justifyContent={'start'} gap={80} opacity={0}>
         <Rect width={9} height={9} fill={C.danger} radius={4} />
         <Txt text="DATABASE_URL  ·  *.conf  ·  db secrets" fill={C.danger} fontSize={() => vW() * 0.017} fontFamily={'DM Mono, monospace'} />
-        <Txt text="— bases de données" fill={`${C.danger}70`} fontSize={() => vW() * 0.013} fontFamily={'DM Mono, monospace'} />
+        <Txt text="- bases de données" fill={`${C.danger}70`} fontSize={() => vW() * 0.013} fontFamily={'DM Mono, monospace'} />
       </Layout>
 
       <Layout ref={r6} x={0} y={() => vH() * 0.105} width={() => vW() * 0.85} direction={'row'} alignItems={'center'} justifyContent={'start'} gap={80} opacity={0}>
         <Rect width={9} height={9} fill={C.ghost} radius={4} />
         <Txt text="~/.bash_history  ·  ~/.zsh_history" fill={C.ghost} fontSize={() => vW() * 0.017} fontFamily={'DM Mono, monospace'} />
-        <Txt text="— historique shell" fill={`${C.ghost}80`} fontSize={() => vW() * 0.013} fontFamily={'DM Mono, monospace'} />
+        <Txt text="- historique shell" fill={`${C.ghost}80`} fontSize={() => vW() * 0.013} fontFamily={'DM Mono, monospace'} />
       </Layout>
 
       <Layout ref={r7} x={0} y={() => vH() * 0.160} width={() => vW() * 0.85} direction={'row'} alignItems={'center'} justifyContent={'start'} gap={80} opacity={0}>
         <Rect width={9} height={9} fill={C.cream} radius={4} />
         <Txt text="wallets  ·  keystore  ·  seed phrases" fill={C.cream} fontSize={() => vW() * 0.017} fontFamily={'DM Mono, monospace'} />
-        <Txt text="— crypto" fill={`${C.cream}70`} fontSize={() => vW() * 0.013} fontFamily={'DM Mono, monospace'} />
+        <Txt text="- crypto" fill={`${C.cream}70`} fontSize={() => vW() * 0.013} fontFamily={'DM Mono, monospace'} />
       </Layout>
 
       <Layout ref={r8} x={0} y={() => vH() * 0.215} width={() => vW() * 0.85} direction={'row'} alignItems={'center'} justifyContent={'start'} gap={80} opacity={0}>
         <Rect width={9} height={9} fill={C.danger} radius={4} />
         <Txt text="~/.gitconfig" fill={C.danger} fontSize={() => vW() * 0.017} fontFamily={'DM Mono, monospace'} />
-        <Txt text="— tokens GitHub en clair" fill={`${C.danger}B0`} fontSize={() => vW() * 0.013} fontFamily={'DM Mono, monospace'} />
+        <Txt text="- tokens GitHub en clair" fill={`${C.danger}B0`} fontSize={() => vW() * 0.013} fontFamily={'DM Mono, monospace'} />
       </Layout>
 
-      {/* .gitconfig note — "souvent oublié dans les audits" */}
+      {/* .gitconfig note - "souvent oublié dans les audits" */}
       <Txt
         ref={gitconfigNote}
-        text="souvent oublié dans les audits sécu — peut contenir des tokens GitHub en clair"
+        text="souvent oublié dans les audits sécu - peut contenir des tokens GitHub en clair"
         fill={C.danger}
         fontSize={() => vW() * 0.014}
         fontFamily={'DM Mono, monospace'}
@@ -184,7 +184,7 @@ export default makeScene2D(function* (view) {
         <Txt text="aspiration en cours…" fill={C.danger} fontSize={() => vW() * 0.013} fontFamily={'DM Mono, monospace'} opacity={0.8} />
       </Rect>
 
-      {/* ══════════════════════ PHASE 2 — CHIFFREMENT ══════════════════════ */}
+      {/* ══════════════════════ PHASE 2 - CHIFFREMENT ══════════════════════ */}
 
       {/* archive.tar.gz */}
       <Rect
@@ -252,7 +252,7 @@ export default makeScene2D(function* (view) {
 
       <Txt
         ref={p2Note}
-        text="sans la clé privée de l'attaquant — personne d'autre ne peut déchiffrer"
+        text="sans la clé privée de l'attaquant - personne d'autre ne peut déchiffrer"
         fill={C.ghost}
         fontSize={() => vW() * 0.015}
         fontFamily={'DM Mono, monospace'}
@@ -260,7 +260,7 @@ export default makeScene2D(function* (view) {
         opacity={0}
       />
 
-      {/* ══════════════════════ PHASE 3 — PERSISTANCE ══════════════════════ */}
+      {/* ══════════════════════ PHASE 3 - PERSISTANCE ══════════════════════ */}
 
       {/* sysmon.py file path */}
       <Rect
@@ -285,7 +285,7 @@ export default makeScene2D(function* (view) {
         layout direction={'column'} alignItems={'center'} justifyContent={'center'} gap={6}
       >
         <Txt text="[systemd]  sysmon.service" fill={C.blue} fontSize={() => vW() * 0.018} fontFamily={'DM Mono, monospace'} fontWeight={600} />
-        <Txt text="relance automatique — nom choisi pour passer pour du monitoring" fill={C.ghost} fontSize={() => vW() * 0.013} fontFamily={'DM Mono, monospace'} />
+        <Txt text="relance automatique - nom choisi pour passer pour du monitoring" fill={C.ghost} fontSize={() => vW() * 0.013} fontFamily={'DM Mono, monospace'} />
       </Rect>
 
       {/* kill switch */}
@@ -312,7 +312,7 @@ export default makeScene2D(function* (view) {
   yield* title().opacity(1, 0.55);
   yield* waitFor(0.4);
 
-  // ─── PHASE 1 — file list ───
+  // ─── PHASE 1 - file list ───
   yield* waitUntil('aspiration');
   yield* sequence(0.09,
     r0().opacity(1, 0.35),
@@ -346,7 +346,7 @@ export default makeScene2D(function* (view) {
   );
   // Title swap
   yield* title().opacity(0, 0.2);
-  title().text('ÉTAPE 2 — CHIFFREMENT');
+  title().text('ÉTAPE 2 - CHIFFREMENT');
   yield* title().opacity(1, 0.35);
   yield* waitFor(0.3);
 
@@ -376,7 +376,7 @@ export default makeScene2D(function* (view) {
   );
   // Title swap
   yield* title().opacity(0, 0.2);
-  title().text('ÉTAPE 3 — PERSISTANCE');
+  title().text('ÉTAPE 3 - PERSISTANCE');
   yield* title().opacity(1, 0.35);
   yield* waitFor(0.35);
 

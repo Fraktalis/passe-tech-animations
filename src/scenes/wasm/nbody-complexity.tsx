@@ -52,7 +52,7 @@ export default makeScene2D(function* (view) {
   const on2Desc  = createRef<Txt>();
 
   // ═══════════════════════════════════════════
-  // SCENE TREE — all elements absolutely positioned
+  // SCENE TREE - all elements absolutely positioned
   // ═══════════════════════════════════════════
   view.add(
     <Layout>
@@ -63,7 +63,7 @@ export default makeScene2D(function* (view) {
       <Txt ref={titleRef}    text="COMPLEXITÉ ALGORITHMIQUE" fill={COLORS.cream} fontSize={() => vW() * 0.036} fontWeight={800} fontFamily={'Space Grotesk'} y={() => vH() * -0.42} opacity={0} />
       <Txt ref={subtitleRef} text="combien d'opérations pour N données ?"  fill={COLORS.ghost} fontSize={() => vW() * 0.018} fontFamily={'Space Grotesk'} y={() => vH() * -0.35} opacity={0} />
 
-      {/* ══ LINEAR BLOCKS — explicit x/y each ══ */}
+      {/* ══ LINEAR BLOCKS - explicit x/y each ══ */}
       <Rect ref={linearBlocks[0]} x={blockX(0)} y={blockY} width={() => vW() * 0.055} height={() => vH() * 0.13} fill={COLORS.dim} stroke={COLORS.ghost} lineWidth={2} radius={() => vW() * 0.004} opacity={0} />
       <Rect ref={linearBlocks[1]} x={blockX(1)} y={blockY} width={() => vW() * 0.055} height={() => vH() * 0.13} fill={COLORS.dim} stroke={COLORS.ghost} lineWidth={2} radius={() => vW() * 0.004} opacity={0} />
       <Rect ref={linearBlocks[2]} x={blockX(2)} y={blockY} width={() => vW() * 0.055} height={() => vH() * 0.13} fill={COLORS.dim} stroke={COLORS.ghost} lineWidth={2} radius={() => vW() * 0.004} opacity={0} />
@@ -78,9 +78,9 @@ export default makeScene2D(function* (view) {
       <Txt ref={minLabel}   text="min"               fill={COLORS.jaune} fontSize={() => vW() * 0.014} fontWeight={700} fontFamily={'Space Grotesk'} y={() => vH() * -0.135} opacity={0} />
       <Txt ref={counterTxt} text=""                  fill={COLORS.ghost} fontSize={() => vW() * 0.018} fontFamily={'DM Mono, monospace'} y={() => vH() * 0.15} opacity={0} />
       <Txt ref={onLabel}    text="O(n)"              fill={COLORS.vert}  fontSize={() => vW() * 0.065} fontWeight={800} fontFamily={'Space Grotesk'} y={() => vH() * 0.27} opacity={0} />
-      <Txt ref={onDesc}     text="linéaire — N opérations" fill={COLORS.ghost} fontSize={() => vW() * 0.018} fontFamily={'Space Grotesk'} y={() => vH() * 0.40} opacity={0} />
+      <Txt ref={onDesc}     text="linéaire - N opérations" fill={COLORS.ghost} fontSize={() => vW() * 0.018} fontFamily={'Space Grotesk'} y={() => vH() * 0.40} opacity={0} />
 
-      {/* ══ GRID CELLS — row 0 ══ */}
+      {/* ══ GRID CELLS - row 0 ══ */}
       <Rect ref={cells[0]}  x={cellX(0)} y={cellY(0)} width={() => vW() * 0.038} height={() => vH() * 0.05} fill={COLORS.dim} stroke={COLORS.ghost} lineWidth={1} radius={() => vW() * 0.003} opacity={0} />
       <Rect ref={cells[1]}  x={cellX(1)} y={cellY(0)} width={() => vW() * 0.038} height={() => vH() * 0.05} fill={COLORS.dim} stroke={COLORS.ghost} lineWidth={1} radius={() => vW() * 0.003} opacity={0} />
       <Rect ref={cells[2]}  x={cellX(2)} y={cellY(0)} width={() => vW() * 0.038} height={() => vH() * 0.05} fill={COLORS.dim} stroke={COLORS.ghost} lineWidth={1} radius={() => vW() * 0.003} opacity={0} />
@@ -193,7 +193,7 @@ export default makeScene2D(function* (view) {
 
       <Txt ref={rowHint}  text=""        fill={COLORS.ghost} fontSize={() => vW() * 0.015} fontFamily={'DM Mono, monospace'} y={() => vH() * 0.35} opacity={0} />
       <Txt ref={on2Label} text="O(n²)"   fill={COLORS.rose}  fontSize={() => vW() * 0.065} fontWeight={800} fontFamily={'Space Grotesk'} y={() => vH() * 0.35} opacity={0} />
-      <Txt ref={on2Desc}  text="quadratique — N² opérations" fill={COLORS.ghost} fontSize={() => vW() * 0.018} fontFamily={'Space Grotesk'} y={() => vH() * 0.43} opacity={0} />
+      <Txt ref={on2Desc}  text="quadratique - N² opérations" fill={COLORS.ghost} fontSize={() => vW() * 0.018} fontFamily={'Space Grotesk'} y={() => vH() * 0.43} opacity={0} />
     </Layout>,
   );
 
@@ -241,7 +241,7 @@ export default makeScene2D(function* (view) {
       .map(b => all(b().fill(COLORS.dim, 0.4), b().stroke(COLORS.ghost, 0.4), b().opacity(0.4, 0.4))),
   );
 
-  // "min" label above MIN_IDX — x = vW * (-0.279 + MIN_IDX * 0.062)
+  // "min" label above MIN_IDX - x = vW * (-0.279 + MIN_IDX * 0.062)
   minLabel().x(vW() * (-0.279 + MIN_IDX * 0.062));
   yield* minLabel().opacity(1, 0.4);
   yield* waitFor(0.3);

@@ -12,11 +12,11 @@ export default makeScene2D(function* (view) {
     cream: '#F9F9F6',
     ghost: '#3D444D',
     ghostText: '#484F58',
-    pid1Color: '#58A6FF',   // bleu — racine
-    pidNormal: '#3FB950',   // vert — processus ordinaire
-    pidTarget: '#FFE14D',   // jaune — processus ciblé
-    pidChild: '#6DFF8A',    // vert vif — enfants dans le namespace
-    ns: '#FF3E6C',          // rose Passe-Tech — mur du namespace
+    pid1Color: '#58A6FF',   // bleu - racine
+    pidNormal: '#3FB950',   // vert - processus ordinaire
+    pidTarget: '#FFE14D',   // jaune - processus ciblé
+    pidChild: '#6DFF8A',    // vert vif - enfants dans le namespace
+    ns: '#FF3E6C',          // rose Passe-Tech - mur du namespace
     processBg: '#1C2128',
     processBorder: '#30363D',
   };
@@ -39,13 +39,13 @@ export default makeScene2D(function* (view) {
   const pid2Box         = createRef<Rect>();
   const pid3Box         = createRef<Rect>();
 
-  // Lignes de connexion — arbre hôte
+  // Lignes de connexion - arbre hôte
   const lineToP42       = createRef<Line>();
   const lineToP87       = createRef<Line>();
   const lineToP156      = createRef<Line>();
   const lineTo242       = createRef<Line>();
 
-  // Lignes de connexion — enfants namespace
+  // Lignes de connexion - enfants namespace
   const lineNs1         = createRef<Line>();
   const lineNs2         = createRef<Line>();
 
@@ -94,7 +94,7 @@ export default makeScene2D(function* (view) {
         opacity={0}
       />
 
-      {/* ─── Lignes — arbre hôte (dessinées sous les boîtes) ─────────────── */}
+      {/* ─── Lignes - arbre hôte (dessinées sous les boîtes) ─────────────── */}
       <Line
         ref={lineToP42}
         points={() => [[0, vH() * -0.282], [vW() * -0.25, vH() * -0.181]]}
@@ -128,7 +128,7 @@ export default makeScene2D(function* (view) {
         end={0}
       />
 
-      {/* ─── Lignes — enfants namespace ──────────────────────────────────── */}
+      {/* ─── Lignes - enfants namespace ──────────────────────────────────── */}
       <Line
         ref={lineNs1}
         points={() => [[vW() * 0.25, vH() * 0.069], [vW() * 0.182, vH() * 0.182]]}
@@ -146,7 +146,7 @@ export default makeScene2D(function* (view) {
         end={0}
       />
 
-      {/* ─── PID 1 — systemd ─────────────────────────────────────────────── */}
+      {/* ─── PID 1 - systemd ─────────────────────────────────────────────── */}
       <Rect
         ref={pid1Box}
         x={0}
@@ -180,7 +180,7 @@ export default makeScene2D(function* (view) {
         />
       </Rect>
 
-      {/* ─── PID 42 — nginx ──────────────────────────────────────────────── */}
+      {/* ─── PID 42 - nginx ──────────────────────────────────────────────── */}
       <Rect
         ref={pid42Box}
         x={() => vW() * -0.25}
@@ -214,7 +214,7 @@ export default makeScene2D(function* (view) {
         />
       </Rect>
 
-      {/* ─── PID 87 — sshd ───────────────────────────────────────────────── */}
+      {/* ─── PID 87 - sshd ───────────────────────────────────────────────── */}
       <Rect
         ref={pid87Box}
         x={0}
@@ -248,7 +248,7 @@ export default makeScene2D(function* (view) {
         />
       </Rect>
 
-      {/* ─── PID 156 — bash ──────────────────────────────────────────────── */}
+      {/* ─── PID 156 - bash ──────────────────────────────────────────────── */}
       <Rect
         ref={pid156Box}
         x={() => vW() * 0.25}
@@ -282,7 +282,7 @@ export default makeScene2D(function* (view) {
         />
       </Rect>
 
-      {/* ─── PID 242 — notre processus cible ─────────────────────────────── */}
+      {/* ─── PID 242 - notre processus cible ─────────────────────────────── */}
       <Rect
         ref={pid242Box}
         x={() => vW() * 0.25}
@@ -317,7 +317,7 @@ export default makeScene2D(function* (view) {
         />
       </Rect>
 
-      {/* ─── Mur du namespace — dessiné après les boîtes hôte, avant enfants ─ */}
+      {/* ─── Mur du namespace - dessiné après les boîtes hôte, avant enfants ─ */}
       <Rect
         ref={nsWall}
         x={() => vW() * 0.25}
@@ -333,7 +333,7 @@ export default makeScene2D(function* (view) {
         shadowBlur={() => vW() * 0.015}
       />
 
-      {/* ─── PID 2 — nginx (enfant namespace) ────────────────────────────── */}
+      {/* ─── PID 2 - nginx (enfant namespace) ────────────────────────────── */}
       <Rect
         ref={pid2Box}
         x={() => vW() * 0.182}
@@ -367,7 +367,7 @@ export default makeScene2D(function* (view) {
         />
       </Rect>
 
-      {/* ─── PID 3 — bash (enfant namespace) ─────────────────────────────── */}
+      {/* ─── PID 3 - bash (enfant namespace) ─────────────────────────────── */}
       <Rect
         ref={pid3Box}
         x={() => vW() * 0.318}
@@ -456,7 +456,7 @@ export default makeScene2D(function* (view) {
 
   yield* waitFor(0.4);
 
-  // PID 242 — enfant de PID 156
+  // PID 242 - enfant de PID 156
   lineTo242().opacity(1);
   yield* lineTo242().end(1, 0.4);
   yield* pid242Box().opacity(1, 0.4);

@@ -76,7 +76,7 @@ export default makeScene2D(function* (view) {
 
       {/* Title */}
       <Txt ref={titleRef}    text="AVANT WASM"                    fill={COLORS.cream} fontSize={() => vW() * 0.042} fontWeight={800} fontFamily={'Space Grotesk'} y={() => vH() * -0.41} opacity={0} />
-      <Txt ref={subtitleRef} text="trois tentatives — trois échecs" fill={COLORS.ghost} fontSize={() => vW() * 0.018} fontFamily={'Space Grotesk'} y={() => vH() * -0.34} opacity={0} />
+      <Txt ref={subtitleRef} text="trois tentatives - trois échecs" fill={COLORS.ghost} fontSize={() => vW() * 0.018} fontFamily={'Space Grotesk'} y={() => vH() * -0.34} opacity={0} />
 
       {/* ══ AXIS ══ */}
       <Line
@@ -125,7 +125,7 @@ export default makeScene2D(function* (view) {
       <Txt ref={naclEndMark} text="† 2017"         fill={COLORS.death} fontSize={() => vW() * 0.012} fontWeight={700} fontFamily={'DM Mono, monospace'} x={xyr(2017)} y={() => NACL_Y() + BAR_H() * 0.95} opacity={0} />
 
       {/* ══ FLASH EVENTS ══ */}
-      {/* Jobs letter — 29 avril 2010 */}
+      {/* Jobs letter - 29 avril 2010 */}
       <Line
         ref={jobsTick}
         stroke={COLORS.flash} lineWidth={2} opacity={0} lineDash={[5, 4]}
@@ -143,7 +143,7 @@ export default makeScene2D(function* (view) {
         opacity={0}
       />
 
-      {/* Flash EOL — 31 déc. 2020 */}
+      {/* Flash EOL - 31 déc. 2020 */}
       <Line
         ref={eolTick}
         stroke={COLORS.death} lineWidth={2} opacity={0} lineDash={[5, 4]}
@@ -296,7 +296,7 @@ export default makeScene2D(function* (view) {
 
 
 
-  // Camera zooms into Flash area — center on year 2012, Flash bar height
+  // Camera zooms into Flash area - center on year 2012, Flash bar height
   yield* all(
     camera().centerOn([xf(2012) * vW(), FLASH_Y()], 0.7, easeInOutCubic),
     camera().zoom(1.8, 0.7, easeInOutCubic),

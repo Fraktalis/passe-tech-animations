@@ -25,8 +25,10 @@ import pthDiagram from './scenes/litellm/pth-diagram?scene';
 import pthExecChain from './scenes/litellm/pth-exec-chain?scene';
 import payloadFiles from './scenes/litellm/payload-files?scene';
 import kubePwn from './scenes/litellm/kube-pwn?scene';
+import terminalDemo from './scenes/_misc/terminal-demo?scene';
+import install_terminal from './scenes/litellm/install_terminal?scene';
 import audio from './audio/voiceover_training.wav';
 
 export default makeProject({
-  scenes: [pthDiagram, pthExecChain],
+  scenes: [install_terminal],
 });

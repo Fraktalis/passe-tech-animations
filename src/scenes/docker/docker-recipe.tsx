@@ -33,7 +33,7 @@ export default makeScene2D(function* (view) {
   const cgRam      = createRef<Rect>();
   const cgIo       = createRef<Rect>();
 
-  // Ghost processes (context — outside all layers)
+  // Ghost processes (context - outside all layers)
   const ghostLeft  = createRef<Rect>();
   const ghostRight = createRef<Rect>();
 
@@ -73,7 +73,7 @@ export default makeScene2D(function* (view) {
         opacity={0}
       />
 
-      {/* ─── Cgroups layer — outermost, drawn first (behind) ─── */}
+      {/* ─── Cgroups layer - outermost, drawn first (behind) ─── */}
       <Rect
         ref={cgLayer}
         width={() => vW() * 0.44}
@@ -85,7 +85,7 @@ export default makeScene2D(function* (view) {
         opacity={0}
       />
 
-      {/* Cgroups resource badges — in the gap between CG top and NS top */}
+      {/* Cgroups resource badges - in the gap between CG top and NS top */}
       <Rect
         ref={cgCpu}
         x={() => vW() * -0.10}
@@ -152,7 +152,7 @@ export default makeScene2D(function* (view) {
         shadowBlur={() => vW() * 0.015}
       />
 
-      {/* ─── Filesystem layer — dashed border ─── */}
+      {/* ─── Filesystem layer - dashed border ─── */}
       <Rect
         ref={fsLayer}
         width={() => vW() * 0.20}
@@ -165,7 +165,7 @@ export default makeScene2D(function* (view) {
         opacity={0}
       />
 
-      {/* ─── Ghost processes — outside all layers, represent the host ─── */}
+      {/* ─── Ghost processes - outside all layers, represent the host ─── */}
       <Rect
         ref={ghostLeft}
         x={() => vW() * -0.35}
@@ -203,7 +203,7 @@ export default makeScene2D(function* (view) {
         <Txt text="sshd" fill={COLORS.ghostText} fontSize={() => vW() * 0.008} fontFamily={'DM Sans, Space Grotesk'} opacity={0.5} />
       </Rect>
 
-      {/* ─── FS path labels — inside the FS layer, above the process box ─── */}
+      {/* ─── FS path labels - inside the FS layer, above the process box ─── */}
       <Layout
         ref={fsPaths}
         x={0}
@@ -220,7 +220,7 @@ export default makeScene2D(function* (view) {
         <Txt text="/etc" fill={COLORS.vert} fontSize={() => vW() * 0.010} fontWeight={700} fontFamily={'DM Mono, monospace'} opacity={0.75} />
       </Layout>
 
-      {/* ─── Process box — innermost ─── */}
+      {/* ─── Process box - innermost ─── */}
       <Rect
         ref={processBox}
         width={() => vW() * 0.12}
@@ -269,7 +269,7 @@ export default makeScene2D(function* (view) {
           opacity={0}
         />
         <Txt
-          text="—"
+          text="-"
           fill={COLORS.ghostText}
           fontSize={() => vW() * 0.017}
           fontFamily={'DM Mono, monospace'}
@@ -292,7 +292,7 @@ export default makeScene2D(function* (view) {
   // HELPERS
   // ═══════════════════════════════════════════════════════════════════════════
 
-  // The "—" separator shares opacity with captionNum — we update it in sync
+  // The "-" separator shares opacity with captionNum - we update it in sync
   // by targeting its parent Layout children. Simpler: just fade num+txt together.
   function* showCaption(num: string, text: string, color: string) {
     // Fade out if visible
@@ -359,7 +359,7 @@ export default makeScene2D(function* (view) {
   yield* waitFor(0.15);
   yield* all(
     nsLayer().opacity(1, 0.6),
-    // Ghosts fade almost to invisible — the wall "cuts them off"
+    // Ghosts fade almost to invisible - the wall "cuts them off"
     ghostLeft().opacity(0.07, 0.6),
     ghostRight().opacity(0.07, 0.6),
   );

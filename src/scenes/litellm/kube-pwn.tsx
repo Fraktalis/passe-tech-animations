@@ -1,5 +1,5 @@
 // litellm/kube-pwn.tsx
-// CUT — séquence Kubernetes en 5 étapes
+// CUT - séquence Kubernetes en 5 étapes
 // ① Détection token  ② Aspiration secrets  ③ Déploiement alpine
 // ④ Montage host FS  ⑤ Persistance sysmon
 
@@ -33,14 +33,14 @@ export default makeScene2D(function* (view) {
     danger: '#F85149',
   };
 
-  // Step panel — x center of the 5 step boxes
+  // Step panel - x center of the 5 step boxes
   const SX = -0.275;
-  // Step y centers — evenly spaced
+  // Step y centers - evenly spaced
   const SY = [-0.21, -0.105, 0.0, 0.105, 0.21] as const;
   const SW = 0.395; // step box width (vW fraction)
   const SH = 0.096; // step box height (vH fraction)
 
-  // Cluster panel — right side
+  // Cluster panel - right side
   const CX = 0.275; // cluster center x
 
   // glow signals per step (0 = dim, 1 = active)
@@ -71,23 +71,23 @@ export default makeScene2D(function* (view) {
   const hostSysmon2   = createRef<Txt>();
 
   // Dynamic elements activated by steps
-  // Step 1 — service account token badge
+  // Step 1 - service account token badge
   const tokenBadge    = createRef<Rect>();
 
-  // Step 2 — secrets indicator
+  // Step 2 - secrets indicator
   const secretsBadge  = createRef<Rect>();
 
-  // Step 3 — 3 alpine pods inside kube-system
+  // Step 3 - 3 alpine pods inside kube-system
   const pod0 = createRef<Rect>(), pod1 = createRef<Rect>(), pod2 = createRef<Rect>();
 
-  // Step 4 — mount arrows from pods down to HOST layer
+  // Step 4 - mount arrows from pods down to HOST layer
   const mArr0 = createRef<Line>(), mArr1 = createRef<Line>(), mArr2 = createRef<Line>();
   const hostHighlight = createRef<Rect>(); // overlay on HOST layer
 
   // Connector: active step → cluster (dotted line from step box right edge to cluster)
   const stepConnector = createRef<Line>();
 
-  // Step 5 — siphon packets (2 waves × 3 nodes = 6 Rects)
+  // Step 5 - siphon packets (2 waves × 3 nodes = 6 Rects)
   // Wave A labels: .ssh · .aws · .env
   const pac0a = createRef<Rect>(), pac1a = createRef<Rect>(), pac2a = createRef<Rect>();
   // Wave B labels: db pass · .kube · tokens
@@ -122,11 +122,11 @@ export default makeScene2D(function* (view) {
   const POD_W   = 0.075;
   const POD_H   = 0.085;
 
-  // Token badge position — top-right inside cluster
+  // Token badge position - top-right inside cluster
   const TOK_X   = CX + 0.155;
   const TOK_Y   = CLUS_Y - 0.245;
 
-  // Secrets badge — center of kube-system
+  // Secrets badge - center of kube-system
   const SEC_X   = CX + 0.06;
   const SEC_Y   = KS_Y - 0.01;
 
@@ -172,7 +172,7 @@ export default makeScene2D(function* (view) {
 
       {/* ══════════════════════ STEP BOXES (left) ══════════════════════ */}
 
-      {/* Step 0 — Détection */}
+      {/* Step 0 - Détection */}
       <Rect
         ref={s0}
         x={() => vW() * SX} y={() => vH() * SY[0]}
@@ -186,7 +186,7 @@ export default makeScene2D(function* (view) {
         <Txt text="token service account trouvé dans l'env" fill={C.ghost} fontSize={() => vW() * 0.012} fontFamily={'DM Mono, monospace'} opacity={0.7} />
       </Rect>
 
-      {/* Step 1 — Aspiration secrets */}
+      {/* Step 1 - Aspiration secrets */}
       <Rect
         ref={s1}
         x={() => vW() * SX} y={() => vH() * SY[1]}
@@ -200,7 +200,7 @@ export default makeScene2D(function* (view) {
         <Txt text="tous les secrets · toutes les namespaces · tout" fill={C.blue} fontSize={() => vW() * 0.012} fontFamily={'DM Mono, monospace'} opacity={0.7} />
       </Rect>
 
-      {/* Step 2 — Déploiement */}
+      {/* Step 2 - Déploiement */}
       <Rect
         ref={s2}
         x={() => vW() * SX} y={() => vH() * SY[2]}
@@ -214,7 +214,7 @@ export default makeScene2D(function* (view) {
         <Txt text="alpine:latest · kube-system · chaque nœud" fill={C.rose} fontSize={() => vW() * 0.012} fontFamily={'DM Mono, monospace'} opacity={0.7} />
       </Rect>
 
-      {/* Step 3 — Montage host FS */}
+      {/* Step 3 - Montage host FS */}
       <Rect
         ref={s3}
         x={() => vW() * SX} y={() => vH() * SY[3]}
@@ -225,10 +225,10 @@ export default makeScene2D(function* (view) {
         layout direction={'column'} alignItems={'center'} justifyContent={'center'} gap={5}
       >
         <Txt text="④ MONTAGE HOST FS" fill={C.jaune} fontSize={() => vW() * 0.016} fontWeight={700} fontFamily={'Space Grotesk'} />
-        <Txt text="pas le container — la vraie machine physique" fill={C.jaune} fontSize={() => vW() * 0.012} fontFamily={'DM Mono, monospace'} opacity={0.7} />
+        <Txt text="pas le container - la vraie machine physique" fill={C.jaune} fontSize={() => vW() * 0.012} fontFamily={'DM Mono, monospace'} opacity={0.7} />
       </Rect>
 
-      {/* Step 4 — Persistance */}
+      {/* Step 4 - Persistance */}
       <Rect
         ref={s4}
         x={() => vW() * SX} y={() => vH() * SY[4]}
@@ -300,7 +300,7 @@ export default makeScene2D(function* (view) {
         opacity={0}
       />
 
-      {/* ── Step 1 — token badge ── */}
+      {/* ── Step 1 - token badge ── */}
       <Rect
         ref={tokenBadge}
         x={() => vW() * TOK_X} y={() => vH() * TOK_Y}
@@ -314,7 +314,7 @@ export default makeScene2D(function* (view) {
         <Txt text="service account" fill={C.jaune} fontSize={() => vW() * 0.010} fontFamily={'DM Mono, monospace'} opacity={0.7} />
       </Rect>
 
-      {/* ── Step 2 — secrets badge ── */}
+      {/* ── Step 2 - secrets badge ── */}
       <Rect
         ref={secretsBadge}
         x={() => vW() * SEC_X} y={() => vH() * SEC_Y}
@@ -327,7 +327,7 @@ export default makeScene2D(function* (view) {
         <Txt text="all namespaces" fill={C.blue} fontSize={() => vW() * 0.010} fontFamily={'DM Mono, monospace'} opacity={0.7} />
       </Rect>
 
-      {/* ── Step 3 — alpine pods inside kube-system ── */}
+      {/* ── Step 3 - alpine pods inside kube-system ── */}
       <Rect
         ref={pod0}
         x={() => vW() * POD_XS[0]} y={() => vH() * POD_Y}
@@ -362,7 +362,7 @@ export default makeScene2D(function* (view) {
         <Txt text=":latest" fill={C.rose} fontSize={() => vW() * 0.010} fontFamily={'DM Mono, monospace'} opacity={0.6} />
       </Rect>
 
-      {/* ── Step 4 — mount arrows ── */}
+      {/* ── Step 4 - mount arrows ── */}
       <Line
         ref={mArr0}
         stroke={C.jaune} lineWidth={2} opacity={0}
@@ -407,7 +407,7 @@ export default makeScene2D(function* (view) {
         shadowColor={C.jaune} shadowBlur={() => vW() * 0.022}
       />
 
-      {/* ── Step 5 — siphon packets: wave A ── */}
+      {/* ── Step 5 - siphon packets: wave A ── */}
       {/* All start at HOST_Y, rise toward kube-system while fading */}
       <Rect
         ref={pac0a}
@@ -440,7 +440,7 @@ export default makeScene2D(function* (view) {
         <Txt text=".env" fill={C.danger} fontSize={() => vW() * 0.012} fontFamily={'DM Mono, monospace'} fontWeight={600} />
       </Rect>
 
-      {/* ── Step 5 — siphon packets: wave B ── */}
+      {/* ── Step 5 - siphon packets: wave B ── */}
       <Rect
         ref={pac0b}
         x={() => vW() * POD_XS[0]} y={() => vH() * HOST_Y}
@@ -472,7 +472,7 @@ export default makeScene2D(function* (view) {
         <Txt text="tokens" fill={C.danger} fontSize={() => vW() * 0.012} fontFamily={'DM Mono, monospace'} fontWeight={600} />
       </Rect>
 
-      {/* ── Step 5 — exfil arrow (exits cluster right side) ── */}
+      {/* ── Step 5 - exfil arrow (exits cluster right side) ── */}
       {/* From HOST right edge → past cluster wall → off-screen right */}
       <Line
         ref={exfilArrow}
@@ -485,7 +485,7 @@ export default makeScene2D(function* (view) {
         ]}
         end={0}
       />
-      {/* C2 badge — at the screen-right edge, partially visible */}
+      {/* C2 badge - at the screen-right edge, partially visible */}
       <Rect
         ref={exfilBadge}
         x={() => vW() * 0.488} y={() => vH() * HOST_Y}
@@ -499,7 +499,7 @@ export default makeScene2D(function* (view) {
         <Txt text="litellm.cloud" fill={C.danger} fontSize={() => vW() * 0.010} fontFamily={'DM Mono, monospace'} opacity={0.75} />
       </Rect>
 
-      {/* ── Step 5 — sysmon labels on HOST ──
+      {/* ── Step 5 - sysmon labels on HOST ──
            Positioned outside the HOST box (below it) to avoid overlap
            with the siphon packets that animate inside the HOST area.       */}
       <Txt
@@ -560,7 +560,7 @@ export default makeScene2D(function* (view) {
   );
   yield* waitFor(0.5);
 
-  // ── STEP 1 — Détection ──
+  // ── STEP 1 - Détection ──
   yield* waitUntil('step1');
   // Step box activates (glow)
   yield* chain(g0(1.8, 0.25, easeOutCubic), g0(1.0, 0.4, easeInOutCubic));
@@ -569,7 +569,7 @@ export default makeScene2D(function* (view) {
   yield* waitFor(1.2);
   g0(0);
 
-  // ── STEP 2 — Aspiration secrets ──
+  // ── STEP 2 - Aspiration secrets ──
   yield* waitUntil('step2');
   yield* chain(g1(1.8, 0.25, easeOutCubic), g1(1.0, 0.4, easeInOutCubic));
   // kube-system border gets more prominent, secrets badge appears
@@ -580,10 +580,10 @@ export default makeScene2D(function* (view) {
   yield* waitFor(1.2);
   g1(0);
 
-  // ── STEP 3 — Déploiement alpine ──
+  // ── STEP 3 - Déploiement alpine ──
   yield* waitUntil('step3');
   yield* chain(g2(1.8, 0.25, easeOutCubic), g2(1.0, 0.4, easeInOutCubic));
-  // Fade out secrets badge — replaced visually by the pods
+  // Fade out secrets badge - replaced visually by the pods
   yield* secretsBadge().opacity(0, 0.3);
   // 3 alpine pod boxes appear inside kube-system
   yield* sequence(0.12,
@@ -594,7 +594,7 @@ export default makeScene2D(function* (view) {
   yield* waitFor(1.2);
   g2(0);
 
-  // ── STEP 4 — Montage host FS ──
+  // ── STEP 4 - Montage host FS ──
   yield* waitUntil('step4');
   yield* chain(g3(1.8, 0.25, easeOutCubic), g3(1.0, 0.4, easeInOutCubic));
   // Mount arrows draw downward from pods to HOST layer
@@ -616,7 +616,7 @@ export default makeScene2D(function* (view) {
   yield* waitFor(1.2);
   g3(0);
 
-  // ── STEP 5 — Persistance ──
+  // ── STEP 5 - Persistance ──
   yield* waitUntil('step5');
   yield* chain(g4(2.2, 0.25, easeOutCubic), g4(1.2, 0.5, easeInOutCubic));
   // HOST layer turns danger red
@@ -634,7 +634,7 @@ export default makeScene2D(function* (view) {
   // HOST label fades, sysmon label replaces
   yield* hostLayerLbl().opacity(0, 0.3);
 
-  // ── Siphon animation — wave A (.ssh · .aws · .env) ──
+  // ── Siphon animation - wave A (.ssh · .aws · .env) ──
   // First, clear the sysmon labels from the HOST interior so they don't
   // overlap with the siphon packets that animate in the same HOST area
   yield* all(
@@ -666,7 +666,7 @@ export default makeScene2D(function* (view) {
   );
   yield* waitFor(0.15);
 
-  // ── Siphon animation — wave B (db pass · .kube · tokens) ──
+  // ── Siphon animation - wave B (db pass · .kube · tokens) ──
   yield* sequence(0.12,
     pac0b().opacity(1, 0.2),
     pac1b().opacity(1, 0.2),

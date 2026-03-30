@@ -7,7 +7,7 @@ import {HighlightStyle} from '@codemirror/language';
 import {tags} from '@lezer/highlight';
 
 // ─────────────────────────────────────────────────────────────────────────────
-// JIT Compiler animation — uses Motion Canvas Code component (Lezer highlight)
+// JIT Compiler animation - uses Motion Canvas Code component (Lezer highlight)
 // Left  : JS code panel with real syntax highlighting
 // Right : JIT register table (identifier | type | value)
 // Deopt : warning banner when score changes number → string
@@ -56,7 +56,7 @@ export default makeScene2D(function* (view) {
   const PW  = () => vW() *  0.44;
   const PH  = () => vH() *  0.84;
 
-  // Register columns — textAlign='left' + explicit width → text left-aligned
+  // Register columns - textAlign='left' + explicit width → text left-aligned
   const RL   = () => RCX() - PW() * 0.5 + PW() * 0.045;  // content left edge
   const CW1  = () => PW() * 0.28;
   const CW2  = () => PW() * 0.22;
@@ -131,7 +131,7 @@ score = "niveau max";`;
         fontFamily={'DM Mono, monospace'} opacity={0}
       />
 
-      {/* Code component — positioned top-left inside left panel */}
+      {/* Code component - positioned top-left inside left panel */}
       <Code
         ref={codeRef}
         highlighter={new LezerHighlighter(parser, PasteTechTheme)}
@@ -256,7 +256,7 @@ score = "niveau max";`;
   // Show full code block dimmed via selection (no selection = full dim)
   yield* codeRef().code(JS_CODE, 0.5);
   yield* codeRef().opacity(1, 0.4);
-  // Dim everything — selection with empty range dims non-selected lines
+  // Dim everything - selection with empty range dims non-selected lines
   yield* codeRef().selection(lines(0, 100), 0.3);
 
   yield* waitFor(0.5);

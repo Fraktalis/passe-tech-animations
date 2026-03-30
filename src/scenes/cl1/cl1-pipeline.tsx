@@ -108,7 +108,7 @@ export default makeScene2D(function* (view) {
       />
       <Txt
         ref={subtitleRef}
-        text="4 blocs — 3 sur silicium classique, 1 biologique"
+        text="4 blocs - 3 sur silicium classique, 1 biologique"
         fill={COLORS.ghost}
         fontSize={() => vW() * 0.018}
         fontFamily={'Space Grotesk'}
@@ -116,7 +116,7 @@ export default makeScene2D(function* (view) {
         opacity={0}
       />
 
-      {/* ══ BLOCK 1 — FREEDOOM ══ */}
+      {/* ══ BLOCK 1 - FREEDOOM ══ */}
       <Rect
         ref={block1}
         x={() => vW() * BX[0]}
@@ -135,7 +135,7 @@ export default makeScene2D(function* (view) {
         <Txt text="silicium" fill={COLORS.ghost} fontSize={() => vW() * 0.011} fontFamily={'DM Mono, monospace'} />
       </Rect>
 
-      {/* ══ BLOCK 2 — ENCODEUR ══ */}
+      {/* ══ BLOCK 2 - ENCODEUR ══ */}
       <Rect
         ref={block2}
         x={() => vW() * BX[1]}
@@ -154,7 +154,7 @@ export default makeScene2D(function* (view) {
         <Txt text="PyTorch · GPU" fill={COLORS.blue} fontSize={() => vW() * 0.011} fontFamily={'DM Mono, monospace'} opacity={0.7} />
       </Rect>
 
-      {/* ══ BLOCK 3 — CL1 (neurones) ══ */}
+      {/* ══ BLOCK 3 - CL1 (neurones) ══ */}
       <Rect
         ref={block3}
         x={() => vW() * BX[2]}
@@ -176,7 +176,7 @@ export default makeScene2D(function* (view) {
         <Txt ref={cl1Sub2Ref} text="59 électrodes" fill={COLORS.rose} fontSize={() => vW() * 0.01} fontFamily={'DM Mono, monospace'} opacity={0.5} />
       </Rect>
 
-      {/* ══ BLOCK 4 — DÉCODEUR ══ */}
+      {/* ══ BLOCK 4 - DÉCODEUR ══ */}
       <Rect
         ref={block4}
         x={() => vW() * BX[3]}
@@ -297,7 +297,7 @@ export default makeScene2D(function* (view) {
       />
 
       {/* ══ BYPASS ARROW (court-circuit, chemin rouge en tirets) ══ */}
-      {/* Part of the decoder risk section — appears ABOVE blocks 2-4 */}
+      {/* Part of the decoder risk section - appears ABOVE blocks 2-4 */}
       <Line
         ref={bypassArrow}
         stroke={COLORS.danger}
@@ -388,7 +388,7 @@ export default makeScene2D(function* (view) {
         radius={() => vW() * 0.003}
         opacity={0}
       />
-      {/* Fill bar — left-anchored via signal */}
+      {/* Fill bar - left-anchored via signal */}
       <Rect
         ref={perfFill}
         x={() => vW() * (-0.22 + 0.22 * perfLevel())}
@@ -455,7 +455,7 @@ export default makeScene2D(function* (view) {
   yield* block2().opacity(1, 0.4);
   yield* waitFor(0.6);
 
-  // ─── BLOC 3 : La CL1 — mise en avant ───
+  // ─── BLOC 3 : La CL1 - mise en avant ───
   yield* waitUntil('block3');
   yield* arrow23().opacity(1, 0.1);
   yield* arrow23().end(1, 0.4, easeOutCubic);
@@ -528,7 +528,7 @@ export default makeScene2D(function* (view) {
   );
   yield* waitFor(0.5);
 
-  // Dim blocks 1, 2, 4 — spotlight CL1
+  // Dim blocks 1, 2, 4 - spotlight CL1
   yield* all(
     block1().opacity(0.2, 0.5),
     block2().opacity(0.2, 0.5),
@@ -566,7 +566,7 @@ export default makeScene2D(function* (view) {
 
   yield* waitFor(0.5);
 
-  // Barre de performance — apparaît à 100%
+  // Barre de performance - apparaît à 100%
   yield* all(
     perfBarLabel().opacity(1, 0.4),
     perfContainer().opacity(1, 0.4),
@@ -575,7 +575,7 @@ export default makeScene2D(function* (view) {
   );
   yield* waitFor(0.6);
 
-  // Effondrement — barre s'écrase vers zéro
+  // Effondrement - barre s'écrase vers zéro
   yield* all(
     perfLevel(0.05, 0.9, easeInOutCubic),
     perfFill().fill(COLORS.danger, 0.9),

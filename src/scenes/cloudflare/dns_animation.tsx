@@ -188,13 +188,13 @@ export default makeScene2D(function* (view) {
   );
 
 
-  // Step 1 — Query leaves the client
+  // Step 1 - Query leaves the client
   yield* queryArrow().opacity(1, 0.6);
   yield* queryArrow().end(1, 0.6);
   yield* waitFor(0.6);
   yield* queryArrow().start(1, 0.6);
 
-  // Step 2 — Inside DNS: reveal hierarchy
+  // Step 2 - Inside DNS: reveal hierarchy
   yield* dnsLayers().opacity(1, 0.8);
   yield* waitFor(0.2);
   yield* rootLayer().scale(1.1, 0.3).to(1, 0.2);
@@ -216,7 +216,7 @@ export default makeScene2D(function* (view) {
 
   yield* mobileDnsIP().position(dns().position(), 1.5)
   yield* dnsLayers().opacity(0, 0.8);
- // Step 3 — Response back to client
+ // Step 3 - Response back to client
   yield* responseLine().opacity(1, 0.6);
   yield* all(responseLine().end(1, 0.6),
   mobileDnsIP().position(client().position(), 3)
@@ -241,6 +241,6 @@ export default makeScene2D(function* (view) {
   yield* finalLink().start(1, 0.6);
   yield* waitFor(1.5);  
 
-  // Step 4 — Connect to the real server
+  // Step 4 - Connect to the real server
   
 });

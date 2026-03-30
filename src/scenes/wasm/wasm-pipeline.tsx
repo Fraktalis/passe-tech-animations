@@ -61,7 +61,7 @@ export default makeScene2D(function* (view) {
   const binaryRow3   = createRef<Txt>();
   const typesNote    = createRef<Txt>();
 
-  // ─── Refs : Section 2 — Browser execution ───
+  // ─── Refs : Section 2 - Browser execution ───
   const browserBox    = createRef<Rect>();
   const browserLabel  = createRef<Txt>();
   const jitArrow      = createRef<Line>();
@@ -103,7 +103,7 @@ export default makeScene2D(function* (view) {
       />
       <Txt
         ref={subtitleRef}
-        text="pas un langage — un format binaire portable"
+        text="pas un langage - un format binaire portable"
         fill={COLORS.ghost}
         fontSize={() => vW() * 0.018}
         fontFamily={'Space Grotesk'}
@@ -111,7 +111,7 @@ export default makeScene2D(function* (view) {
         opacity={0}
       />
 
-      {/* ══ SOURCE FILES — left column ══ */}
+      {/* ══ SOURCE FILES - left column ══ */}
 
       {/* C++ */}
       <Rect
@@ -240,7 +240,7 @@ export default makeScene2D(function* (view) {
         end={0}
       />
 
-      {/* ══ COMPILER — center ══ */}
+      {/* ══ COMPILER - center ══ */}
       <Rect
         ref={compilerBox}
         x={0}
@@ -289,7 +289,7 @@ export default makeScene2D(function* (view) {
         end={0}
       />
 
-      {/* ══ .wasm FILE — right ══ */}
+      {/* ══ .wasm FILE - right ══ */}
       <Rect
         ref={wasmFile}
         x={() => vW() * 0.37}
@@ -321,7 +321,7 @@ export default makeScene2D(function* (view) {
         />
       </Rect>
 
-      {/* ══ BINARY DETAIL — expanded view, slides from .wasm toward center ══ */}
+      {/* ══ BINARY DETAIL - expanded view, slides from .wasm toward center ══ */}
       <Rect
         ref={binaryBlock}
         x={() => vW() * 0.1}
@@ -372,10 +372,10 @@ export default makeScene2D(function* (view) {
         opacity={0}
       />
 
-      {/* ══ Section 2 — Browser execution ══ */}
+      {/* ══ Section 2 - Browser execution ══ */}
       {/* Layout : wasm(-0.32) ──► browser(0) ──► native(0.32) */}
 
-      {/* Browser box — center */}
+      {/* Browser box - center */}
       <Rect
         ref={browserBox}
         x={0}

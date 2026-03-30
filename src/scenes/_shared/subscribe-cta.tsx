@@ -55,7 +55,7 @@ export default makeScene2D(function* (view) {
       />
 
       {/* ══════════════════════════════════════════════════════════════════
-          Trois cartes CTA — scale=0 au départ → bounce-in séquentiel
+          Trois cartes CTA - scale=0 au départ → bounce-in séquentiel
           y = vH()*0.02    x : -0.295 · 0 · +0.295
           w = vW()*0.24    h = vH()*0.38
       ═══════════════════════════════════════════════════════════════════ */}
@@ -199,7 +199,7 @@ export default makeScene2D(function* (view) {
   // Brand mark
   yield* brandMark().opacity(1, 0.45);
 
-  // ─── Pulse global — les 3 cartes ensemble ────────────────────────────────
+  // ─── Pulse global - les 3 cartes ensemble ────────────────────────────────
   yield* waitFor(0.8);
 
   yield* all(

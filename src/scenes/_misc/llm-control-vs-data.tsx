@@ -425,7 +425,7 @@ export default makeScene2D(function* (view) {
           <Circle width={16} height={16} fill={'#F85149'} />
           <Circle width={16} height={16} fill={'#D29922'} />
           <Circle width={16} height={16} fill={'#3FB950'} />
-          <Txt text="  Terminal — bash" fill={COLORS.ghost} fontSize={() => vW() * 0.011} fontFamily={'monospace'} />
+          <Txt text="  Terminal - bash" fill={COLORS.ghost} fontSize={() => vW() * 0.011} fontFamily={'monospace'} />
         </Rect>
 
         {/* Terminal body */}

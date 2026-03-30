@@ -50,13 +50,13 @@ export default makeScene2D(function* (view) {
   );
 
   // ═══════════════════════════════════════════════════════════
-  //  SECTION 1 — DEEP LEARNING
+  //  SECTION 1 - DEEP LEARNING
   // ═══════════════════════════════════════════════════════════
 
   const dlTitle = createRef<Txt>();
   const networkContainer = createRef<Layout>();
 
-  // Neural network config: 3 layers — shifted LEFT
+  // Neural network config: 3 layers - shifted LEFT
   const layers = [4, 6, 3];
   const nodeRefs: ReturnType<typeof createRef<Circle>>[][] = [];
   const connectionRefs = createRefArray<Line>();
@@ -104,7 +104,7 @@ export default makeScene2D(function* (view) {
     }
   }
 
-  // Build connections — each gets a signal for animated weight (lineWidth)
+  // Build connections - each gets a signal for animated weight (lineWidth)
   const weightSignals: ReturnType<typeof createSignal<number>>[] = [];
   const connectionLines: any[] = [];
   for (let l = 0; l < layers.length - 1; l++) {
@@ -173,7 +173,7 @@ export default makeScene2D(function* (view) {
     />
   );
 
-  // Network container — centered vertically
+  // Network container - centered vertically
   view.add(
     <Layout ref={networkContainer} y={() => vH() * -0.02} opacity={0}>
       {...connectionLines}
@@ -201,7 +201,7 @@ export default makeScene2D(function* (view) {
     );
   }
 
-  // Loss curve section — on the RIGHT
+  // Loss curve section - on the RIGHT
   view.add(
     <Layout ref={lossContainer} x={() => vW() * 0.12} y={() => vH() * 0.02} opacity={0}>
       <Line
@@ -287,7 +287,7 @@ export default makeScene2D(function* (view) {
   );
 
   // ═══════════════════════════════════════════════════════════
-  //  SECTION 2 — CL1 BIOLOGICAL LEARNING
+  //  SECTION 2 - CL1 BIOLOGICAL LEARNING
   // ═══════════════════════════════════════════════════════════
 
   const cl1Title = createRef<Txt>();
@@ -333,7 +333,7 @@ export default makeScene2D(function* (view) {
   view.add(
     <Txt
       ref={cl1Title}
-      text={'CL1 — APPRENTISSAGE BIOLOGIQUE'}
+      text={'CL1 - APPRENTISSAGE BIOLOGIQUE'}
       fontFamily={'Space Grotesk'}
       fontWeight={800}
       fontSize={() => vW() * 0.036}
@@ -418,7 +418,7 @@ export default makeScene2D(function* (view) {
       />
       <Txt
         ref={signalLabel}
-        text={'Signal stable — prévisible'}
+        text={'Signal stable - prévisible'}
         fontFamily={'DM Mono, monospace'}
         fontWeight={600}
         fontSize={() => vW() * 0.016}
@@ -428,7 +428,7 @@ export default makeScene2D(function* (view) {
       />
       <Txt
         ref={noiseLabel}
-        text={'⚡ BRUIT — imprévisible'}
+        text={'⚡ BRUIT - imprévisible'}
         fontFamily={'DM Mono, monospace'}
         fontWeight={700}
         fontSize={() => vW() * 0.016}
@@ -488,7 +488,7 @@ export default makeScene2D(function* (view) {
   view.add(
     <Txt
       ref={fepTitle}
-      text={'Principe d\'Énergie Libre — Karl Friston'}
+      text={'Principe d\'Énergie Libre - Karl Friston'}
       fontFamily={'Space Grotesk'}
       fontWeight={800}
       fontSize={() => vW() * 0.024}
@@ -512,7 +512,7 @@ export default makeScene2D(function* (view) {
   );
 
   // ═══════════════════════════════════════════════════════════
-  //  HELPER — Backprop glow pulse through the network
+  //  HELPER - Backprop glow pulse through the network
   //  Signal lumineux rose qui remonte de la sortie vers l'entrée
   // ═══════════════════════════════════════════════════════════
 
@@ -596,7 +596,7 @@ export default makeScene2D(function* (view) {
     yield* waitFor(0.15);
   }
 
-  // ─── Phase 4: Backprop — signal lumineux qui remonte ───
+  // ─── Phase 4: Backprop - signal lumineux qui remonte ───
   yield* waitUntil('dl-backprop');
 
   // First pass: slow, clearly visible
@@ -610,7 +610,7 @@ export default makeScene2D(function* (view) {
   yield* lossContainer().opacity(1, 0.4);
   yield* lossProgress(1, 2.5, easeInOutCubic);
 
-  // ─── Phase 6: "Encore et encore" — rapid loops ───
+  // ─── Phase 6: "Encore et encore" - rapid loops ───
   yield* waitUntil('dl-encore');
   yield* encoreLabel().opacity(1, 0.4);
   yield* costLabel().opacity(1, 0.4);
@@ -691,7 +691,7 @@ export default makeScene2D(function* (view) {
   yield* neuronGlow(3, 0.3, easeOutCubic);
   yield* signalPhase(Math.PI * 14, 3, easeInOutCubic);
 
-  // ─── Phase 12: Neuron adapts — step by step ───
+  // ─── Phase 12: Neuron adapts - step by step ───
   yield* waitUntil('cl1-adapt');
 
   // Show connection neuron → signal + label

@@ -25,7 +25,7 @@ export default makeScene2D(function* (view) {
   const titleRef     = createRef<Txt>();
   const subtitleRef  = createRef<Txt>();
 
-  // Cellule — couches concentriques
+  // Cellule - couches concentriques
   const cellOuter    = createRef<Rect>();   // membrane plasmique
   const membraneGlow = createRef<Rect>();   // halo rose membrane
   const nucleus      = createRef<Rect>();   // noyau (ADN)
@@ -105,7 +105,7 @@ export default makeScene2D(function* (view) {
         shadowBlur={() => vW() * 0.030}
       />
 
-      {/* ─── Cellule — bordure membrane ─── */}
+      {/* ─── Cellule - bordure membrane ─── */}
       <Rect
         ref={cellOuter}
         x={() => vW() * -0.10}
@@ -190,7 +190,7 @@ export default makeScene2D(function* (view) {
         gap={() => vH() * 0.010}
       >
         <Txt text="ADN" fill={COLORS.vert} fontSize={() => vW() * 0.016} fontWeight={700} fontFamily={'DM Mono, monospace'} />
-        {/* Badge lecture seule — caché au départ */}
+        {/* Badge lecture seule - caché au départ */}
         <Rect
           ref={readOnlyBadge}
           width={() => vW() * 0.095}
@@ -206,7 +206,7 @@ export default makeScene2D(function* (view) {
         </Rect>
       </Rect>
 
-      {/* ─── Badge ATP (cgroups) — au-dessus de mito1 ─── */}
+      {/* ─── Badge ATP (cgroups) - au-dessus de mito1 ─── */}
       <Rect
         ref={atpBadge}
         x={() => vW() * -0.170}
@@ -225,7 +225,7 @@ export default makeScene2D(function* (view) {
         <Txt text="budget limité" fill={COLORS.ghostText} fontSize={() => vW() * 0.008} fontFamily={'DM Mono, monospace'} />
       </Rect>
 
-      {/* ─── Badge Glucose (cgroups) — au-dessus de mito2 ─── */}
+      {/* ─── Badge Glucose (cgroups) - au-dessus de mito2 ─── */}
       <Rect
         ref={glucoseBadge}
         x={() => vW() * -0.025}
@@ -257,7 +257,7 @@ export default makeScene2D(function* (view) {
         radius={() => vW() * 0.008}
         opacity={0}
         layout direction={'column'}
-        alignItems={'flex-start'}
+        alignItems={'start'}
         padding={() => vW() * 0.020}
         gap={() => vH() * 0.022}
       >
@@ -378,7 +378,7 @@ export default makeScene2D(function* (view) {
   // ANIMATIONS
   // ═══════════════════════════════════════════════════════════════════════════
 
-  // ─── Intro — cellule complète ─────────────────────────────────────────────
+  // ─── Intro - cellule complète ─────────────────────────────────────────────
   yield* waitUntil('intro');
 
   yield* all(
@@ -398,7 +398,7 @@ export default makeScene2D(function* (view) {
 
   yield* waitFor(0.5);
 
-  // ─── Section 1 — Membrane = Namespace ────────────────────────────────────
+  // ─── Section 1 - Membrane = Namespace ────────────────────────────────────
   yield* waitUntil('membrane');
 
   yield* showCaption('01', 'MEMBRANE PLASMIQUE', COLORS.rose);
@@ -416,7 +416,7 @@ export default makeScene2D(function* (view) {
 
   yield* waitFor(1);
 
-  // ─── Section 2 — ATP = cgroups ────────────────────────────────────────────
+  // ─── Section 2 - ATP = cgroups ────────────────────────────────────────────
   yield* waitUntil('atp');
 
   yield* all(
@@ -449,7 +449,7 @@ export default makeScene2D(function* (view) {
 
   yield* waitFor(1);
 
-  // ─── Section 3 — ADN = Docker image ──────────────────────────────────────
+  // ─── Section 3 - ADN = Docker image ──────────────────────────────────────
   yield* waitUntil('dna');
 
   yield* all(
@@ -457,7 +457,7 @@ export default makeScene2D(function* (view) {
     glucoseBadge().opacity(0, 0.3),
   );
 
-  yield* showCaption('03', 'ADN — PLAN DE CONSTRUCTION', COLORS.vert);
+  yield* showCaption('03', 'ADN - PLAN DE CONSTRUCTION', COLORS.vert);
 
   // Halo noyau
   yield* all(
@@ -475,7 +475,7 @@ export default makeScene2D(function* (view) {
 
   yield* waitFor(1);
 
-  // ─── Section 4 — Apoptose = docker stop ──────────────────────────────────
+  // ─── Section 4 - Apoptose = docker stop ──────────────────────────────────
   yield* waitUntil('apoptose');
 
   yield* all(
@@ -487,7 +487,7 @@ export default makeScene2D(function* (view) {
 
   yield* showCaption('04', 'APOPTOSE', COLORS.danger);
 
-  // Cellule vire au rouge — dysfonctionnelle
+  // Cellule vire au rouge - dysfonctionnelle
   yield* all(
     cellOuter().stroke(COLORS.danger, 0.45),
     cellOuter().fill(`${COLORS.danger}08`, 0.45),
@@ -519,7 +519,7 @@ export default makeScene2D(function* (view) {
   // Analogie finale
   yield* swapAnalogy(
     '→ DOCKER STOP',
-    'Destruction propre du container.\nSans dégâts collatéraux.\nNouvelle version relancée — ni vu ni connu.',
+    'Destruction propre du container.\nSans dégâts collatéraux.\nNouvelle version relancée - ni vu ni connu.',
   );
 
   yield* waitFor(1.5);

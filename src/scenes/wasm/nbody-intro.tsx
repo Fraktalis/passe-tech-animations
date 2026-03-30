@@ -3,7 +3,7 @@ import {Grid, Layout, Latex, Line, Rect, Txt} from '@motion-canvas/2d/lib/compon
 import {all, createRef, waitFor, waitUntil} from '@motion-canvas/core';
 
 // ─────────────────────────────────────────────────────────────────────────────
-// N-Body intro — illustre le problème des N corps
+// N-Body intro - illustre le problème des N corps
 // 6 "étoiles" disséminées dans l'espace ; pour chaque particule active (bleue)
 // on trace les N-1 lignes de force vers toutes les autres.
 // Après le sweep, les particules bougent légèrement (étape d'intégration).
@@ -50,12 +50,12 @@ export default makeScene2D(function* (view) {
   const latexRef  = createRef<Latex>();
   const massLabel = createRef<Txt>();
 
-  // Légende — terme (coloré) + description (ghost), 4 lignes
+  // Légende - terme (coloré) + description (ghost), 4 lignes
   const LEGEND = [
-    { term: 'F',        color: C.rose,  desc: '— force gravitationnelle entre deux corps' },
-    { term: 'G',        color: C.vert,  desc: '— constante gravitationnelle  (6.674 × 10⁻¹¹)' },
-    { term: 'm₁, m₂',  color: C.jaune, desc: '— masses des deux corps' },
-    { term: 'r',        color: C.self,  desc: '— distance entre les corps' },
+    { term: 'F',        color: C.rose,  desc: '- force gravitationnelle entre deux corps' },
+    { term: 'G',        color: C.vert,  desc: '- constante gravitationnelle  (6.674 × 10⁻¹¹)' },
+    { term: 'm₁, m₂',  color: C.jaune, desc: '- masses des deux corps' },
+    { term: 'r',        color: C.self,  desc: '- distance entre les corps' },
   ];
   const legendTerms = Array.from({length: LEGEND.length}, () => createRef<Txt>());
   const legendDescs = Array.from({length: LEGEND.length}, () => createRef<Txt>());
@@ -85,7 +85,7 @@ export default makeScene2D(function* (view) {
         opacity={0}
       />
 
-      {/* Légende — terme coloré à gauche, description ghost à droite */}
+      {/* Légende - terme coloré à gauche, description ghost à droite */}
       <Txt ref={legendTerms[0]} text={LEGEND[0].term} fill={LEGEND[0].color} fontSize={() => vW()*0.018} fontWeight={700} fontFamily={'DM Mono, monospace'} x={W * -0.12} y={H * 0.08} opacity={0} />
       <Txt ref={legendDescs[0]} text={LEGEND[0].desc} fill={C.ghost}          fontSize={() => vW()*0.017}               fontFamily={'Space Grotesk'}       x={W *  0.06} y={H * 0.08} opacity={0} />
 
@@ -119,7 +119,7 @@ export default makeScene2D(function* (view) {
       <Line ref={connLines[3]} points={[[0,0],[1,1]]} stroke={C.vert} lineWidth={1} opacity={0} end={0} />
       <Line ref={connLines[4]} points={[[0,0],[1,1]]} stroke={C.vert} lineWidth={1} opacity={0} end={0} />
 
-      {/* Active-particle rings — positions statiques pour correspondre aux pRefs */}
+      {/* Active-particle rings - positions statiques pour correspondre aux pRefs */}
       <Rect ref={ringRefs[0]} x={W*PX[0]} y={H*PY[0]} width={W*(PR[0]*2+0.05)} height={W*(PR[0]*2+0.05)} radius={W*(PR[0]+0.025)} fill={null} stroke={C.self} lineWidth={2} opacity={0} />
       <Rect ref={ringRefs[1]} x={W*PX[1]} y={H*PY[1]} width={W*(PR[1]*2+0.05)} height={W*(PR[1]*2+0.05)} radius={W*(PR[1]+0.025)} fill={null} stroke={C.self} lineWidth={2} opacity={0} />
       <Rect ref={ringRefs[2]} x={W*PX[2]} y={H*PY[2]} width={W*(PR[2]*2+0.05)} height={W*(PR[2]*2+0.05)} radius={W*(PR[2]+0.025)} fill={null} stroke={C.self} lineWidth={2} opacity={0} />
@@ -127,7 +127,7 @@ export default makeScene2D(function* (view) {
       <Rect ref={ringRefs[4]} x={W*PX[4]} y={H*PY[4]} width={W*(PR[4]*2+0.05)} height={W*(PR[4]*2+0.05)} radius={W*(PR[4]+0.025)} fill={null} stroke={C.self} lineWidth={2} opacity={0} />
       <Rect ref={ringRefs[5]} x={W*PX[5]} y={H*PY[5]} width={W*(PR[5]*2+0.05)} height={W*(PR[5]*2+0.05)} radius={W*(PR[5]+0.025)} fill={null} stroke={C.self} lineWidth={2} opacity={0} />
 
-      {/* Particles — positions statiques, scale=0 pour apparition par croissance */}
+      {/* Particles - positions statiques, scale=0 pour apparition par croissance */}
       <Rect ref={pRefs[0]} x={W*PX[0]} y={H*PY[0]} width={W*PR[0]*2} height={W*PR[0]*2} radius={W*PR[0]} fill={C.star} scale={0} />
       <Rect ref={pRefs[1]} x={W*PX[1]} y={H*PY[1]} width={W*PR[1]*2} height={W*PR[1]*2} radius={W*PR[1]} fill={C.star} scale={0} />
       <Rect ref={pRefs[2]} x={W*PX[2]} y={H*PY[2]} width={W*PR[2]*2} height={W*PR[2]*2} radius={W*PR[2]} fill={C.star} scale={0} />
@@ -172,7 +172,7 @@ export default makeScene2D(function* (view) {
   }
   yield* waitFor(0.8);
 
-  // "on pose m = 1" — légende s'efface, label apparaît
+  // "on pose m = 1" - légende s'efface, label apparaît
   yield* all(
     ...legendTerms.map(r => r().opacity(0, 0.3)),
     ...legendDescs.map(r => r().opacity(0, 0.3)),
@@ -257,7 +257,7 @@ export default makeScene2D(function* (view) {
 
   yield* counterTxt().opacity(0, 0.3);
 
-  // ─── Position update — les particules bougent (intégration) ───
+  // ─── Position update - les particules bougent (intégration) ───
   yield* waitUntil('positionUpdate');
 
   yield* all(

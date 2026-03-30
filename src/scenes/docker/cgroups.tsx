@@ -14,9 +14,9 @@ export default makeScene2D(function* (view) {
     processBg:     '#1C2128',
     processBorder: '#30363D',
     // Cgroup colors
-    mem:   '#EF4444',   // rouge  — danger, OOM
-    cpu:   '#F59E0B',   // ambre  — throttle
-    blkio: '#3B82F6',   // bleu   — I/O
+    mem:   '#EF4444',   // rouge  - danger, OOM
+    cpu:   '#F59E0B',   // ambre  - throttle
+    blkio: '#3B82F6',   // bleu   - I/O
     // Conclusion
     conc:  '#6DFF8A',   // vert Passe-Tech
   };
@@ -199,7 +199,7 @@ export default makeScene2D(function* (view) {
             layout direction={'column'} gap={() => vH() * 0.007}>
             <Txt text="⏸  THROTTLED" fill={COLORS.cpu}
               fontSize={() => vW() * 0.010} fontWeight={700} fontFamily={'Space Grotesk'} />
-            <Txt text="Processus gelé — attend la prochaine période" fill={COLORS.ghostText}
+            <Txt text="Processus gelé - attend la prochaine période" fill={COLORS.ghostText}
               fontSize={() => vW() * 0.008} fontFamily={'DM Mono, monospace'} />
           </Rect>
         </Rect>

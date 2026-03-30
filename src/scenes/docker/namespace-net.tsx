@@ -17,7 +17,7 @@ export default makeScene2D(function* (view) {
     pid:   '#58A6FF',
     net:   '#0099FF',
     mount: '#F59E0B',
-    user:  '#FF3E6C',   // rose Passe-Tech — le plus critique
+    user:  '#FF3E6C',   // rose Passe-Tech - le plus critique
     ipc:   '#A78BFA',
     uts:   '#06B6D4',
     // Intérieur du card USER
@@ -77,7 +77,7 @@ export default makeScene2D(function* (view) {
       />
 
       {/* ═══════════════════════════════════════════════════════════════════
-          Grille 3 × 2 — toutes cartes : w=vW()*0.27  h=vH()*0.24
+          Grille 3 × 2 - toutes cartes : w=vW()*0.27  h=vH()*0.24
           Ligne 1  y=vH()*-0.14   x : -0.325 · 0 · +0.325
           Ligne 2  y=vH()*0.165   x : -0.325 · 0 · +0.325
       ════════════════════════════════════════════════════════════════════ */}
@@ -222,7 +222,7 @@ export default makeScene2D(function* (view) {
         </Rect>
       </Rect>
 
-      {/* ─── USER (le plus important — glow rose) ────────────────────────── */}
+      {/* ─── USER (le plus important - glow rose) ────────────────────────── */}
       <Rect
         ref={userCard}
         x={() => vW() * -0.325}

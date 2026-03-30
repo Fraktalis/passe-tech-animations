@@ -608,7 +608,7 @@ export default makeScene2D(function* (view) {
   // ─── ERA 1: UNIX 70s ──────────────────────────────────────────────────────
   yield* waitUntil('unix');
 
-  yield* showCaption('01', 'UNIX 70s — QUOTA PAR UTILISATEUR', COLORS.bleu);
+  yield* showCaption('01', 'UNIX 70s - QUOTA PAR UTILISATEUR', COLORS.bleu);
 
   yield* swapPanel(
     '≈ 1970',
@@ -641,7 +641,7 @@ export default makeScene2D(function* (view) {
     quotaC().opacity(1, 0.3),
   );
 
-  // Resource fills — Era 1: soft quotas, moderate usage, lots of free space
+  // Resource fills - Era 1: soft quotas, moderate usage, lots of free space
   yield* all(
     cpuA().opacity(1, 0.3), cpuB().opacity(1, 0.3), cpuC().opacity(1, 0.3),
     ramA().opacity(1, 0.3), ramB().opacity(1, 0.3), ramC().opacity(1, 0.3),
@@ -653,7 +653,7 @@ export default makeScene2D(function* (view) {
   // ─── ERA 2: VMs 2000s ─────────────────────────────────────────────────────
   yield* waitUntil('vms');
 
-  yield* showCaption('02', 'VM — 2000s — ISOLATION COMPLÈTE', COLORS.jaune);
+  yield* showCaption('02', 'VM - 2000s - ISOLATION COMPLÈTE', COLORS.jaune);
 
   // Fade lines, kernel, quota badges
   yield* all(
@@ -686,10 +686,10 @@ export default makeScene2D(function* (view) {
   yield* swapPanel(
     '≈ 2000',
     'VM + HYPERVISEUR',
-    'Chaque VM embarque\nun OS complet.\nIsolation forte — mais\nchaque OS consomme\nCPU et RAM en permanence.',
+    'Chaque VM embarque\nun OS complet.\nIsolation forte - mais\nchaque OS consomme\nCPU et RAM en permanence.',
   );
 
-  // Resource fills — Era 2: VMs allocate big fixed blocks (OS overhead)
+  // Resource fills - Era 2: VMs allocate big fixed blocks (OS overhead)
   yield* setFills(0.150, 0.150, 0.150, 0.140, 0.140, 0.140);
 
   yield* waitFor(1.5);
@@ -697,7 +697,7 @@ export default makeScene2D(function* (view) {
   // ─── ERA 3: Docker 2013 ───────────────────────────────────────────────────
   yield* waitUntil('docker');
 
-  yield* showCaption('03', 'DOCKER 2013 — NAMESPACES + CGROUPS', COLORS.rose);
+  yield* showCaption('03', 'DOCKER 2013 - NAMESPACES + CGROUPS', COLORS.rose);
 
   // OS layers and overhead fade
   yield* all(
@@ -737,11 +737,11 @@ export default makeScene2D(function* (view) {
   // Right panel update
   yield* swapPanel(
     '2013',
-    'DOCKER — CONTAINERS',
+    'DOCKER - CONTAINERS',
     'Kernel partagé.\nNamespaces : chaque\nprocessus croit être seul.\nCgroups : quota fin\nsur CPU, RAM, I/O.',
   );
 
-  // Resource fills — Era 3: small cgroup allocations, lots of free space
+  // Resource fills - Era 3: small cgroup allocations, lots of free space
   yield* setFills(0.070, 0.070, 0.060, 0.060, 0.060, 0.050);
 
   yield* waitFor(2.0);
