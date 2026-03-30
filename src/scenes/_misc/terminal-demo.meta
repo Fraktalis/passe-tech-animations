@@ -1,0 +1,42 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "phase1",
+      "targetTime": 0
+    },
+    {
+      "name": "phase2",
+      "targetTime": 3.8000000000000007
+    },
+    {
+      "name": "phase3",
+      "targetTime": 6.500000000000017
+    },
+    {
+      "name": "phase4",
+      "targetTime": 7.710000000000018
+    },
+    {
+      "name": "phase5",
+      "targetTime": 10.160000000000018
+    },
+    {
+      "name": "phase6",
+      "targetTime": 11.910000000000016
+    },
+    {
+      "name": "phase7",
+      "targetTime": 14.660000000000018
+    },
+    {
+      "name": "phase8",
+      "targetTime": 18.110000000000017
+    },
+    {
+      "name": "end",
+      "targetTime": 23.419999999999956
+    }
+  ],
+  "seed": 1532215476
+}
