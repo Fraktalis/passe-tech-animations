@@ -1,0 +1,34 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "intro",
+      "targetTime": 0
+    },
+    {
+      "name": "spine",
+      "targetTime": 1.5
+    },
+    {
+      "name": "event1",
+      "targetTime": 2.8
+    },
+    {
+      "name": "event2",
+      "targetTime": 5.5
+    },
+    {
+      "name": "event3",
+      "targetTime": 8.2
+    },
+    {
+      "name": "event4",
+      "targetTime": 11
+    },
+    {
+      "name": "endScene",
+      "targetTime": 16
+    }
+  ],
+  "seed": 712394851
+}

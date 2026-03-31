@@ -27,8 +27,12 @@ import payloadFiles from './scenes/litellm/payload-files?scene';
 import kubePwn from './scenes/litellm/kube-pwn?scene';
 import terminalDemo from './scenes/_misc/terminal-demo?scene';
 import install_terminal from './scenes/litellm/install_terminal?scene';
-import audio from './audio/voiceover_training.wav';
+import payloadDecode from './scenes/litellm/payload-decode?scene';
+import teampcpTimeline from './scenes/litellm/teampcp-timeline?scene';
+import conclusionRemediation from './scenes/litellm/conclusion-remediation?scene';
+import audio from './audio/kube-pwn.wav';
 
 export default makeProject({
-  scenes: [install_terminal],
+  scenes: [conclusionRemediation],
+  audio
 });

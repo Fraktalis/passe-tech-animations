@@ -1,0 +1,58 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "intro",
+      "targetTime": 0
+    },
+    {
+      "name": "etape1",
+      "targetTime": 1.8
+    },
+    {
+      "name": "cmd-version",
+      "targetTime": 3.5
+    },
+    {
+      "name": "cmd-pth",
+      "targetTime": 6.5
+    },
+    {
+      "name": "cmd-sysmon",
+      "targetTime": 9.2
+    },
+    {
+      "name": "cmd-kube",
+      "targetTime": 12
+    },
+    {
+      "name": "etape2",
+      "targetTime": 15.5
+    },
+    {
+      "name": "cmd-purge",
+      "targetTime": 17.2
+    },
+    {
+      "name": "cmd-rm",
+      "targetTime": 20
+    },
+    {
+      "name": "etape3",
+      "targetTime": 24
+    },
+    {
+      "name": "yaml-bad",
+      "targetTime": 25.8
+    },
+    {
+      "name": "yaml-good",
+      "targetTime": 29
+    },
+    {
+      "name": "endScene",
+      "targetTime": 32.5
+    }
+  ],
+  "seed": 348291074
+}

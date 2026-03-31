@@ -74,8 +74,9 @@ export default makeScene2D(function* (view) {
   // Step 1 - service account token badge
   const tokenBadge    = createRef<Rect>();
 
-  // Step 2 - secrets indicator
-  const secretsBadge  = createRef<Rect>();
+  // Step 2 - secrets indicator + scanning label
+  const secretsBadge    = createRef<Rect>();
+  const secretsScanLbl  = createRef<Txt>();
 
   // Step 3 - 3 alpine pods inside kube-system
   const pod0 = createRef<Rect>(), pod1 = createRef<Rect>(), pod2 = createRef<Rect>();
@@ -131,10 +132,11 @@ export default makeScene2D(function* (view) {
   const SEC_Y   = KS_Y - 0.01;
 
   // Mount arrow y: from pod bottom to HOST layer top
-  // pod bottom: POD_Y + POD_H/2 = KS_Y + 0.0425
-  // HOST top: HOST_Y - HOST_H/2 = CLUS_Y + 0.215 - 0.055 = CLUS_Y + 0.16
   const MARR_Y0 = KS_Y  + POD_H / 2 + 0.005;  // slightly below pod
   const MARR_Y1 = HOST_Y - HOST_H / 2 - 0.005; // slightly above HOST
+
+  // C2 badge — centré sous le HOST layer, flèche verticale
+  const C2_Y = HOST_Y + HOST_H / 2 + 0.115; // ~0.405 vH
 
   // ──────────────────────────────────────────────────────
   // SCENE TREE
@@ -327,6 +329,18 @@ export default makeScene2D(function* (view) {
         <Txt text="all namespaces" fill={C.blue} fontSize={() => vW() * 0.010} fontFamily={'DM Mono, monospace'} opacity={0.7} />
       </Rect>
 
+      {/* ── Step 2 - scanning label (cycle namespaces) ── */}
+      <Txt
+        ref={secretsScanLbl}
+        text="scanning → default…"
+        fill={C.blue}
+        fontSize={() => vW() * 0.012}
+        fontFamily={'DM Mono, monospace'}
+        x={() => vW() * CX}
+        y={() => vH() * (KS_Y + 0.05)}
+        opacity={0}
+      />
+
       {/* ── Step 3 - alpine pods inside kube-system ── */}
       <Rect
         ref={pod0}
@@ -472,36 +486,33 @@ export default makeScene2D(function* (view) {
         <Txt text="tokens" fill={C.danger} fontSize={() => vW() * 0.012} fontFamily={'DM Mono, monospace'} fontWeight={600} />
       </Rect>
 
-      {/* ── Step 5 - exfil arrow (exits cluster right side) ── */}
-      {/* From HOST right edge → past cluster wall → off-screen right */}
+      {/* ── Step 5 - exfil arrow (HOST bottom → C2 badge, vertical) ── */}
       <Line
         ref={exfilArrow}
         stroke={C.danger} lineWidth={2} lineDash={[8, 4]} opacity={0}
         endArrow arrowSize={9}
         shadowColor={C.danger} shadowBlur={() => vW() * 0.015}
         points={() => [
-          [vW() * (CX + HOST_W / 2),          vH() * HOST_Y],
-          [vW() * (CX + CLUS_W / 2 + 0.06),   vH() * HOST_Y],
+          [vW() * CX, vH() * (HOST_Y + HOST_H / 2 + 0.005)],
+          [vW() * CX, vH() * (C2_Y - 0.038)],
         ]}
         end={0}
       />
-      {/* C2 badge - at the screen-right edge, partially visible */}
+      {/* C2 badge — centré sous le HOST layer */}
       <Rect
         ref={exfilBadge}
-        x={() => vW() * 0.488} y={() => vH() * HOST_Y}
-        width={() => vW() * 0.085} height={() => vH() * 0.06}
+        x={() => vW() * CX} y={() => vH() * C2_Y}
+        width={() => vW() * 0.18} height={() => vH() * 0.062}
         fill={`${C.danger}20`} stroke={C.danger} lineWidth={2}
         radius={() => vW() * 0.004} opacity={0}
         shadowColor={C.danger} shadowBlur={() => vW() * 0.02}
-        layout direction={'column'} alignItems={'center'} justifyContent={'center'} gap={3}
+        layout direction={'row'} alignItems={'center'} justifyContent={'center'} gap={10}
       >
-        <Txt text="C2" fill={C.danger} fontSize={() => vW() * 0.014} fontWeight={700} fontFamily={'Space Grotesk'} />
-        <Txt text="litellm.cloud" fill={C.danger} fontSize={() => vW() * 0.010} fontFamily={'DM Mono, monospace'} opacity={0.75} />
+        <Txt text="C2" fill={C.danger} fontSize={() => vW() * 0.015} fontWeight={700} fontFamily={'Space Grotesk'} />
+        <Txt text="models.litellm.cloud" fill={C.danger} fontSize={() => vW() * 0.011} fontFamily={'DM Mono, monospace'} opacity={0.85} />
       </Rect>
 
-      {/* ── Step 5 - sysmon labels on HOST ──
-           Positioned outside the HOST box (below it) to avoid overlap
-           with the siphon packets that animate inside the HOST area.       */}
+      {/* ── Step 5 - sysmon labels — apparaissent DANS le HOST box en dernier ── */}
       <Txt
         ref={hostSysmon0}
         text="sysmon.py + systemd"
@@ -510,7 +521,7 @@ export default makeScene2D(function* (view) {
         fontFamily={'DM Mono, monospace'}
         fontWeight={600}
         x={() => vW() * CX}
-        y={() => vH() * (HOST_Y + HOST_H / 2 + 0.028)}
+        y={() => vH() * (HOST_Y - 0.014)}
         opacity={0}
       />
       <Txt
@@ -520,7 +531,7 @@ export default makeScene2D(function* (view) {
         fontSize={() => vW() * 0.011}
         fontFamily={'DM Mono, monospace'}
         x={() => vW() * CX}
-        y={() => vH() * (HOST_Y + HOST_H / 2 + 0.048)}
+        y={() => vH() * (HOST_Y + 0.018)}
         opacity={0}
       />
     </Layout>,
@@ -572,12 +583,22 @@ export default makeScene2D(function* (view) {
   // ── STEP 2 - Aspiration secrets ──
   yield* waitUntil('step2');
   yield* chain(g1(1.8, 0.25, easeOutCubic), g1(1.0, 0.4, easeInOutCubic));
-  // kube-system border gets more prominent, secrets badge appears
   yield* all(
     kubeSystemBox().stroke(C.blue, 0.4),
     secretsBadge().opacity(1, 0.4),
   );
-  yield* waitFor(1.2);
+  // Scanning namespaces — label cycle + badge pulse
+  yield* secretsScanLbl().opacity(1, 0.3);
+  const namespaces = ['default', 'kube-system', 'monitoring', 'production', 'staging', 'kube-public'];
+  for (const ns of namespaces) {
+    secretsScanLbl().text(`scanning → ${ns}…`);
+    yield* chain(
+      secretsBadge().lineWidth(3, 0.1),
+      secretsBadge().lineWidth(2, 0.12),
+    );
+  }
+  secretsScanLbl().text('✓  all namespaces — dumped');
+  yield* waitFor(0.6);
   g1(0);
 
   // ── STEP 3 - Déploiement alpine ──
@@ -619,54 +640,30 @@ export default makeScene2D(function* (view) {
   // ── STEP 5 - Persistance ──
   yield* waitUntil('step5');
   yield* chain(g4(2.2, 0.25, easeOutCubic), g4(1.2, 0.5, easeInOutCubic));
-  // HOST layer turns danger red
+  // HOST layer turns danger red — le pod privilégié a accès au disque
   yield* all(
     hostLayer().stroke(C.danger, 0.4),
     hostHighlight().stroke(C.danger, 0.4),
     hostHighlight().shadowColor(C.danger, 0.4),
     hostLayerLbl().fill(C.danger, 0.4),
   );
-  // sysmon labels appear
-  yield* all(
-    hostSysmon0().opacity(1, 0.45),
-    hostSysmon1().opacity(1, 0.4),
-  );
-  // HOST label fades, sysmon label replaces
   yield* hostLayerLbl().opacity(0, 0.3);
 
-  // ── Siphon animation - wave A (.ssh · .aws · .env) ──
-  // First, clear the sysmon labels from the HOST interior so they don't
-  // overlap with the siphon packets that animate in the same HOST area
-  yield* all(
-    hostSysmon0().opacity(0, 0.25),
-    hostSysmon1().opacity(0, 0.25),
-  );
-  yield* waitFor(0.25);
-  // Packets materialise inside the HOST layer
+  // ── Siphon wave A (.ssh · .aws · .env) ──
   yield* sequence(0.12,
     pac0a().opacity(1, 0.2),
     pac1a().opacity(1, 0.2),
     pac2a().opacity(1, 0.2),
   );
   yield* waitFor(0.25);
-  // Packets rise along the mount paths and fade out simultaneously
   yield* sequence(0.14,
-    all(
-      pac0a().y(vH() * KS_Y, 0.62, easeInOutCubic),
-      pac0a().opacity(0, 0.62),
-    ),
-    all(
-      pac1a().y(vH() * KS_Y, 0.62, easeInOutCubic),
-      pac1a().opacity(0, 0.62),
-    ),
-    all(
-      pac2a().y(vH() * KS_Y, 0.62, easeInOutCubic),
-      pac2a().opacity(0, 0.62),
-    ),
+    all(pac0a().y(vH() * KS_Y, 0.62, easeInOutCubic), pac0a().opacity(0, 0.62)),
+    all(pac1a().y(vH() * KS_Y, 0.62, easeInOutCubic), pac1a().opacity(0, 0.62)),
+    all(pac2a().y(vH() * KS_Y, 0.62, easeInOutCubic), pac2a().opacity(0, 0.62)),
   );
   yield* waitFor(0.15);
 
-  // ── Siphon animation - wave B (db pass · .kube · tokens) ──
+  // ── Siphon wave B (db pass · .kube · tokens) ──
   yield* sequence(0.12,
     pac0b().opacity(1, 0.2),
     pac1b().opacity(1, 0.2),
@@ -674,33 +671,25 @@ export default makeScene2D(function* (view) {
   );
   yield* waitFor(0.25);
   yield* sequence(0.14,
-    all(
-      pac0b().y(vH() * KS_Y, 0.62, easeInOutCubic),
-      pac0b().opacity(0, 0.62),
-    ),
-    all(
-      pac1b().y(vH() * KS_Y, 0.62, easeInOutCubic),
-      pac1b().opacity(0, 0.62),
-    ),
-    all(
-      pac2b().y(vH() * KS_Y, 0.62, easeInOutCubic),
-      pac2b().opacity(0, 0.62),
-    ),
+    all(pac0b().y(vH() * KS_Y, 0.62, easeInOutCubic), pac0b().opacity(0, 0.62)),
+    all(pac1b().y(vH() * KS_Y, 0.62, easeInOutCubic), pac1b().opacity(0, 0.62)),
+    all(pac2b().y(vH() * KS_Y, 0.62, easeInOutCubic), pac2b().opacity(0, 0.62)),
   );
   yield* waitFor(0.3);
 
-  // Sysmon labels reappear below HOST once siphon waves are done
-  yield* all(
-    hostSysmon0().opacity(1, 0.35),
-    hostSysmon1().opacity(1, 0.3),
-  );
-  yield* waitFor(0.4);
-
-  // ── Exfil arrow exits the cluster toward C2 ──
+  // ── C2 + exfil arrow (données partent vers models.litellm.cloud) ──
   yield* waitUntil('exfil');
-  yield* exfilBadge().opacity(1, 0.35);
+  yield* exfilBadge().opacity(1, 0.4);
   yield* exfilArrow().opacity(1, 0.1);
   yield* exfilArrow().end(1, 0.55, easeOutCubic);
+  yield* waitFor(1.2);
+
+  // ── Persistance sysmon — dernier acte (apparaît DANS le HOST box) ──
+  yield* waitUntil('sysmon');
+  yield* all(
+    hostSysmon0().opacity(1, 0.45),
+    hostSysmon1().opacity(1, 0.4),
+  );
   yield* waitFor(2.0);
 
   // ─── End ───
@@ -717,6 +706,7 @@ export default makeScene2D(function* (view) {
     hostHighlight().opacity(0, 0.35),
     tokenBadge().opacity(0, 0.3),
     secretsBadge().opacity(0, 0.3),
+    secretsScanLbl().opacity(0, 0.3),
     pod0().opacity(0, 0.3), pod1().opacity(0, 0.3), pod2().opacity(0, 0.3),
     mArr0().opacity(0, 0.3), mArr1().opacity(0, 0.3), mArr2().opacity(0, 0.3),
     hostSysmon0().opacity(0, 0.3), hostSysmon1().opacity(0, 0.3),

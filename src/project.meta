@@ -10,7 +10,7 @@
       "x": 3840,
       "y": 2160
     },
-    "audioOffset": -15.117613433369073
+    "audioOffset": -0.25230439442658814
   },
   "preview": {
     "fps": 30,
@@ -21,11 +21,10 @@
     "resolutionScale": 1,
     "colorSpace": "srgb",
     "exporter": {
-      "name": "@motion-canvas/core/image-sequence",
+      "name": "@motion-canvas/ffmpeg",
       "options": {
-        "fileType": "image/png",
-        "quality": 100,
-        "groupByScene": true
+        "fastStart": true,
+        "includeAudio": false
       }
     }
   }

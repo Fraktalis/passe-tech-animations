@@ -1,0 +1,62 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "intro",
+      "targetTime": 0
+    },
+    {
+      "name": "couche1",
+      "targetTime": 1.25
+    },
+    {
+      "name": "b64_payload",
+      "targetTime": 3.45
+    },
+    {
+      "name": "decode1",
+      "targetTime": 5.65
+    },
+    {
+      "name": "b64_key",
+      "targetTime": 8.1
+    },
+    {
+      "name": "b64_sshkey",
+      "targetTime": 10.15
+    },
+    {
+      "name": "b64_files",
+      "targetTime": 14.230385852090034
+    },
+    {
+      "name": "chiffrement",
+      "targetTime": 17.290961057520548
+    },
+    {
+      "name": "exfil",
+      "targetTime": 19.99096105752055
+    },
+    {
+      "name": "decode2",
+      "targetTime": 22.690961057520553
+    },
+    {
+      "name": "credScan",
+      "targetTime": 25.240961057520554
+    },
+    {
+      "name": "keyReveal",
+      "targetTime": 27.740961057520558
+    },
+    {
+      "name": "backdoor",
+      "targetTime": 30.94096105752056
+    },
+    {
+      "name": "endScene",
+      "targetTime": 34.64096105752056
+    }
+  ],
+  "seed": 502709202
+}

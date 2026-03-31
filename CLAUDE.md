@@ -136,6 +136,7 @@ Reveal.initialize({
 
 ### Règles impératives
 
+- **`key` obligatoire sur chaque nœud JSX** du scene tree — permet d'identifier les blocs dans le viewer Motion Canvas. Nommer de façon sémantique : `key="editor-panel"`, `key="highlight-box"`, `key="dot-close"`, etc. Les nœuds sans ref doivent quand même avoir un `key`.
 - **INTERDIT : `fill={'transparent'}`** — format non reconnu. Utiliser `fill={'#00000000'}` pour un fond sans couleur.
 - Toutes les dimensions, positions et tailles de fonte doivent utiliser `vW()` / `vH()` (cf. mémoire projet).
 - **Avant de créer un composant**, vérifier qu'il n'existe pas déjà dans `src/components/`. Lister les fichiers existants et lire le composant candidat avant toute création.
