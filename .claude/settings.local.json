@@ -9,7 +9,8 @@
       "mcp__blender__get_scene_info",
       "mcp__blender__get_viewport_screenshot",
       "mcp__blender__get_object_info",
-      "Bash(npm list:*)"
+      "Bash(npm list:*)",
+      "WebSearch"
     ]
   }
 }

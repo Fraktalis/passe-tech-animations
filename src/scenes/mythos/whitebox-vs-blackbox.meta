@@ -1,0 +1,30 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "intro",
+      "targetTime": 0
+    },
+    {
+      "name": "leftReveal",
+      "targetTime": 1.85
+    },
+    {
+      "name": "rightReveal",
+      "targetTime": 5.05
+    },
+    {
+      "name": "neqReveal",
+      "targetTime": 8
+    },
+    {
+      "name": "conclusion",
+      "targetTime": 10.75
+    },
+    {
+      "name": "endScene",
+      "targetTime": 14.75
+    }
+  ],
+  "seed": 376648273
+}

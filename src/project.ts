@@ -30,9 +30,12 @@ import install_terminal from './scenes/litellm/install_terminal?scene';
 import payloadDecode from './scenes/litellm/payload-decode?scene';
 import teampcpTimeline from './scenes/litellm/teampcp-timeline?scene';
 import conclusionRemediation from './scenes/litellm/conclusion-remediation?scene';
-import audio from './audio/kube-pwn.wav';
+import mythosExploitChain from './scenes/mythos/exploit-chain?scene';
+import mythosWhiteboxVsBlackbox from './scenes/mythos/whitebox-vs-blackbox?scene';
+import glasswingHeartbleedXz from './scenes/glasswing/heartbleed-xz?scene';
+import audio from './audio/evasion_sandbox.wav';
 
 export default makeProject({
-  scenes: [conclusionRemediation],
+  scenes: [glasswingHeartbleedXz],
   audio
 });
