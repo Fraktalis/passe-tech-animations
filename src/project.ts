@@ -4,6 +4,12 @@ import {parser} from '@lezer/javascript';
 
 Code.defaultHighlighter = new LezerHighlighter(parser);
 
+// ── Scènes de test des composants (≥ 2026-05-20) ────────────────────────────
+import testConnectionArrow from './scenes/_components/test-connection-arrow?scene';
+import testInfoCard         from './scenes/_components/test-info-card?scene';
+import testConnectedNode    from './scenes/_components/test-connected-node?scene';
+import testAnnotationBox    from './scenes/_components/test-annotation-box?scene';
+
 import mainScene from './scenes/_misc/openclaw-flow?scene';
 import mainScene2 from './scenes/_misc/bitShift?scene';
 import controlVsData from './scenes/_misc/llm-control-vs-data?scene';
@@ -33,9 +39,12 @@ import conclusionRemediation from './scenes/litellm/conclusion-remediation?scene
 import mythosExploitChain from './scenes/mythos/exploit-chain?scene';
 import mythosWhiteboxVsBlackbox from './scenes/mythos/whitebox-vs-blackbox?scene';
 import glasswingHeartbleedXz from './scenes/glasswing/heartbleed-xz?scene';
-import audio from './audio/evasion_sandbox.wav';
+import rpIntro from './scenes/reverse-proxy/rp-intro?scene';
+import lbBalancer from './scenes/reverse-proxy/lb-balancer?scene';
+import apiGateway from './scenes/reverse-proxy/api-gateway?scene';
+import lbOsi from './scenes/reverse-proxy/lb-osi?scene';
+import dockerSocketEscape from './scenes/docker/docker-socket-escape?scene';
 
 export default makeProject({
-  scenes: [glasswingHeartbleedXz],
-  audio
+  scenes: [testAnnotationBox],
 });

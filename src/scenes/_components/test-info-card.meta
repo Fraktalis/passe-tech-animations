@@ -1,0 +1,22 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "intro",
+      "targetTime": 0
+    },
+    {
+      "name": "showCards",
+      "targetTime": 0.6
+    },
+    {
+      "name": "fillBars",
+      "targetTime": 1.35
+    },
+    {
+      "name": "end",
+      "targetTime": 3.75
+    }
+  ],
+  "seed": 1658946433
+}

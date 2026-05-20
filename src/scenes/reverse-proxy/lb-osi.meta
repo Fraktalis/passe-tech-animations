@@ -1,0 +1,42 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "intro",
+      "targetTime": 0
+    },
+    {
+      "name": "osiPyramid",
+      "targetTime": 2.5427652733118973
+    },
+    {
+      "name": "pyramidShrinks",
+      "targetTime": 5.2227652733118966
+    },
+    {
+      "name": "l4Focus",
+      "targetTime": 6.172765273311897
+    },
+    {
+      "name": "l4Demo",
+      "targetTime": 8.102765273311896
+    },
+    {
+      "name": "l7Focus",
+      "targetTime": 10.682765273311896
+    },
+    {
+      "name": "l7Demo",
+      "targetTime": 13.092765273311898
+    },
+    {
+      "name": "comparison",
+      "targetTime": 17.942765273311895
+    },
+    {
+      "name": "endScene",
+      "targetTime": 21.242765273311893
+    }
+  ],
+  "seed": 1830502618
+}

@@ -142,6 +142,26 @@ Reveal.initialize({
 - **Avant de créer un composant**, vérifier qu'il n'existe pas déjà dans `src/components/`. Lister les fichiers existants et lire le composant candidat avant toute création.
 - **Noms de variables en toutes lettres** — pas d'abréviations cryptiques. `cur` → `activeCursor`, `idx` → `lineIndex`, `ref` → `lineRef` / `nodeRef`, etc. Les boucles courtes peuvent garder un compteur classique comme `i`, `j` ou `k`.
 
+### Bibliothèque de composants — frontière 2026-05-20
+
+**Toute scène créée après le 2026-05-20 doit utiliser les composants de `src/components/`** plutôt que reconstruire ces patterns inline.
+
+Les scènes antérieures (docker/, litellm/, glasswing/, mythos/, reverse-proxy/, etc.) sont conservées telles quelles — **ne pas rétro-fitter**.
+
+Composants disponibles (importer via `../../components` depuis les scènes) :
+
+| Composant | Usage | Pattern |
+|-----------|-------|---------|
+| `Terminal` | Fenêtre terminal animée | Classe — `.typewrite()`, `.writeLine()`, `.clear()` |
+| `ConnectionArrow` | Flèche réactive entre deux points | Classe légère — `from/to: () => [x, y]` obligatoires |
+| `InfoCard` | Carte header coloré + children libres | Classe — children injectés dans le body |
+| `ConnectedNode` | Nœud de diagramme (icon + label + compteur) | Classe légère — `counterValue` = signal externe |
+| `AnnotationBox` | Boîte annotation (titre + lignes) | Classe — flèche gérée via `ConnectionArrow` séparé |
+
+Palette partagée : `import {PALETTE} from '../../theme'` (ne plus définir `COLORS` inline dans les nouvelles scènes).
+
+Scènes de référence pour chaque composant : `src/scenes/_components/test-*.tsx`.
+
 ---
 
 ## Notes de production (dans `.ft-note`)

@@ -1,0 +1,38 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "intro",
+      "targetTime": 0
+    },
+    {
+      "name": "gatewayAppears",
+      "targetTime": 3.94
+    },
+    {
+      "name": "authFeatures",
+      "targetTime": 9.44
+    },
+    {
+      "name": "rateLimiting",
+      "targetTime": 12.360000000000001
+    },
+    {
+      "name": "centralLogs",
+      "targetTime": 17.46
+    },
+    {
+      "name": "xmlToJson",
+      "targetTime": 22.360000000000003
+    },
+    {
+      "name": "conditionalRouting",
+      "targetTime": 27.040000000000003
+    },
+    {
+      "name": "endScene",
+      "targetTime": 33.76
+    }
+  ],
+  "seed": 243015030
+}

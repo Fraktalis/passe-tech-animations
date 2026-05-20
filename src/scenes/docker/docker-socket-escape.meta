@@ -1,0 +1,30 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "setupHost",
+      "targetTime": 0
+    },
+    {
+      "name": "showContainer",
+      "targetTime": 5.249999999999999
+    },
+    {
+      "name": "mountSocket",
+      "targetTime": 8.1
+    },
+    {
+      "name": "showTerminal",
+      "targetTime": 12.400000000000002
+    },
+    {
+      "name": "escape",
+      "targetTime": 25.245999999999892
+    },
+    {
+      "name": "endScene",
+      "targetTime": 30.295999999999896
+    }
+  ],
+  "seed": 468060023
+}

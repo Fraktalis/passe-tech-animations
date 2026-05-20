@@ -1,0 +1,30 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "intro",
+      "targetTime": 0
+    },
+    {
+      "name": "showTarget",
+      "targetTime": 0.6
+    },
+    {
+      "name": "ann1",
+      "targetTime": 1.05
+    },
+    {
+      "name": "ann2",
+      "targetTime": 1.9000000000000001
+    },
+    {
+      "name": "ann3",
+      "targetTime": 2.7500000000000004
+    },
+    {
+      "name": "end",
+      "targetTime": 5.1000000000000005
+    }
+  ],
+  "seed": 923020748
+}

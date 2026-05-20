@@ -1,0 +1,26 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "intro",
+      "targetTime": 0
+    },
+    {
+      "name": "showNodes",
+      "targetTime": 0.6
+    },
+    {
+      "name": "drawArrows",
+      "targetTime": 1.3499999999999999
+    },
+    {
+      "name": "animate",
+      "targetTime": 2.15
+    },
+    {
+      "name": "end",
+      "targetTime": 5.449999999999999
+    }
+  ],
+  "seed": 1749343628
+}

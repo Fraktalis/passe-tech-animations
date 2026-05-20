@@ -1,0 +1,30 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "intro",
+      "targetTime": 0
+    },
+    {
+      "name": "showNodes",
+      "targetTime": 1.1
+    },
+    {
+      "name": "arrowBasic",
+      "targetTime": 1.6900000000000004
+    },
+    {
+      "name": "arrowColored",
+      "targetTime": 2.49
+    },
+    {
+      "name": "arrowDashed",
+      "targetTime": 3.29
+    },
+    {
+      "name": "end",
+      "targetTime": 5.69
+    }
+  ],
+  "seed": 457897065
+}
