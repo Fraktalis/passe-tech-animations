@@ -10,7 +10,21 @@
       "mcp__blender__get_viewport_screenshot",
       "mcp__blender__get_object_info",
       "Bash(npm list:*)",
-      "WebSearch"
+      "WebSearch",
+      "mcp__blender__execute_blender_code",
+      "Bash(Get-ChildItem -Path \"E:\\\\WS\\\\passe-tech-animations\\\\src\\\\components\" -Recurse -File)",
+      "Bash(Select-Object FullName)",
+      "Bash(Get-ChildItem -Path \"E:\\\\WS\\\\passe-tech-animations\" -Force)",
+      "Bash(Select-Object Name, PSIsContainer)",
+      "Bash(dir \"E:\\\\WS\\\\passe-tech-animations\")",
+      "Bash(grep -E \"\\\\.tsx$\")",
+      "Bash(git -C \"E:\\\\WS\\\\passe-tech-animations\" log --oneline --all)",
+      "Bash(Get-ChildItem -Path \"E:\\\\WS\\\\passe-tech-animations\\\\src\\\\scenes\" -Directory)",
+      "Bash(Select-Object Name)",
+      "mcp__obsidian__list_notes",
+      "mcp__obsidian__read_note",
+      "Bash(npx tsc *)",
+      "mcp__obsidian__list_folders"
     ]
   }
 }

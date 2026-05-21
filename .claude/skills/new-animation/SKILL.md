@@ -5,15 +5,19 @@ description: Create a new Motion Canvas animation scene for the Passe-Tech YouTu
 
 ## Purpose
 
-Create Motion Canvas 2D animation scenes for Passe-Tech, a French tech-education YouTube channel (audience: curious devs, CS students, pros reconverting). Animations explain computer science concepts visually — Docker, networking, security, LLM internals, etc.
+Create Motion Canvas 2D animation scenes for Passe-Tech, a French tech-education YouTube channel (audience: curious devs 16–25, CS students, pros reconverting 28–45, ethical geeks 25–40). Animations explain computer science concepts visually — Docker, networking, security, LLM internals, etc.
 
 ## Workflow
 
+0. **Consult Obsidian notes** — read the two vault references before starting:
+   - `🍉 PasseTech Youtube Channel/motion_canvas_component_library.md` — DS palette, 6 primitives API, MC constraints, Icon catalog
+   - `🍉 PasseTech Youtube Channel/Descriptif de la chaine.md` — channel identity, audience personas, editorial strategy
 1. **Clarify the concept** — ask what the animation should show if not specified
-2. **Choose a folder** under `src/scenes/` matching the video topic (e.g. `docker/`, `litellm/`, `reverse-proxy/`). Create a new subfolder if no match exists.
-3. **Create the scene file** following the boilerplate in `assets/scene-boilerplate.tsx`
-4. **Register** in `src/project.ts` — set the new scene as the active one
-5. **Verify** in the Motion Canvas viewer (`npm start`)
+2. **Check `src/components/`** — list existing components, read candidates before creating anything new (see `references/components.md`)
+3. **Choose a folder** under `src/scenes/` matching the video topic (e.g. `docker/`, `litellm/`, `reverse-proxy/`). Create a new subfolder if no match exists.
+4. **Create the scene file** — use `PALETTE` from `'../../theme'`, not inline COLORS
+5. **Register** in `src/project.ts` — set the new scene as the active one
+6. **Verify** in the Motion Canvas viewer (`npm start`)
 
 ## Mandatory Rules (from CLAUDE.md)
 
@@ -23,51 +27,124 @@ Create Motion Canvas 2D animation scenes for Passe-Tech, a French tech-education
 | `key` on every JSX node | none | `key="host-box"` |
 | Transparent fill | `fill={'transparent'}` | `fill={'#00000000'}` |
 | Variable names | `cur`, `idx`, `ref` | `activeCursor`, `lineIndex`, `boxRef` |
-| Fonts | anything else | `Space Grotesk` (display), `DM Mono` (code) |
+| Fonts (technical) | anything else | `JetBrains Mono` (labels, data, protocols) |
+| Fonts (conceptual) | anything else | `Space Grotesk` (titles), `DM Sans` (body) |
+| Palette | inline `COLORS = {...}` | `import {PALETTE} from '../../theme'` |
 
-## Brand Palette
+## Design System — Palette
+
+Import from theme (never define inline in new scenes):
 
 ```typescript
-const COLORS = {
-  bg:      '#0D1117',  // dark background
-  cream:   '#F9F9F6',  // main text
-  ghost:   '#484F58',  // secondary / muted
-  rose:    '#FF3E6C',  // Passe-Tech accent — danger, highlight
-  vert:    '#6DFF8A',  // success, safe
-  jaune:   '#FFE14D',  // warning, info
-  blue:    '#58A6FF',  // primary element
-};
+import {PALETTE} from '../../theme';
+// PALETTE.bg        = '#0D0D0D'   — scene background
+// PALETTE.nodeBg    = '#1A1A1A'   — node interior
+// PALETTE.nodeActive= '#252525'   — node involved in current action
+// PALETTE.text      = '#F5F5F0'   — main labels
+// PALETTE.muted     = '#6B7280'   — secondary, inactive
+// PALETTE.rose      = '#FF4D6D'   — danger, attacker, error
+// PALETTE.vert      = '#4ADE80'   — valid, encrypted, success
+// PALETTE.cyan      = '#38BDF8'   — data in transit, active network
+// PALETTE.ambre     = '#FBBF24'   — warning, storage
 ```
+
+### Single active color rule
+
+**One scene = one active color.** The active color carries all semantic meaning; the rest stays in `muted`. Exception: explicit valid/compromised contrast uses vert + rose together.
+
+## Design System — Available Components
+
+All scenes created after 2026-05-20 must use `src/components/`. Import:
+
+```typescript
+import {DiagramNode, DiagramEdge, Packet, Zone, Callout, Slot, SlotGroup,
+        Terminal, ConnectionArrow, InfoCard, ConnectedNode, AnnotationBox}
+  from '../../components';
+```
+
+### The 6 DS Primitives (post-2026-05-20)
+
+| Component | Represents | Key props |
+|-----------|-----------|-----------|
+| `DiagramNode` | Any box entity (server, container, DB, person…) | `label`, `sublabel`, `icon`, `color`, `nodeState`, `preset`, `borderStyle` |
+| `DiagramEdge` | Connection between two nodes | `from`/`to` (refs), `edgeDirection`, `edgeStyle`, `label` |
+| `Packet` | Data traveling along an edge | `content`, `color`, `packetSize`, `flyTo(target, duration)` |
+| `Zone` | Perimeter grouping nodes | `label`, `color`, `borderStyle`, `preset` |
+| `Callout` | Anchored annotation box | `title`, `body`, `color`, `calloutState` (+ separate `ConnectionArrow`) |
+| `Slot` / `SlotGroup` | Cell in spatial data structure | `index`, `content`, `color`, `slotState` |
+
+Pre-built presets for `DiagramNode`: `server`, `container`, `database`, `file`, `browser`, `terminal`, `person`, `org`
+Pre-built presets for `Zone`: `network`, `cloud`, `trusted`, `untrusted`, `sandbox`, `cluster`
+
+See `references/components.md` for full API, API divergences vs spec, and MC circular-dependency constraints.
+
+### Legacy components (pre-2026-05-20, still valid)
+
+| Component | Usage |
+|-----------|-------|
+| `Terminal` | Animated terminal window — `.typewrite()`, `.writeLine()`, `.clear()` |
+| `ConnectionArrow` | Reactive arrow between two points — `from/to: () => [x, y]` |
+| `InfoCard` | Colored header card + free children body |
+| `ConnectedNode` | Diagram node (icon + label + external counter signal) |
+| `AnnotationBox` | Annotation box (title + lines), arrow handled via `ConnectionArrow` |
+
+## Icon Component
+
+Motion Canvas exposes `<Icon />` natively — no extra install needed:
+
+```typescript
+import {Icon} from '@motion-canvas/2d';
+
+// Brand logos (never override color — brand colors are intentional)
+<Icon key="docker-icon" icon="logos:docker-icon" size={() => vW() * 0.03} />
+
+// Generic icons (assign semantic palette color)
+<Icon key="server-icon" icon="lucide:server" size={() => vW() * 0.03} color={PALETTE.muted} />
+<Icon key="lock-icon"   icon="lucide:lock"   size={() => vW() * 0.03} color={PALETTE.vert} />
+<Icon key="skull-icon"  icon="lucide:skull"  size={() => vW() * 0.03} color={PALETTE.rose} />
+```
+
+Collections: `logos:` (brand logos), `lucide:` (generic — preferred), `material-symbols:`, `mdi:`.
+Full catalog: icones.js.org
 
 ## Scene File Skeleton
 
 ```typescript
-import {makeScene2D, Rect, Txt, Layout} from '@motion-canvas/2d';
+import {makeScene2D, Layout, Rect, Txt} from '@motion-canvas/2d';
 import {createRef, all, sequence, waitFor, waitUntil} from '@motion-canvas/core';
+import {DiagramNode, DiagramEdge, Zone} from '../../components';
+import {PALETTE} from '../../theme';
 
 export default makeScene2D(function* (view) {
   const vW = () => view.width();
   const vH = () => view.height();
 
-  const COLORS = { bg: '#0D1117', cream: '#F9F9F6' /* ... */ };
-
   // 1. Declare refs
-  const titleRef = createRef<Txt>();
+  const serverRef = createRef<DiagramNode>();
 
   // 2. Build scene tree (all opacity={0} initially)
   view.add(
     <Layout key="root" width={'100%'} height={'100%'}>
-      <Rect key="bg" width={'100%'} height={'100%'} fill={COLORS.bg} />
-      <Txt key="title" ref={titleRef} text="Title" fill={COLORS.cream}
-           fontSize={() => vW() * 0.04} opacity={0} />
+      <Rect key="bg" width={'100%'} height={'100%'} fill={PALETTE.bg} />
+      <DiagramNode
+        key="server"
+        ref={serverRef}
+        preset="server"
+        label="api.example.com"
+        sublabel="nginx 1.25"
+        color={PALETTE.cyan}
+        x={() => vW() * 0.0}
+        y={() => vH() * 0.0}
+        opacity={0}
+      />
     </Layout>
   );
 
-  // 3. Animation phases
-  yield* waitUntil('intro');
-  yield* titleRef().opacity(1, 0.5);
+  // 3. Animation phases (semantic names tied to narration)
+  yield* waitUntil('showServer');
+  yield* serverRef().opacity(1, 0.3);
   yield* waitUntil('end');
-  yield* titleRef().opacity(0, 0.4);
+  yield* serverRef().opacity(0, 0.3);
 });
 ```
 
@@ -81,12 +158,10 @@ import myNewScene from './scenes/topic/my-new-scene?scene';
 export default makeProject({ scenes: [myNewScene] });
 ```
 
-## Before Creating a Component
-
-Check `src/components/` first — a `Terminal` component already exists with typewrite, writeLine, startBlink, etc. See `references/components.md` for its full API.
-
 ## References
 
 - `references/choreography.md` — animation patterns (sequence, all, waitUntil, camera, typewriter)
-- `references/components.md` — Terminal component API and reuse checklist
+- `references/components.md` — full API for all 11 components + MC constraints
 - `assets/scene-boilerplate.tsx` — full-featured starter template
+- Obsidian: `motion_canvas_component_library.md` — canonical DS spec + icon catalog
+- Obsidian: `Descriptif de la chaine.md` — channel identity and editorial rules
