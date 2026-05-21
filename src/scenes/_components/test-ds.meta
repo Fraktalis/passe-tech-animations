@@ -1,0 +1,42 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "intro",
+      "targetTime": 0
+    },
+    {
+      "name": "showNodes",
+      "targetTime": 1.1144694533762056
+    },
+    {
+      "name": "nodeStates",
+      "targetTime": 2.1924758842443732
+    },
+    {
+      "name": "showZone",
+      "targetTime": 3.8600964630225083
+    },
+    {
+      "name": "showEdges",
+      "targetTime": 5.433729903536978
+    },
+    {
+      "name": "showPacket",
+      "targetTime": 10.283729903536981
+    },
+    {
+      "name": "showCallout",
+      "targetTime": 11.98372990353698
+    },
+    {
+      "name": "showSlots",
+      "targetTime": 13.71372990353698
+    },
+    {
+      "name": "end",
+      "targetTime": 16.75372990353698
+    }
+  ],
+  "seed": 2299650231
+}

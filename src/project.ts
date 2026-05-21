@@ -9,6 +9,7 @@ import testConnectionArrow from './scenes/_components/test-connection-arrow?scen
 import testInfoCard         from './scenes/_components/test-info-card?scene';
 import testConnectedNode    from './scenes/_components/test-connected-node?scene';
 import testAnnotationBox    from './scenes/_components/test-annotation-box?scene';
+import testDs               from './scenes/_components/test-ds?scene';
 
 import mainScene from './scenes/_misc/openclaw-flow?scene';
 import mainScene2 from './scenes/_misc/bitShift?scene';
@@ -46,5 +47,5 @@ import lbOsi from './scenes/reverse-proxy/lb-osi?scene';
 import dockerSocketEscape from './scenes/docker/docker-socket-escape?scene';
 
 export default makeProject({
-  scenes: [testAnnotationBox],
+  scenes: [testDs],
 });

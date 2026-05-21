@@ -42,3 +42,31 @@ export type {ConnectedNodeProps}             from './ConnectedNode';
 // ── AnnotationBox ────────────────────────────────────────────────────────────
 export {AnnotationBox}                       from './AnnotationBox';
 export type {AnnotationBoxProps}             from './AnnotationBox';
+
+// ════════════════════════════════════════════════════════════════════════════
+// Design System Passe-Tech — Primitives (≥ 2026-05-20)
+// ════════════════════════════════════════════════════════════════════════════
+
+// ── DiagramNode ───────────────────────────────────────────────────────────────
+export {DiagramNode}                         from './DiagramNode';
+export type {DiagramNodeProps, NodeState, NodePreset, NodeBorderStyle} from './DiagramNode';
+
+// ── DiagramEdge ───────────────────────────────────────────────────────────────
+export {DiagramEdge}                         from './DiagramEdge';
+export type {DiagramEdgeProps, EdgeDirection, EdgeStyle} from './DiagramEdge';
+
+// ── Packet ────────────────────────────────────────────────────────────────────
+export {Packet}                              from './Packet';
+export type {PacketProps, PacketSize}        from './Packet';
+
+// ── Zone ──────────────────────────────────────────────────────────────────────
+export {Zone}                                from './Zone';
+export type {ZoneProps, ZonePreset}          from './Zone';
+
+// ── Callout ───────────────────────────────────────────────────────────────────
+export {Callout}                             from './Callout';
+export type {CalloutProps, CalloutState}     from './Callout';
+
+// ── Slot / SlotGroup ──────────────────────────────────────────────────────────
+export {Slot, SlotGroup}                     from './Slot';
+export type {SlotProps, SlotState, SlotGroupProps} from './Slot';
