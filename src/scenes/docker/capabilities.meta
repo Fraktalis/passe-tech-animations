@@ -1,0 +1,26 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "showBinary",
+      "targetTime": 0.6826366559485532
+    },
+    {
+      "name": "showCaps",
+      "targetTime": 3.3273311897106113
+    },
+    {
+      "name": "showDockerDefault",
+      "targetTime": 17.925616291532684
+    },
+    {
+      "name": "showPrivileged",
+      "targetTime": 33.648017148981765
+    },
+    {
+      "name": "end",
+      "targetTime": 52.08027867095389
+    }
+  ],
+  "seed": 1984042602
+}

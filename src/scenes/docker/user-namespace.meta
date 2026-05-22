@@ -1,0 +1,30 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "showSetup",
+      "targetTime": 0.7257130697938337
+    },
+    {
+      "name": "showUserNs",
+      "targetTime": 2.391121619065632
+    },
+    {
+      "name": "showLazy",
+      "targetTime": 7.025949025912614
+    },
+    {
+      "name": "showDefault",
+      "targetTime": 8.290263854738035
+    },
+    {
+      "name": "showId",
+      "targetTime": 12.2346666351428
+    },
+    {
+      "name": "end",
+      "targetTime": 16.754666635142755
+    }
+  ],
+  "seed": 4290196514
+}

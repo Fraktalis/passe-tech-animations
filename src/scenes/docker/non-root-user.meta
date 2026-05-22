@@ -1,0 +1,38 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "showSetup",
+      "targetTime": 0.5
+    },
+    {
+      "name": "showRootContainer",
+      "targetTime": 2
+    },
+    {
+      "name": "showRootFlows",
+      "targetTime": 4
+    },
+    {
+      "name": "showDockerfileFix",
+      "targetTime": 7.5
+    },
+    {
+      "name": "showAppContainer",
+      "targetTime": 13.110825294748125
+    },
+    {
+      "name": "showAttacker",
+      "targetTime": 15.610825294748125
+    },
+    {
+      "name": "showAttackBlocked",
+      "targetTime": 18.610825294748125
+    },
+    {
+      "name": "end",
+      "targetTime": 23.110825294748125
+    }
+  ],
+  "seed": 1337420042
+}

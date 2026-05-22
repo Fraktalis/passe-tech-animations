@@ -3,39 +3,39 @@
   "timeEvents": [
     {
       "name": "intro",
-      "targetTime": 0
+      "targetTime": 0.4917623092288683
     },
     {
       "name": "showNodes",
-      "targetTime": 1.1144694533762056
+      "targetTime": 1.606231762605074
     },
     {
       "name": "nodeStates",
-      "targetTime": 2.1924758842443732
+      "targetTime": 2.6842381934732416
     },
     {
       "name": "showZone",
-      "targetTime": 3.8600964630225083
+      "targetTime": 4.351858772251377
     },
     {
       "name": "showEdges",
-      "targetTime": 5.433729903536978
+      "targetTime": 5.925492212765847
     },
     {
       "name": "showPacket",
-      "targetTime": 10.283729903536981
+      "targetTime": 10.77549221276585
     },
     {
       "name": "showCallout",
-      "targetTime": 11.98372990353698
+      "targetTime": 12.475492212765849
     },
     {
       "name": "showSlots",
-      "targetTime": 13.71372990353698
+      "targetTime": 14.205492212765847
     },
     {
       "name": "end",
-      "targetTime": 16.75372990353698
+      "targetTime": 17.245492212765846
     }
   ],
   "seed": 2299650231

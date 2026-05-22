@@ -1,0 +1,34 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "showImages",
+      "targetTime": 1
+    },
+    {
+      "name": "showRegistry",
+      "targetTime": 4.5
+    },
+    {
+      "name": "showPush",
+      "targetTime": 8
+    },
+    {
+      "name": "showThirdPush",
+      "targetTime": 12
+    },
+    {
+      "name": "showTyposquat",
+      "targetTime": 16
+    },
+    {
+      "name": "showLitellm",
+      "targetTime": 21
+    },
+    {
+      "name": "end",
+      "targetTime": 27
+    }
+  ],
+  "seed": 1984042601
+}

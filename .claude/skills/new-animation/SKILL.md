@@ -7,6 +7,25 @@ description: Create a new Motion Canvas animation scene for the Passe-Tech YouTu
 
 Create Motion Canvas 2D animation scenes for Passe-Tech, a French tech-education YouTube channel (audience: curious devs 16–25, CS students, pros reconverting 28–45, ethical geeks 25–40). Animations explain computer science concepts visually — Docker, networking, security, LLM internals, etc.
 
+## Principe cardinal — Show, Don't Tell
+
+**Montrer un phénomène vaut mieux que l'expliquer avec des phrases.**
+
+Avant d'écrire un `Txt` explicatif, demande-toi : *est-ce que le mouvement, la forme ou la couleur peut transmettre cette information à ma place ?*
+
+| Intention | ✗ Tell (à éviter) | ✓ Show (à privilégier) |
+|-----------|-------------------|------------------------|
+| Expliquer l'effet avalanche du hash | Txt `"Δ 1 octet → hash totalement différent"` | Faisceau qui scanne deux fichiers similaires → deux hashes monospace complètement différents apparaissent |
+| Montrer qu'un tag est mutable | Callout `"Le tag peut pointer vers n'importe quelle image"` | Badge `nginx:1.31` qui glisse d'une image vers une autre via un signal animé |
+| Indiquer une erreur | Label rouge `"Erreur de connexion"` | Node qui pulse en rose, flèche animée qui se bloque et rebondit |
+| Montrer que données transitent | Txt `"Le paquet voyage de A vers B"` | `Packet` qui se déplace le long d'un `DiagramEdge` animé |
+
+**Règle pratique :** si un `Txt` décrit ce que l'animation montre déjà, supprime-le. Un label court (nom d'un nœud, valeur d'un compteur) reste utile — une phrase explicative est toujours suspecte.
+
+Les callouts et annotations courts (`Callout`, `AnnotationBox`) sont acceptables pour ancrer un terme technique précis, jamais pour raconter ce que le visuel fait déjà.
+
+---
+
 ## Workflow
 
 0. **Consult Obsidian notes** — read the two vault references before starting:

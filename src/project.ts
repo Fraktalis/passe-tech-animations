@@ -46,7 +46,13 @@ import apiGateway from './scenes/reverse-proxy/api-gateway?scene';
 import lbOsi from './scenes/reverse-proxy/lb-osi?scene';
 import dockerSocketEscape from './scenes/docker/docker-socket-escape?scene';
 import codeBadge from './scenes/_shared/code-badge?scene';
+import userNamespace from './scenes/docker/user-namespace?scene';
+import latestDanger from './scenes/docker/latest-danger?scene';
+import capabilities from './scenes/docker/capabilities?scene';
+import layerSecrets from './scenes/docker/layer-secrets?scene';
+import digestPinning from './scenes/docker/digest-pinning?scene';
+import nonRootUser from './scenes/docker/non-root-user?scene';
 
 export default makeProject({
-  scenes: [codeBadge],
+  scenes: [nonRootUser],
 });
