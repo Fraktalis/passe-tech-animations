@@ -45,7 +45,8 @@ import lbBalancer from './scenes/reverse-proxy/lb-balancer?scene';
 import apiGateway from './scenes/reverse-proxy/api-gateway?scene';
 import lbOsi from './scenes/reverse-proxy/lb-osi?scene';
 import dockerSocketEscape from './scenes/docker/docker-socket-escape?scene';
+import codeBadge from './scenes/_shared/code-badge?scene';
 
 export default makeProject({
-  scenes: [testDs],
+  scenes: [codeBadge],
 });

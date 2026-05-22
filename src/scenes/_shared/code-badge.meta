@@ -1,0 +1,14 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "show",
+      "targetTime": 0
+    },
+    {
+      "name": "hide",
+      "targetTime": 0.35
+    }
+  ],
+  "seed": 675851864
+}

@@ -96,7 +96,7 @@ export class Zone extends Rect {
           key={`zone-label-${id}`}
           text={label}
           fill={themeColor + 'AA'}
-          fontSize={10}
+          fontSize={() => this.width() * 0.035}
           fontFamily={'JetBrains Mono, DM Mono, monospace'}
           fontWeight={700}
           // offset={[-1, -1]} ancre le coin haut-gauche du texte sur (x, y)

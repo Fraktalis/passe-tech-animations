@@ -33,7 +33,7 @@
  * @module
  */
 
-import {Rect, RectProps, Layout, Txt} from '@motion-canvas/2d/lib/components';
+import {Rect, RectProps, Layout, Txt, Icon} from '@motion-canvas/2d/lib/components';
 import {all, ThreadGenerator} from '@motion-canvas/core';
 import {PALETTE} from '../theme';
 
@@ -46,8 +46,10 @@ export interface DiagramNodeProps extends RectProps {
   label: string;
   /** Texte secondaire (port, image, namespace…). */
   sublabel?: string;
-  /** Icône unicode — surcharge le preset. */
+  /** Icône unicode — surcharge le preset. Ignorée si `iconName` est fourni. */
   icon?: string;
+  /** Identifiant d'icône pour le composant Icon (ex : `"mdi:server"`). Prioritaire sur `icon`. */
+  iconName?: string;
   /** Couleur de bordure — surcharge le preset. */
   color?: string;
   /** Preset qui pré-remplit icon, color, borderStyle. */
@@ -60,15 +62,15 @@ export interface DiagramNodeProps extends RectProps {
 
 // ── Preset defaults ─────────────────────────────────────────────────────────
 
-const PRESET_ICONS: Record<NodePreset, string> = {
-  server:    '≡',
-  container: '⊡',
-  database:  '⊓',
-  file:      '◻',
-  browser:   '⊟',
-  terminal:  '>_',
-  person:    '◉',
-  org:       '⊞',
+const PRESET_ICON_NAMES: Record<NodePreset, string> = {
+  server:    'mdi:server',
+  container: 'mdi:docker',
+  database:  'mdi:database',
+  file:      'mdi:file-document-outline',
+  browser:   'mdi:web',
+  terminal:  'mdi:console',
+  person:    'mdi:account-circle',
+  org:       'mdi:domain',
 };
 
 const PRESET_COLORS: Record<NodePreset, string> = {
@@ -146,24 +148,28 @@ export class DiagramNode extends Rect {
     label,
     sublabel,
     icon,
+    iconName,
     color,
     preset,
     borderStyle,
     initialState = 'idle',
     ...rest
   }: DiagramNodeProps) {
-    const themeColor  = color ?? (preset ? PRESET_COLORS[preset] : PALETTE.secondary);
-    const resolvedIcon = icon ?? (preset ? PRESET_ICONS[preset]  : '▣');
-    const isDashed     = borderStyle === 'dashed'
+    const themeColor      = color ?? (preset ? PRESET_COLORS[preset] : PALETTE.secondary);
+    const resolvedIconName = iconName ?? (preset ? PRESET_ICON_NAMES[preset] : undefined);
+    const resolvedIcon     = icon ?? '▣';
+    const isDashed         = borderStyle === 'dashed'
                       || (borderStyle === undefined && preset ? PRESET_DASHED[preset] : false);
 
     super({
-      fill:      resolvedFill(initialState, themeColor),
-      stroke:    resolvedStroke(initialState, themeColor),
-      lineWidth: resolvedLineWidth(initialState),
-      lineDash:  isDashed ? [6, 4] : [],
-      radius:    8,
-      clip:      true,
+      fill:        resolvedFill(initialState, themeColor),
+      stroke:      resolvedStroke(initialState, themeColor),
+      lineWidth:   resolvedLineWidth(initialState),
+      lineDash:    isDashed ? [6, 4] : [],
+      radius:      8,
+      clip:        true,
+      shadowBlur:  22,
+      shadowColor: '#00000055',
       ...rest,
     });
 
@@ -193,13 +199,21 @@ export class DiagramNode extends Rect {
           paddingTop={() => this.height() * 0.1}
           paddingBottom={() => this.height() * 0.1}
         >
-        <Txt
-          key={`dnode-icon-${id}`}
-          text={resolvedIcon}
-          fill={themeColor}
-          fontSize={() => this.width() * 0.25}
-          fontFamily={'JetBrains Mono, DM Mono, monospace'}
-        />
+        {resolvedIconName
+          ? <Icon
+              key={`dnode-icon-${id}`}
+              icon={resolvedIconName}
+              color={themeColor}
+              size={() => this.width() * 0.15}
+            />
+          : <Txt
+              key={`dnode-icon-${id}`}
+              text={resolvedIcon}
+              fill={themeColor}
+              fontSize={() => this.width() * 0.25}
+              fontFamily={'JetBrains Mono, DM Mono, monospace'}
+            />
+        }
 
         <Rect
           key={`dnode-divider-${id}`}

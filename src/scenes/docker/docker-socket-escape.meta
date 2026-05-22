@@ -2,29 +2,41 @@
   "version": 0,
   "timeEvents": [
     {
-      "name": "setupHost",
+      "name": "showHost",
       "targetTime": 0
     },
     {
       "name": "showContainer",
-      "targetTime": 5.249999999999999
+      "targetTime": 0.76
     },
     {
-      "name": "mountSocket",
-      "targetTime": 8.1
+      "name": "showDockerFlow",
+      "targetTime": 1.1600000000000001
     },
     {
-      "name": "showTerminal",
-      "targetTime": 12.400000000000002
+      "name": "showAttack",
+      "targetTime": 3.0900000000000003
     },
     {
-      "name": "escape",
-      "targetTime": 25.245999999999892
+      "name": "attackCommand",
+      "targetTime": 3.49
     },
     {
-      "name": "endScene",
-      "targetTime": 30.295999999999896
+      "name": "showMount",
+      "targetTime": 7.116000000000002
+    },
+    {
+      "name": "attackOutput",
+      "targetTime": 8.066000000000003
+    },
+    {
+      "name": "catCommand",
+      "targetTime": 10.20599999999997
+    },
+    {
+      "name": "end",
+      "targetTime": 18.361999999999888
     }
   ],
-  "seed": 468060023
+  "seed": 3334017391
 }
