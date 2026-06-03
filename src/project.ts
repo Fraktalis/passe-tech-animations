@@ -53,7 +53,8 @@ import layerSecrets from './scenes/docker/layer-secrets?scene';
 import digestPinning from './scenes/docker/digest-pinning?scene';
 import nonRootUser from './scenes/docker/non-root-user?scene';
 import tokenisation from './scenes/llm/tokenisation?scene';
+import attention from './scenes/llm/attention?scene';
 
 export default makeProject({
-  scenes: [tokenisation],
+  scenes: [attention],
 });
