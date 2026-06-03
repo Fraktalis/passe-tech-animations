@@ -52,7 +52,8 @@ import capabilities from './scenes/docker/capabilities?scene';
 import layerSecrets from './scenes/docker/layer-secrets?scene';
 import digestPinning from './scenes/docker/digest-pinning?scene';
 import nonRootUser from './scenes/docker/non-root-user?scene';
+import tokenisation from './scenes/llm/tokenisation?scene';
 
 export default makeProject({
-  scenes: [nonRootUser],
+  scenes: [tokenisation],
 });

@@ -1,0 +1,58 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "intro",
+      "targetTime": 0
+    },
+    {
+      "name": "chatgpt",
+      "targetTime": 0.8
+    },
+    {
+      "name": "split",
+      "targetTime": 1.6
+    },
+    {
+      "name": "variability",
+      "targetTime": 4.29
+    },
+    {
+      "name": "long-word",
+      "targetTime": 7.02
+    },
+    {
+      "name": "bpe",
+      "targetTime": 9.450000000000001
+    },
+    {
+      "name": "merge",
+      "targetTime": 11.450000000000003
+    },
+    {
+      "name": "strawberry",
+      "targetTime": 13.700000000000005
+    },
+    {
+      "name": "countR",
+      "targetTime": 15.16000000000001
+    },
+    {
+      "name": "modelView",
+      "targetTime": 17.12000000000001
+    },
+    {
+      "name": "wrongAnswer",
+      "targetTime": 18.420000000000012
+    },
+    {
+      "name": "thesis",
+      "targetTime": 20.02000000000001
+    },
+    {
+      "name": "end",
+      "targetTime": 22.12000000000001
+    }
+  ],
+  "seed": 3553501686
+}
