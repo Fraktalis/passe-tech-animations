@@ -1,0 +1,42 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "intro",
+      "targetTime": 0
+    },
+    {
+      "name": "text",
+      "targetTime": 1.6000000000000003
+    },
+    {
+      "name": "tokens",
+      "targetTime": 2.3000000000000003
+    },
+    {
+      "name": "numbers",
+      "targetTime": 3.759999999999999
+    },
+    {
+      "name": "attention",
+      "targetTime": 6.070000000000002
+    },
+    {
+      "name": "probas",
+      "targetTime": 8.11
+    },
+    {
+      "name": "detok",
+      "targetTime": 11.430000000000001
+    },
+    {
+      "name": "loop",
+      "targetTime": 12.22
+    },
+    {
+      "name": "end",
+      "targetTime": 17.130000000000003
+    }
+  ],
+  "seed": 270582728
+}

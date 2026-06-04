@@ -1,0 +1,38 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "intro",
+      "targetTime": 0
+    },
+    {
+      "name": "babel",
+      "targetTime": 0.8
+    },
+    {
+      "name": "console",
+      "targetTime": 2.9700000000000006
+    },
+    {
+      "name": "random",
+      "targetTime": 4.5699999999999985
+    },
+    {
+      "name": "eachKnob",
+      "targetTime": 5.369999999999999
+    },
+    {
+      "name": "training",
+      "targetTime": 6.47
+    },
+    {
+      "name": "converge",
+      "targetTime": 7.919999999999999
+    },
+    {
+      "name": "end",
+      "targetTime": 9.719999999999999
+    }
+  ],
+  "seed": 1168614765
+}

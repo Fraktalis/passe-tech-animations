@@ -24,7 +24,8 @@
       "mcp__obsidian__list_notes",
       "mcp__obsidian__read_note",
       "Bash(npx tsc *)",
-      "mcp__obsidian__list_folders"
+      "mcp__obsidian__list_folders",
+      "Bash(git add *)"
     ]
   }
 }

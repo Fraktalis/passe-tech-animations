@@ -1,5 +1,54 @@
 {
   "version": 0,
-  "timeEvents": [],
+  "timeEvents": [
+    {
+      "name": "intro",
+      "targetTime": 0
+    },
+    {
+      "name": "tokens",
+      "targetTime": 0.8
+    },
+    {
+      "name": "rnn",
+      "targetTime": 1.4700000000000004
+    },
+    {
+      "name": "dilute",
+      "targetTime": 2.5700000000000003
+    },
+    {
+      "name": "weakLink",
+      "targetTime": 4.67
+    },
+    {
+      "name": "attention",
+      "targetTime": 5.97
+    },
+    {
+      "name": "keys",
+      "targetTime": 7.17
+    },
+    {
+      "name": "scores",
+      "targetTime": 7.619999999999999
+    },
+    {
+      "name": "match",
+      "targetTime": 8.42
+    },
+    {
+      "name": "value",
+      "targetTime": 9.22
+    },
+    {
+      "name": "resolved",
+      "targetTime": 10.42
+    },
+    {
+      "name": "end",
+      "targetTime": 11.82
+    }
+  ],
   "seed": 4153622522
 }

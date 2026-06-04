@@ -1,0 +1,38 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "intro",
+      "targetTime": 0
+    },
+    {
+      "name": "billions",
+      "targetTime": 0.8
+    },
+    {
+      "name": "settle",
+      "targetTime": 3.1
+    },
+    {
+      "name": "encode",
+      "targetTime": 3.8
+    },
+    {
+      "name": "unknown",
+      "targetTime": 5.86499999999997
+    },
+    {
+      "name": "interp",
+      "targetTime": 7.064999999999971
+    },
+    {
+      "name": "works",
+      "targetTime": 8.264999999999972
+    },
+    {
+      "name": "end",
+      "targetTime": 10.564999999999971
+    }
+  ],
+  "seed": 2957993061
+}

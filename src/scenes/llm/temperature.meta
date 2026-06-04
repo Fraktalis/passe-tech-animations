@@ -1,0 +1,38 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "intro",
+      "targetTime": 0
+    },
+    {
+      "name": "argmax",
+      "targetTime": 2.23
+    },
+    {
+      "name": "sample",
+      "targetTime": 5.79
+    },
+    {
+      "name": "temperature",
+      "targetTime": 9.35
+    },
+    {
+      "name": "low",
+      "targetTime": 9.85
+    },
+    {
+      "name": "high",
+      "targetTime": 14.709999999999997
+    },
+    {
+      "name": "conclusion",
+      "targetTime": 19.67
+    },
+    {
+      "name": "end",
+      "targetTime": 22.570000000000004
+    }
+  ],
+  "seed": 387270604
+}

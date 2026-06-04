@@ -54,7 +54,24 @@ import digestPinning from './scenes/docker/digest-pinning?scene';
 import nonRootUser from './scenes/docker/non-root-user?scene';
 import tokenisation from './scenes/llm/tokenisation?scene';
 import attention from './scenes/llm/attention?scene';
+import neurone from './scenes/llm/neurone?scene';
+import consoleMixage from './scenes/llm/console-mixage?scene';
+import descenteGradient from './scenes/llm/descente-gradient?scene';
+import retropropagation from './scenes/llm/retropropagation?scene';
+import interpretabilite from './scenes/llm/interpretabilite?scene';
+import summaryPipeline from './scenes/llm/summary-pipeline?scene';
+import temperature from './scenes/llm/temperature?scene';
 
 export default makeProject({
-  scenes: [attention],
+  scenes: [
+    neurone,
+    consoleMixage,
+    descenteGradient,
+    retropropagation,
+    interpretabilite,
+    tokenisation,
+    attention,
+    summaryPipeline,
+    temperature
+  ],
 });

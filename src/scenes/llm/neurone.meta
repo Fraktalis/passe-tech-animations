@@ -1,0 +1,50 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "intro",
+      "targetTime": 0
+    },
+    {
+      "name": "inputs",
+      "targetTime": 0.8
+    },
+    {
+      "name": "weights",
+      "targetTime": 1.34
+    },
+    {
+      "name": "sum",
+      "targetTime": 2.24
+    },
+    {
+      "name": "activation",
+      "targetTime": 3.1399999999999997
+    },
+    {
+      "name": "output",
+      "targetTime": 4.449999999999999
+    },
+    {
+      "name": "substitute",
+      "targetTime": 7.810000000000001
+    },
+    {
+      "name": "multiply",
+      "targetTime": 6.16
+    },
+    {
+      "name": "arbitrary",
+      "targetTime": 7.420000000000001
+    },
+    {
+      "name": "tasks",
+      "targetTime": 8.739999999999998
+    },
+    {
+      "name": "end",
+      "targetTime": 12.109999999999998
+    }
+  ],
+  "seed": 887942411
+}

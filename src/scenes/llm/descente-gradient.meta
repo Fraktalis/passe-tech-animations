@@ -1,0 +1,30 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "intro",
+      "targetTime": 0
+    },
+    {
+      "name": "ball",
+      "targetTime": 2.1
+    },
+    {
+      "name": "slope",
+      "targetTime": 2.6999999999999997
+    },
+    {
+      "name": "descend",
+      "targetTime": 3.5
+    },
+    {
+      "name": "error",
+      "targetTime": 7.25
+    },
+    {
+      "name": "end",
+      "targetTime": 8.65
+    }
+  ],
+  "seed": 3119632210
+}
