@@ -46,8 +46,18 @@
  */
 
 import {Rect, RectProps, Layout, Txt} from '@motion-canvas/2d/lib/components';
-import {all, ThreadGenerator} from '@motion-canvas/core';
+import {all, waitFor, ThreadGenerator} from '@motion-canvas/core';
 import {PALETTE} from '../theme';
+
+/**
+ * Réglage du temps de lecture proportionnel à la longueur du texte.
+ * `READ_BASE` est le plancher incompressible (temps de réaction / d'accroche),
+ * `READ_PER_CHAR` les secondes ajoutées par caractère (titre + body).
+ * ≈ 22 caractères/seconde, légèrement plus rapide que le standard sous-titres
+ * (17 cps) car la narration renforce le texte affiché.
+ */
+const READ_BASE = 0.8;
+const READ_PER_CHAR = 0.045;
 
 export type CalloutState = 'idle' | 'active' | 'error' | 'success';
 
@@ -87,6 +97,8 @@ function calloutTitleColor(state: CalloutState, baseColor: string): string {
 export class Callout extends Rect {
   private static _count = 0;
   private readonly _baseColor: string;
+  private readonly _title: string;
+  private readonly _body: string;
   private _titleTxt!: Txt;
   private _accentRect!: Rect;
 
@@ -107,6 +119,8 @@ export class Callout extends Rect {
     });
 
     this._baseColor = color;
+    this._title = title;
+    this._body = body ?? '';
 
     const id = Callout._count++;
 
@@ -176,5 +190,34 @@ export class Callout extends Rect {
       this._accentRect.fill(newStroke, duration),
       this._titleTxt.fill(newTitle, duration),
     );
+  }
+
+  /**
+   * Durée de lecture conseillée pour ce callout, **proportionnelle à la
+   * longueur du texte affiché** (titre + body). Un callout dense reste donc
+   * plus longtemps à l'écran qu'un callout court.
+   *
+   * À passer à {@link waitFor} après le fade-in, ou via le raccourci
+   * {@link hold}.
+   *
+   * @param perChar  Secondes ajoutées par caractère. @defaultValue {@link READ_PER_CHAR}
+   * @param base     Plancher incompressible. @defaultValue {@link READ_BASE}
+   */
+  public readTime(perChar = READ_PER_CHAR, base = READ_BASE): number {
+    const chars = this._title.length + this._body.length;
+    return base + chars * perChar;
+  }
+
+  /**
+   * Maintient le callout à l'écran le temps de le lire (voir {@link readTime}).
+   * À utiliser à la place d'un `waitFor` fixe juste après la révélation :
+   * ```ts
+   * yield* callout().opacity(1, 0.3);
+   * yield* callout().hold();        // dwell ∝ longueur du texte
+   * ```
+   * @param extra  Secondes ajoutées au-delà du temps de lecture. @defaultValue 0
+   */
+  public *hold(extra = 0): ThreadGenerator {
+    yield* waitFor(this.readTime() + extra);
   }
 }
