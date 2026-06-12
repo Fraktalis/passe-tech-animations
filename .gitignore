@@ -16,3 +16,5 @@ dist
 
 *.mp3
 *.wav
+
+blender/**
