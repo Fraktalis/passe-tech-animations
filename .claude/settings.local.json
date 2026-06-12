@@ -25,7 +25,10 @@
       "mcp__obsidian__read_note",
       "Bash(npx tsc *)",
       "mcp__obsidian__list_folders",
-      "Bash(git add *)"
+      "Bash(git add *)",
+      "mcp__blender__get_objects_summary",
+      "mcp__blender__render_viewport_to_path",
+      "mcp__blender__get_screenshot_of_window_as_image"
     ]
   }
 }

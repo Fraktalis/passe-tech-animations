@@ -141,6 +141,7 @@ Reveal.initialize({
 - Toutes les dimensions, positions et tailles de fonte doivent utiliser `vW()` / `vH()` (cf. mémoire projet).
 - **Avant de créer un composant**, vérifier qu'il n'existe pas déjà dans `src/components/`. Lister les fichiers existants et lire le composant candidat avant toute création.
 - **Noms de variables en toutes lettres** — pas d'abréviations cryptiques. `cur` → `activeCursor`, `idx` → `lineIndex`, `ref` → `lineRef` / `nodeRef`, etc. Les boucles courtes peuvent garder un compteur classique comme `i`, `j` ou `k`.
+- **Durée d'affichage des callouts ∝ longueur du texte** — un callout que l'on révèle puis masque ne doit JAMAIS être maintenu par un `waitFor(...)` fixe. Après le fade-in, utiliser `yield* callout().hold()` : le temps de lecture est calculé à partir de `title + body` (cf. `readTime()` dans `src/components/Callout.tsx`). Les callouts qui persistent à l'écran sur plusieurs étapes ne sont pas concernés.
 
 ### Bibliothèque de composants — frontière 2026-05-20
 
@@ -157,6 +158,7 @@ Composants disponibles (importer via `../../components` depuis les scènes) :
 | `InfoCard` | Carte header coloré + children libres | Classe — children injectés dans le body |
 | `ConnectedNode` | Nœud de diagramme (icon + label + compteur) | Classe légère — `counterValue` = signal externe |
 | `AnnotationBox` | Boîte annotation (titre + lignes) | Classe — flèche gérée via `ConnectionArrow` séparé |
+| `Callout` | Annotation ancrée (titre + body, états) | Classe — `.setState()`, `.hold()` (dwell ∝ texte) |
 
 Palette partagée : `import {PALETTE} from '../../theme'` (ne plus définir `COLORS` inline dans les nouvelles scènes).
 
