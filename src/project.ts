@@ -61,17 +61,21 @@ import retropropagation from './scenes/llm/retropropagation?scene';
 import interpretabilite from './scenes/llm/interpretabilite?scene';
 import summaryPipeline from './scenes/llm/summary-pipeline?scene';
 import temperature from './scenes/llm/temperature?scene';
+import echelleParametres from './scenes/llm/echelle-parametres?scene';
+import cosineSimilarite from './scenes/llm/cosine-similarite?scene';
 
 export default makeProject({
   scenes: [
-    neurone,
-    consoleMixage,
-    descenteGradient,
-    retropropagation,
-    interpretabilite,
-    tokenisation,
-    attention,
-    summaryPipeline,
-    temperature
+    // neurone,
+    // consoleMixage,
+    // descenteGradient,
+    // retropropagation,
+    // interpretabilite,
+    // tokenisation,
+    // attention,
+    // summaryPipeline,
+    temperature,
+    // echelleParametres,
+    // cosineSimilarite,
   ],
 });

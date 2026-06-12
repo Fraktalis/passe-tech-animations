@@ -193,7 +193,7 @@ export default makeScene2D(function* (view) {
   // « il mesure l'erreur entre produit et attendu »
   yield* waitUntil('error');
   yield* errCallout().opacity(1, 0.4);
-  yield* waitFor(1.0);
+  yield* errCallout().hold();
 
   yield* waitUntil('end');
   yield* all(

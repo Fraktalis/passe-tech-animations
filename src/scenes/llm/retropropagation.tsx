@@ -4,20 +4,24 @@
  *
  * Show, don't tell :
  *   1. Un réseau en couches (nœuds + connexions). Passe AVANT : une vague cyan
- *      parcourt entrée → sortie et produit une réponse.
- *   2. La sortie est comparée à la cible → ERREUR (rose) à droite.
- *   3. L'information d'erreur remonte EN SENS INVERSE, couche par couche, sortie →
- *      entrée. Chaque arête flashe et son poids s'ajuste (épaisseur qui bouge).
+ *      parcourt entrée → sortie et produit une réponse CHIFFRÉE (probabilité).
+ *   2. La sortie est comparée à la cible (1.00) → ERREUR numérique (rose).
+ *   3. L'information d'erreur remonte EN SENS INVERSE, couche par couche. Chaque
+ *      arête flashe et son poids change DURABLEMENT (épaisseur figée à une nouvelle
+ *      valeur — les poids ne reviennent PAS à l'état initial).
+ *   4. On répète : 3 itérations (1 détaillée + 2 rapides). À chaque tour la
+ *      prédiction grimpe (0.12 → 0.58 → 0.91), l'erreur fond, la couleur converge
+ *      rose → jaune → vert. C'est ça, le côté itératif de l'entraînement.
  *
  * Deux canaux : cyan = signal avant, rose = erreur qui remonte. Jamais mélangés.
  *
  * Note rendu : MC ne flatten pas les tableaux imbriqués → on rend des LISTES PLATES
- * (netNodeFlat / netEdgeFlat), sinon le groupe entier reste vide.
+ * (nodeFlat / edgeFlat), sinon le groupe entier reste vide.
  */
 
 import {makeScene2D, Circle, Grid, Layout, Line, Rect, Txt} from '@motion-canvas/2d';
 import {
-  all, sequence, waitFor, waitUntil, createRef, easeInOutCubic, easeOutCubic,
+  all, waitFor, waitUntil, createRef, createSignal, easeOutCubic,
 } from '@motion-canvas/core';
 import {PALETTE} from '../../theme';
 
@@ -27,6 +31,10 @@ export default makeScene2D(function* (view) {
 
   const MONO = 'JetBrains Mono, DM Mono, monospace';
   const SANS = 'Space Grotesk';
+
+  // RNG déterministe (seedé) pour des poids reproductibles au scrub
+  let seed = 0x4c4d;
+  const rand = () => (seed = (seed * 1103515245 + 12345) & 0x7fffffff) / 0x7fffffff;
 
   // ── Réseau en couches ─────────────────────────────────────────────────────
   const LAYERS = [3, 4, 4, 2];
@@ -51,13 +59,20 @@ export default makeScene2D(function* (view) {
     ).flat());
   const gapEdges = (g: number) => edges[g];
 
+  // ── Signaux numériques ──────────────────────────────────────────────────
+  // prediction = probabilité que le modèle attribue à « chat ». Cible fixe = 1.00.
+  // L'erreur affichée en découle directement : err = cible − prédiction.
+  const prediction = createSignal(0.0);
+
   // ── Refs ──────────────────────────────────────────────────────────────────
   const gridRef   = createRef<Grid>();
   const titleRef  = createRef<Txt>();
+  const iterTag   = createRef<Txt>();
   const netGroup  = createRef<Layout>();
 
   const fwdLine     = createRef<Line>();
   const producedRef = createRef<Rect>();
+  const predValRef  = createRef<Txt>();
   const targetRef   = createRef<Rect>();
   const errorBadge  = createRef<Txt>();
   const errArrow    = createRef<Line>();
@@ -80,6 +95,14 @@ export default makeScene2D(function* (view) {
         fontSize={() => vW() * 0.014}
         fontFamily={MONO} fontWeight={700}
         y={() => vH() * -0.43}
+        opacity={0} />
+
+      <Txt key="iter-tag" ref={iterTag}
+        text="itération 1 / 3"
+        fill={PALETTE.ghost}
+        fontSize={() => vW() * 0.011}
+        fontFamily={MONO} fontWeight={500}
+        y={() => vH() * -0.395}
         opacity={0} />
 
       <Layout key="net" ref={netGroup} opacity={0}>
@@ -112,35 +135,35 @@ export default makeScene2D(function* (view) {
 
       {/* sortie produite vs cible */}
       <Rect key="produced" ref={producedRef}
-        width={() => vW() * 0.13} height={() => vH() * 0.08}
+        width={() => vW() * 0.14} height={() => vH() * 0.085}
         fill={PALETTE.nodeBg} stroke={PALETTE.rose} lineWidth={2}
         radius={() => vW() * 0.006}
-        x={() => vW() * 0.34} y={() => vH() * -0.07}
+        x={() => vW() * 0.34} y={() => vH() * -0.075}
         opacity={0}>
-        <Txt text="produit" fill={PALETTE.secondary}
-          fontSize={() => vW() * 0.011} fontFamily={MONO} y={() => vH() * -0.018} />
-        <Txt text="ch# ?" fill={PALETTE.rose}
-          fontSize={() => vW() * 0.018} fontFamily={MONO} fontWeight={700}
-          y={() => vH() * 0.012} />
+        <Txt text="P(« chat »)" fill={PALETTE.secondary}
+          fontSize={() => vW() * 0.011} fontFamily={MONO} y={() => vH() * -0.019} />
+        <Txt ref={predValRef} text={() => prediction().toFixed(2)} fill={PALETTE.rose}
+          fontSize={() => vW() * 0.022} fontFamily={MONO} fontWeight={700}
+          y={() => vH() * 0.013} />
       </Rect>
 
       <Rect key="target" ref={targetRef}
-        width={() => vW() * 0.13} height={() => vH() * 0.08}
+        width={() => vW() * 0.14} height={() => vH() * 0.085}
         fill={PALETTE.nodeBg} stroke={PALETTE.vert} lineWidth={2}
         radius={() => vW() * 0.006}
-        x={() => vW() * 0.34} y={() => vH() * 0.07}
+        x={() => vW() * 0.34} y={() => vH() * 0.075}
         opacity={0}>
-        <Txt text="attendu" fill={PALETTE.secondary}
-          fontSize={() => vW() * 0.011} fontFamily={MONO} y={() => vH() * -0.018} />
-        <Txt text="chat" fill={PALETTE.vert}
-          fontSize={() => vW() * 0.018} fontFamily={MONO} fontWeight={700}
-          y={() => vH() * 0.012} />
+        <Txt text="cible (« chat »)" fill={PALETTE.secondary}
+          fontSize={() => vW() * 0.011} fontFamily={MONO} y={() => vH() * -0.019} />
+        <Txt text="1.00" fill={PALETTE.vert}
+          fontSize={() => vW() * 0.022} fontFamily={MONO} fontWeight={700}
+          y={() => vH() * 0.013} />
       </Rect>
 
       <Txt key="error-badge" ref={errorBadge}
-        text="≠ erreur"
+        text={() => `erreur ${(1 - prediction()).toFixed(2)}`}
         fill={PALETTE.rose}
-        fontSize={() => vW() * 0.016} fontFamily={MONO} fontWeight={700}
+        fontSize={() => vW() * 0.015} fontFamily={MONO} fontWeight={700}
         x={() => vW() * 0.34} y={() => vH() * 0.0}
         opacity={0} />
 
@@ -163,24 +186,67 @@ export default makeScene2D(function* (view) {
   );
 
   // ════════════════════════════════════════════════════════════════════════
-  // ANIMATIONS
+  // HELPERS D'ANIMATION
   // ════════════════════════════════════════════════════════════════════════
 
   const flashGap = (g: number, color: string, dur = 0.3) =>
     all(...gapEdges(g).map(e =>
       e().stroke(color, dur * 0.4).to(PALETTE.ghost, dur * 0.6)));
-  const adjustGap = (g: number) =>
+
+  // Passe arrière : flashe l'arête en rose ET FIGE une nouvelle épaisseur (poids).
+  // L'épaisseur ne revient pas — les poids ont durablement changé.
+  const reweightGap = (g: number, dur = 0.3) =>
     all(
       ...gapEdges(g).map(e =>
-        e().stroke(PALETTE.rose, 0.15).to(PALETTE.ghost, 0.35)),
-      ...gapEdges(g).map(e =>
-        e().lineWidth(2.8, 0.15).to(1.5, 0.35)),
+        e().stroke(PALETTE.rose, dur * 0.4).to(PALETTE.ghost, dur * 0.6)),
+      ...gapEdges(g).map(e => e().lineWidth(0.8 + rand() * 3.4, dur)),
     );
+
   const lightLayer = (l: number, color: string, dur = 0.2) =>
     all(...nodes[l].map(n => all(n().fill(color, dur), n().stroke(color, dur))));
   const dimLayer = (l: number, dur = 0.3) =>
     all(...nodes[l].map(n =>
       all(n().fill(PALETTE.nodeBg, dur), n().stroke(PALETTE.secondary, dur))));
+  const dimAll = (dur = 0.3) => all(...LAYERS.map((_, l) => dimLayer(l, dur)));
+
+  function* forwardSweep(step: number) {
+    for (let l = 0; l < LAYERS.length; l++) {
+      yield* lightLayer(l, PALETTE.cyan, step);
+      if (l < lastLayer) yield* flashGap(l, PALETTE.cyan, step * 1.5);
+    }
+  }
+  function* backwardSweep(step: number) {
+    yield* lightLayer(lastLayer, PALETTE.rose, step);
+    for (let g = lastLayer - 1; g >= 0; g--) {
+      yield* reweightGap(g, step * 1.5);
+      yield* lightLayer(g, PALETTE.rose, step);
+    }
+  }
+
+  // Itération rapide : avant → la sortie s'améliore → arrière (poids réajustés).
+  function* fastIteration(idx: number, pred: number, predColor: string, step: number) {
+    yield* all(
+      iterTag().text(`itération ${idx} / 3`, 0.3),
+      titleRef().text('PASSE AVANT', 0.3),
+      errArrow().opacity(0.15, 0.2),
+    );
+    yield* forwardSweep(step);
+    // l'output bouge : la prédiction grimpe, l'erreur fond, la couleur converge
+    yield* all(
+      prediction(pred, 0.45),
+      predValRef().fill(predColor, 0.45),
+      producedRef().stroke(predColor, 0.45),
+      errorBadge().fill(predColor, 0.45),
+    );
+    yield* dimAll(0.2);
+    yield* all(titleRef().text('PASSE ARRIÈRE', 0.3), errArrow().opacity(1, 0.2));
+    yield* backwardSweep(step);
+    yield* all(dimAll(0.25), errArrow().opacity(0.3, 0.25));
+  }
+
+  // ════════════════════════════════════════════════════════════════════════
+  // TIMELINE
+  // ════════════════════════════════════════════════════════════════════════
 
   yield* waitUntil('intro');
   yield* all(
@@ -189,44 +255,46 @@ export default makeScene2D(function* (view) {
     netGroup().opacity(1, 0.5),
   );
 
-  // ── Passe avant : vague cyan entrée → sortie ──────────────────────────────
+  // ── ITÉRATION 1 (détaillée) ───────────────────────────────────────────────
+  // Passe avant : vague cyan entrée → sortie
   yield* waitUntil('forward');
-  for (let l = 0; l < LAYERS.length; l++) {
-    yield* lightLayer(l, PALETTE.cyan, 0.2);
-    if (l < lastLayer) yield* flashGap(l, PALETTE.cyan, 0.3);
-  }
-  // la sortie produit une réponse, comparée à la cible
+  yield* iterTag().opacity(1, 0.4);
+  yield* forwardSweep(0.2);
+  // la sortie produit une réponse chiffrée, comparée à la cible
   yield* fwdLine().opacity(1, 0.01);
   yield* fwdLine().end(1, 0.4, easeOutCubic);
   yield* all(
     producedRef().opacity(1, 0.3),
     targetRef().opacity(1, 0.3),
   );
-  yield* errorBadge().opacity(1, 0.3);
+  yield* all(prediction(0.12, 0.5), errorBadge().opacity(1, 0.3));
   yield* errorBadge().scale(1.2, 0.15).to(1, 0.15);
   // les couches retombent au neutre avant la passe arrière
-  yield* all(...LAYERS.map((_, l) => dimLayer(l, 0.3)));
+  yield* dimAll(0.3);
 
-  // ── Passe arrière : l'erreur remonte sortie → entrée ──────────────────────
+  // Passe arrière : l'erreur remonte sortie → entrée, les poids changent
   yield* waitUntil('backward');
   yield* all(
     titleRef().text('PASSE ARRIÈRE', 0.4),
     fwdLine().opacity(0, 0.3),
   );
-  // l'erreur repart du bloc produit vers la sortie du réseau
   yield* errArrow().opacity(1, 0.01);
   yield* errArrow().end(1, 0.4, easeOutCubic);
-  // la couche de sortie s'allume en rose la première
-  yield* lightLayer(lastLayer, PALETTE.rose, 0.2);
-  for (let g = lastLayer - 1; g >= 0; g--) {
-    yield* adjustGap(g);
-    yield* lightLayer(g, PALETTE.rose, 0.2);
-  }
+  yield* backwardSweep(0.2);
   yield* waitFor(0.3);
-  // les poids ajustés retombent, le réseau s'apaise
+  yield* all(dimAll(0.4), errArrow().opacity(0.3, 0.4));
+
+  // ── ITÉRATIONS 2 & 3 (rapides) — le côté itératif ─────────────────────────
+  yield* waitUntil('iter2');
+  yield* fastIteration(2, 0.58, PALETTE.jaune, 0.09);
+
+  yield* waitUntil('iter3');
+  yield* fastIteration(3, 0.91, PALETTE.vert, 0.08);
+
+  // la prédiction a convergé vers la cible : on souligne le résultat
   yield* all(
-    ...LAYERS.map((_, l) => dimLayer(l, 0.4)),
-    errArrow().opacity(0.3, 0.4),
+    predValRef().scale(1.25, 0.2).to(1, 0.2),
+    producedRef().stroke(PALETTE.vert, 0.3),
   );
 
   // « et on appelle ça la rétro-propagation »
@@ -238,6 +306,7 @@ export default makeScene2D(function* (view) {
   yield* all(
     gridRef().opacity(0, 0.5),
     titleRef().opacity(0, 0.5),
+    iterTag().opacity(0, 0.5),
     netGroup().opacity(0, 0.5),
     fwdLine().opacity(0, 0.5),
     producedRef().opacity(0, 0.5),

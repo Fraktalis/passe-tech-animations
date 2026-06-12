@@ -115,6 +115,9 @@ export default makeScene2D(function* (view) {
   const loopArrow = createRef<Line>();
   const loopLabel = createRef<Txt>();
 
+  // Station 6 : label interne du chip (pour mise à jour en autorégression)
+  const detokChipLabel = createRef<Txt>();
+
   // ════════════════════════════════════════════════════════════════════════
   // SCENE TREE
   // ════════════════════════════════════════════════════════════════════════
@@ -286,7 +289,7 @@ export default makeScene2D(function* (view) {
           radius={() => vW() * 0.004}
           y={() => vH() * -0.08}
           opacity={0} scale={0.7}>
-          <Txt text="·Paris" fill={PALETTE.cyan}
+          <Txt ref={detokChipLabel} text="·Paris" fill={PALETTE.cyan}
             fontSize={() => vW() * 0.013} fontFamily={MONO} fontWeight={700} />
         </Rect>
         <Line ref={detokArrow}
@@ -438,6 +441,81 @@ export default makeScene2D(function* (view) {
   yield* inputTxt().text('« La capitale\nde la France\nest Paris »', 0.5);
   yield* inputTxt().fill(PALETTE.vert, 0.3);
   yield* waitFor(1.0);
+
+  // ── Itérations autorégressives rapides ──────────────────────────────────
+  yield* waitUntil('autoregress');
+
+  // Réinitialise la couleur du texte d'entrée (était vert après la 1ère boucle)
+  yield* inputTxt().fill(PALETTE.cream, 0.15);
+
+  const fastIter = function* (inputCtx: string | null, outToken: string, outText: string) {
+    // Remet toutes les stations en mode fantôme
+    yield* all(
+      ...cards.map(c => c().stroke(PALETTE.ghost, 0.12)),
+      ...stageLabels.map(l => l().fill(PALETTE.secondary, 0.12)),
+      ...connectors.map(c => c().stroke(PALETTE.ghost, 0.08)),
+    );
+    // Met à jour le texte d'entrée si fourni
+    if (inputCtx !== null) {
+      yield* inputTxt().text(inputCtx, 0.18);
+    }
+    // Active la station 1
+    yield* all(
+      cards[0]().stroke(PALETTE.cyan, 0.08),
+      stageLabels[0]().fill(PALETTE.cyan, 0.08),
+    );
+    // Remet le pulse au départ (instant)
+    yield* pulse().x(cardX(0)(), 0);
+    // Balayage rapide : pulse + éclairage séquentiel des connecteurs et cartes
+    yield* all(
+      pulse().x(cardX(5)(), 0.4, easeInOutCubic),
+      sequence(0.06,
+        connectors[0]().stroke(PALETTE.cyan, 0.05),
+        connectors[1]().stroke(PALETTE.cyan, 0.05),
+        connectors[2]().stroke(PALETTE.cyan, 0.05),
+        connectors[3]().stroke(PALETTE.cyan, 0.05),
+        connectors[4]().stroke(PALETTE.cyan, 0.05),
+      ),
+      sequence(0.06,
+        cards[1]().stroke(PALETTE.cyan, 0.05),
+        cards[2]().stroke(PALETTE.cyan, 0.05),
+        cards[3]().stroke(PALETTE.cyan, 0.05),
+        cards[4]().stroke(PALETTE.cyan, 0.05),
+        cards[5]().stroke(PALETTE.vert, 0.05),
+      ),
+      sequence(0.06,
+        stageLabels[1]().fill(PALETTE.cyan, 0.05),
+        stageLabels[2]().fill(PALETTE.cyan, 0.05),
+        stageLabels[3]().fill(PALETTE.cyan, 0.05),
+        stageLabels[4]().fill(PALETTE.cyan, 0.05),
+        stageLabels[5]().fill(PALETTE.vert, 0.05),
+      ),
+    );
+    // Met à jour le token de sortie en station 6
+    detokChipLabel().text(outToken);
+    yield* detokText().text(outText, 0);
+    yield* all(
+      cards[5]().stroke(PALETTE.vert, 0.08),
+      stageLabels[5]().fill(PALETTE.vert, 0.08),
+      detokText().scale(1.18, 0.13).to(1, 0.13),
+    );
+    // Clignote la flèche de boucle pour signaler la réinjection
+    yield* loopArrow().opacity(0.35, 0.07).to(1, 0.1);
+    yield* waitFor(0.12);
+  };
+
+  // Tokens : [La, capitale, de, la, France, est, Paris, ",", ville, de, 2, …]
+  // Iter 1 : contexte «…est Paris» → génère ","
+  yield* fastIter(null,                   ',',      ','    );
+  // Iter 2 : contexte «…est Paris,» → génère "ville"
+  yield* fastIter('« …est\nParis, »',    '·ville', 'ville');
+  // Iter 3 : contexte «…Paris, ville» → génère "de"
+  yield* fastIter('« …Paris,\nville »',  '·de',    'de'   );
+
+  // Résultat final accumulé
+  yield* inputTxt().text('« …Paris,\nville de »', 0.3);
+  yield* inputTxt().fill(PALETTE.vert, 0.25);
+  yield* waitFor(0.5);
 
   yield* waitUntil('end');
   yield* all(

@@ -34,6 +34,10 @@
       "targetTime": 12.22
     },
     {
+      "name": "autoregress",
+      "targetTime": 16.839999999999996
+    },
+    {
       "name": "end",
       "targetTime": 17.130000000000003
     }

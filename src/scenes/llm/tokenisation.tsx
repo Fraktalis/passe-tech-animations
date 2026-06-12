@@ -7,8 +7,9 @@
  *   2. variabilité → "tokenisation" = 2,    "Anticonstitutionnellement" = 5.
  *      Le compte de tokens ≠ le nombre de lettres. Ni par mot, ni par lettre.
  *   3. BPE — comment le vocabulaire se construit : fusion des paires fréquentes → "tion".
- *   4. Payoff "strawberry" → [st][raw][berry]. Les 3 « r » se font avaler par les
- *      fragments. Le modèle voit des morceaux, pas des lettres → il répond « 2 ».
+ *   4. Payoff "strawberry" → [straw][berry]. Les 3 « r » se font avaler par les
+ *      fragments (1 dans "straw", 2 dans "berry"). Le modèle voit des morceaux,
+ *      pas des lettres → il répond « 2 ».
  *
  * Découpages conformes au tokenizer o200k (GPT-4o / o1 / GPT-5.x).
  *
@@ -68,7 +69,7 @@ export default makeScene2D(function* (view) {
   const p4GroupRef   = createRef<Layout>();
   const strawLetters = 'strawberry'.split('').map(() => createRef<Txt>());
   const strawRowRef  = createRef<SlotGroup>();
-  const strawFrags   = ['st', 'raw', 'berry'];
+  const strawFrags   = ['straw', 'berry'];
   const strawSlots   = strawFrags.map(() => createRef<Slot>());
   const humanCountRef  = createRef<Txt>();
   const questionRef    = createRef<Txt>();
@@ -231,7 +232,7 @@ export default makeScene2D(function* (view) {
             opacity={0} />
         ))}
 
-        {/* tokens [st][raw][berry] — révélés quand les lettres se font avaler */}
+        {/* tokens [straw][berry] — révélés quand les lettres se font avaler */}
         <SlotGroup key="straw-row" ref={strawRowRef}
           color={PALETTE.ghost}
           width={() => vW() * 0.5} height={() => vH() * 0.2}

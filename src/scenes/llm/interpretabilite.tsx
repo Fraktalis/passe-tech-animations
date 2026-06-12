@@ -141,7 +141,7 @@ export default makeScene2D(function* (view) {
 
       <Callout key="interp-callout" ref={interpCallout}
         title="Interprétabilité"
-        body="ce que les poids encodent reste un problème ouvert"
+        body="Expliquer concrétement ce que les poids encodent reste un problème ouvert"
         color={PALETTE.amber}
         width={() => vW() * 0.32} height={() => vH() * 0.13}
         x={() => vW() * 0.30} y={() => vH() * -0.28}
@@ -210,7 +210,7 @@ export default makeScene2D(function* (view) {
   // « ce qu'on appelle l'interprétabilité »
   yield* waitUntil('interp');
   yield* interpCallout().opacity(1, 0.4);
-  yield* waitFor(0.8);
+  yield* interpCallout().hold();
 
   // « mais ce qu'on sait, c'est que ça marche »
   yield* waitUntil('works');

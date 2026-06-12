@@ -1,0 +1,26 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "gpt2",
+      "targetTime": 0
+    },
+    {
+      "name": "gpt3",
+      "targetTime": 3.4465273878993066
+    },
+    {
+      "name": "frontier",
+      "targetTime": 6.888127279016884
+    },
+    {
+      "name": "moe",
+      "targetTime": 11.50048656833223
+    },
+    {
+      "name": "end",
+      "targetTime": 17.42548656833223
+    }
+  ],
+  "seed": 1206014900
+}

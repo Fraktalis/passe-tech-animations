@@ -1,0 +1,46 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "intro",
+      "targetTime": 0
+    },
+    {
+      "name": "query",
+      "targetTime": 1.5
+    },
+    {
+      "name": "key",
+      "targetTime": 3.5
+    },
+    {
+      "name": "perpendicular",
+      "targetTime": 7
+    },
+    {
+      "name": "opposed",
+      "targetTime": 9.5
+    },
+    {
+      "name": "realign",
+      "targetTime": 12
+    },
+    {
+      "name": "formula",
+      "targetTime": 15
+    },
+    {
+      "name": "show-v",
+      "targetTime": 19.71
+    },
+    {
+      "name": "v-scale",
+      "targetTime": 20.81
+    },
+    {
+      "name": "end",
+      "targetTime": 23
+    }
+  ],
+  "seed": 2946183750
+}

@@ -11,39 +11,39 @@
     },
     {
       "name": "weights",
-      "targetTime": 1.34
+      "targetTime": 2.818815572623905
     },
     {
       "name": "sum",
-      "targetTime": 2.24
+      "targetTime": 5.141559189254407
     },
     {
       "name": "activation",
-      "targetTime": 3.1399999999999997
+      "targetTime": 6.941559189254407
     },
     {
       "name": "output",
-      "targetTime": 4.449999999999999
+      "targetTime": 8.651559189254407
     },
     {
       "name": "substitute",
-      "targetTime": 7.810000000000001
+      "targetTime": 10.161559189254408
     },
     {
       "name": "multiply",
-      "targetTime": 6.16
+      "targetTime": 15.14155918925441
     },
     {
       "name": "arbitrary",
-      "targetTime": 7.420000000000001
+      "targetTime": 18.2970983287505
     },
     {
       "name": "tasks",
-      "targetTime": 8.739999999999998
+      "targetTime": 21.470427011895584
     },
     {
       "name": "end",
-      "targetTime": 12.109999999999998
+      "targetTime": 23.740427011895584
     }
   ],
   "seed": 887942411

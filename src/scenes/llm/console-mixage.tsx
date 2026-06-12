@@ -195,7 +195,7 @@ export default makeScene2D(function* (view) {
     knobs[focus]().scale(1.5, 0.3, easeOutCubic),
     knobCallout().opacity(1, 0.4),
   );
-  yield* waitFor(0.4);
+  yield* knobCallout().hold();
   yield* all(
     knobs[focus]().stroke(PALETTE.rose, 0.3),
     knobs[focus]().scale(1, 0.3),

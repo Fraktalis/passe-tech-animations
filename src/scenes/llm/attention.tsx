@@ -265,7 +265,7 @@ export default makeScene2D(function* (view) {
   // "il" est résolu
   yield* waitUntil('resolved');
   yield* resolvedCallout().opacity(1, 0.4);
-  yield* waitFor(1.0);
+  yield* resolvedCallout().hold();
 
   // ── Fin ───────────────────────────────────────────────────────────────────
   yield* waitUntil('end');
