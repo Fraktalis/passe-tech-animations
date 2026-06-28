@@ -1,0 +1,46 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "intro",
+      "targetTime": 0
+    },
+    {
+      "name": "while",
+      "targetTime": 1.8
+    },
+    {
+      "name": "cat",
+      "targetTime": 2.920000000000001
+    },
+    {
+      "name": "done",
+      "targetTime": 4.920000000000003
+    },
+    {
+      "name": "diagram",
+      "targetTime": 5.320000000000003
+    },
+    {
+      "name": "arrow-p2c",
+      "targetTime": 6.269231868524476
+    },
+    {
+      "name": "arrow-c2a",
+      "targetTime": 6.8692318685244755
+    },
+    {
+      "name": "loop",
+      "targetTime": 7.469231868524475
+    },
+    {
+      "name": "exit",
+      "targetTime": 9.34879599857092
+    },
+    {
+      "name": "end",
+      "targetTime": 13.275662736691675
+    }
+  ],
+  "seed": 2022141734
+}
