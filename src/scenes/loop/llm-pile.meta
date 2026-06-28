@@ -1,0 +1,38 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "intro",
+      "targetTime": 0
+    },
+    {
+      "name": "prompt",
+      "targetTime": 0.9005357521149637
+    },
+    {
+      "name": "skills",
+      "targetTime": 3.4005357521149637
+    },
+    {
+      "name": "tools",
+      "targetTime": 5.900535752114964
+    },
+    {
+      "name": "loop",
+      "targetTime": 8.400535752114964
+    },
+    {
+      "name": "full",
+      "targetTime": 9.560823290716568
+    },
+    {
+      "name": "verifier",
+      "targetTime": 10.180823290716571
+    },
+    {
+      "name": "end",
+      "targetTime": 11.8
+    }
+  ],
+  "seed": 774183822
+}
