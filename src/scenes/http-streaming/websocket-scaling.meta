@@ -1,0 +1,42 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "topologie",
+      "targetTime": 0
+    },
+    {
+      "name": "round-robin",
+      "targetTime": 2.3600000000000003
+    },
+    {
+      "name": "websocket",
+      "targetTime": 6.74
+    },
+    {
+      "name": "case-cochee",
+      "targetTime": 9.09
+    },
+    {
+      "name": "echec-diffusion",
+      "targetTime": 11.259999999999998
+    },
+    {
+      "name": "redis",
+      "targetTime": 12.609999999999998
+    },
+    {
+      "name": "diffusion-complete",
+      "targetTime": 14.059999999999997
+    },
+    {
+      "name": "scale-out",
+      "targetTime": 19.199999999999992
+    },
+    {
+      "name": "end",
+      "targetTime": 24.25999999999998
+    }
+  ],
+  "seed": 902384171
+}

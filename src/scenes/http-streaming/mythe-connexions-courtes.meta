@@ -1,0 +1,46 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "rails",
+      "targetTime": 0
+    },
+    {
+      "name": "lien-1991",
+      "targetTime": 1.7000000000000002
+    },
+    {
+      "name": "rupture",
+      "targetTime": 3.3
+    },
+    {
+      "name": "thread-par-connexion",
+      "targetTime": 4.65
+    },
+    {
+      "name": "pages-complexes",
+      "targetTime": 9.100000000000001
+    },
+    {
+      "name": "keep-alive",
+      "targetTime": 13.429999999999994
+    },
+    {
+      "name": "c10k",
+      "targetTime": 16.879999999999995
+    },
+    {
+      "name": "event-loop",
+      "targetTime": 20.990000000000002
+    },
+    {
+      "name": "query-2026",
+      "targetTime": 27.119999999999987
+    },
+    {
+      "name": "end",
+      "targetTime": 31.069999999999986
+    }
+  ],
+  "seed": 481237529
+}

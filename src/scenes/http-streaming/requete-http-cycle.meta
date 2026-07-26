@@ -1,0 +1,54 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "setup",
+      "targetTime": 0
+    },
+    {
+      "name": "cycle-1",
+      "targetTime": 1.47
+    },
+    {
+      "name": "payload",
+      "targetTime": 10.110000000000001
+    },
+    {
+      "name": "focus-request",
+      "targetTime": 17.962000000000067
+    },
+    {
+      "name": "separation",
+      "targetTime": 19.56200000000007
+    },
+    {
+      "name": "status-line",
+      "targetTime": 23.762000000000068
+    },
+    {
+      "name": "response-headers",
+      "targetTime": 25.36200000000007
+    },
+    {
+      "name": "body",
+      "targetTime": 26.96200000000007
+    },
+    {
+      "name": "payload-dissolve",
+      "targetTime": 29.162000000000074
+    },
+    {
+      "name": "cycles-rapides",
+      "targetTime": 5.055000000000001
+    },
+    {
+      "name": "silence-serveur",
+      "targetTime": 8.412999999999998
+    },
+    {
+      "name": "end",
+      "targetTime": 13.163000000000002
+    }
+  ],
+  "seed": 618402935
+}

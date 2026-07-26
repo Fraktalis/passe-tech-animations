@@ -1,0 +1,38 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "setup",
+      "targetTime": 0
+    },
+    {
+      "name": "request",
+      "targetTime": 2.95
+    },
+    {
+      "name": "highlight-upgrade",
+      "targetTime": 4.530000000000001
+    },
+    {
+      "name": "switching",
+      "targetTime": 7.780000000000002
+    },
+    {
+      "name": "frames",
+      "targetTime": 10.530000000000003
+    },
+    {
+      "name": "blind",
+      "targetTime": 13.21
+    },
+    {
+      "name": "pulse",
+      "targetTime": 15.55
+    },
+    {
+      "name": "end",
+      "targetTime": 18.390000000000004
+    }
+  ],
+  "seed": 728341956
+}

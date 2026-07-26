@@ -1,0 +1,38 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "setup",
+      "targetTime": 0
+    },
+    {
+      "name": "post-1",
+      "targetTime": 1.9000000000000001
+    },
+    {
+      "name": "close-1",
+      "targetTime": 5.440000000000001
+    },
+    {
+      "name": "post-2",
+      "targetTime": 6.440000000000001
+    },
+    {
+      "name": "close-2",
+      "targetTime": 12.460000000000004
+    },
+    {
+      "name": "split",
+      "targetTime": 13.360000000000005
+    },
+    {
+      "name": "ws-fades",
+      "targetTime": 20.360000000000003
+    },
+    {
+      "name": "end",
+      "targetTime": 22.660000000000004
+    }
+  ],
+  "seed": 194527683
+}
