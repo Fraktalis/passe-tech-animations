@@ -3,9 +3,6 @@
  * @description Primitive « Node » du design system Passe-Tech (≥ 2026-05-20).
  * Représente toute entité : serveur, conteneur, base de données, personne, org…
  *
- * Presets disponibles : server | container | database | file | browser | terminal | person | org.
- * Chaque preset pré-remplit icon, color et borderStyle. Toute prop peut être surchargée.
- *
  * @example
  * ```tsx
  * import {DiagramNode} from '../../components';
@@ -15,7 +12,7 @@
  * view.add(
  *   <DiagramNode
  *     ref={serverRef}
- *     preset="server"
+ *     iconName="mdi:server"
  *     label="web-01"
  *     sublabel="nginx:80"
  *     initialState="idle"
@@ -52,7 +49,7 @@ export interface DiagramNodeProps extends RectProps {
   iconName?: string;
   /** Couleur de bordure — surcharge le preset. */
   color?: string;
-  /** Preset qui pré-remplit icon, color, borderStyle. */
+  /** @deprecated Utiliser `iconName` + `color` + `borderStyle` directement. */
   preset?: NodePreset;
   /** Bordure pleine ou tiretée. `container` est dashed par défaut. */
   borderStyle?: NodeBorderStyle;

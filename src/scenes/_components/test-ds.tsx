@@ -71,25 +71,25 @@ export default makeScene2D(function* (view) {
       {/* ── 1. DiagramNode — rangée de presets ──────────────────────────── */}
 
       <DiagramNode key="server"    ref={serverRef}
-        preset="server"    label="web-01"    sublabel="nginx:80"
+        iconName="mdi:server"    label="web-01"    sublabel="nginx:80"
         width={() => vW() * 0.1} height={() => vH() * 0.22}
         x={() => vW() * -0.38} y={() => vH() * -0.17}
         opacity={0} />
 
       <DiagramNode key="container" ref={containerRef}
-        preset="container" label="api"       sublabel="node:18"
+        iconName="mdi:docker" color={PALETTE.cyan} borderStyle="dashed" label="api"       sublabel="node:18"
         width={() => vW() * 0.1} height={() => vH() * 0.22}
         x={() => vW() * -0.25} y={() => vH() * -0.17}
         opacity={0} />
 
       <DiagramNode key="database"  ref={dbRef}
-        preset="database"  label="pg-prod"   sublabel="5432"
+        iconName="mdi:database" color={PALETTE.amber} label="pg-prod"   sublabel="5432"
         width={() => vW() * 0.1} height={() => vH() * 0.22}
         x={() => vW() * -0.12} y={() => vH() * -0.17}
         opacity={0} />
 
       <DiagramNode key="person"    ref={personRef}
-        preset="person"    label="Attacker"
+        iconName="mdi:account-circle" label="Attacker"
         color={PALETTE.dsRose}
         width={() => vW() * 0.1} height={() => vH() * 0.22}
         x={() => vW() *  0.01} y={() => vH() * -0.17}
@@ -137,7 +137,7 @@ export default makeScene2D(function* (view) {
       {/* ── 4. Zone ──────────────────────────────────────────────────────── */}
 
       <Zone key="zone-trusted" ref={zoneRef}
-        preset="trusted"
+        color={PALETTE.dsGreen}
         label="INTERNAL NETWORK"
         width={() => vW() * 0.26}
         height={() => vH() * 0.18}

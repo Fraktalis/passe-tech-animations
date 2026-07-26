@@ -34,7 +34,7 @@ export type ZonePreset = 'network' | 'cloud' | 'trusted' | 'untrusted' | 'sandbo
 export interface ZoneProps extends RectProps {
   /** Label affiché en haut à gauche, caps, monospace. */
   label?: string;
-  /** Preset qui pré-remplit color et borderStyle. */
+  /** @deprecated Utiliser `color` + `lineDash` directement. */
   preset?: ZonePreset;
   /** Surcharge la couleur du preset. */
   color?: string;
