@@ -28,7 +28,17 @@
       "Bash(git add *)",
       "mcp__blender__get_objects_summary",
       "mcp__blender__render_viewport_to_path",
-      "mcp__blender__get_screenshot_of_window_as_image"
+      "mcp__blender__get_screenshot_of_window_as_image",
+      "PowerShell(npx tsc --noEmit)",
+      "PowerShell($output = npx tsc --noEmit 2>&1; $matches = $output | Select-String \"http-streaming\"; Write-Output \"Errors in http-streaming: $\\($matches.Count\\)\"; $matches | ForEach-Object { $_.Line }; Write-Output \"Total error lines: $\\(\\($output | Select-String 'error TS'\\).Count\\)\")",
+      "Bash(echo \"exit:$?\")",
+      "Read(//tmp/**)",
+      "Bash(echo \"EXIT:$?\")",
+      "Bash(wc -l /tmp_tsc_out.txt)",
+      "Bash(grep -c \"http-streaming\" /tmp_tsc_out.txt)",
+      "Bash(echo \"exit: $?\")",
+      "Read(//c/Users/Alex_MC/AppData/Local/Temp/claude/E--WS-passe-tech-animations/1794d811-87c5-4567-bf6a-394bcff8ef98/scratchpad/**)",
+      "Bash(grep -n \"quatre-proprietes-http\" /d/../E:/WS/passe-tech-animations/src/project.ts 2>/dev/null; cat \"E:\\\\WS\\\\passe-tech-animations\\\\src\\\\project.ts\" | grep -n \"scene\\\\|import\" | head -20)"
     ]
   }
 }
