@@ -1,0 +1,54 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "intro",
+      "targetTime": 0
+    },
+    {
+      "name": "q1",
+      "targetTime": 3
+    },
+    {
+      "name": "q1-good",
+      "targetTime": 8.630225080385852
+    },
+    {
+      "name": "q2",
+      "targetTime": 13.747909967845661
+    },
+    {
+      "name": "q2-good",
+      "targetTime": 19.24790996784566
+    },
+    {
+      "name": "q3",
+      "targetTime": 24.235369774919615
+    },
+    {
+      "name": "q3-crash",
+      "targetTime": 30.235369774919615
+    },
+    {
+      "name": "q3-checkpoint",
+      "targetTime": 36.73536977491961
+    },
+    {
+      "name": "q4",
+      "targetTime": 43.22700964630225
+    },
+    {
+      "name": "q4-good",
+      "targetTime": 50.32700964630225
+    },
+    {
+      "name": "summary",
+      "targetTime": 55.22700964630225
+    },
+    {
+      "name": "end",
+      "targetTime": 62.22700964630225
+    }
+  ],
+  "seed": 395450400
+}

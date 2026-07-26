@@ -1,0 +1,34 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "intro",
+      "targetTime": 0
+    },
+    {
+      "name": "session-1",
+      "targetTime": 1.9500000000000002
+    },
+    {
+      "name": "drift-1",
+      "targetTime": 2.25
+    },
+    {
+      "name": "drift-2",
+      "targetTime": 3.75
+    },
+    {
+      "name": "drift-3",
+      "targetTime": 5.25
+    },
+    {
+      "name": "gap-reveal",
+      "targetTime": 6.75
+    },
+    {
+      "name": "end",
+      "targetTime": 7.75
+    }
+  ],
+  "seed": 1864232524
+}

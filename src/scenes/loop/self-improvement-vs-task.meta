@@ -1,0 +1,46 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "intro",
+      "targetTime": 0.15732461966946995
+    },
+    {
+      "name": "self-appears",
+      "targetTime": 1.4418959121948407
+    },
+    {
+      "name": "self-write-ok",
+      "targetTime": 2.5565451515337805
+    },
+    {
+      "name": "self-write-bad",
+      "targetTime": 4.311038497245583
+    },
+    {
+      "name": "self-new-session",
+      "targetTime": 6.263090303067562
+    },
+    {
+      "name": "self-drift",
+      "targetTime": 9.39017580559087
+    },
+    {
+      "name": "task-appears",
+      "targetTime": 10.658376438975433
+    },
+    {
+      "name": "task-pass",
+      "targetTime": 12.952445382192565
+    },
+    {
+      "name": "task-fail",
+      "targetTime": 15.19239018450531
+    },
+    {
+      "name": "end",
+      "targetTime": 17.869636857361208
+    }
+  ],
+  "seed": 3778147640
+}

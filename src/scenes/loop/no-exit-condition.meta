@@ -1,0 +1,38 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "intro",
+      "targetTime": 0
+    },
+    {
+      "name": "task",
+      "targetTime": 0.8
+    },
+    {
+      "name": "code-grows",
+      "targetTime": 1.8
+    },
+    {
+      "name": "pushback",
+      "targetTime": 3.2
+    },
+    {
+      "name": "rebound",
+      "targetTime": 4.2
+    },
+    {
+      "name": "fast-forward",
+      "targetTime": 5.4
+    },
+    {
+      "name": "exit-condition",
+      "targetTime": 8.2
+    },
+    {
+      "name": "end",
+      "targetTime": 12
+    }
+  ],
+  "seed": 1847293650
+}

@@ -1,0 +1,34 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "intro",
+      "targetTime": 0
+    },
+    {
+      "name": "agent",
+      "targetTime": 0.5
+    },
+    {
+      "name": "verifier",
+      "targetTime": 0.9500000000000001
+    },
+    {
+      "name": "criteria",
+      "targetTime": 1.9
+    },
+    {
+      "name": "yes",
+      "targetTime": 6.014999999999999
+    },
+    {
+      "name": "no-path",
+      "targetTime": 7.014999999999999
+    },
+    {
+      "name": "end",
+      "targetTime": 7.844999999999999
+    }
+  ],
+  "seed": 3661001925
+}

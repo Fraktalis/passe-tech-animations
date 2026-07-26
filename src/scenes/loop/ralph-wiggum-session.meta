@@ -1,0 +1,30 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "intro",
+      "targetTime": 0
+    },
+    {
+      "name": "write",
+      "targetTime": 0.4
+    },
+    {
+      "name": "session-ends",
+      "targetTime": 2.1
+    },
+    {
+      "name": "new-session",
+      "targetTime": 2.6
+    },
+    {
+      "name": "read",
+      "targetTime": 3
+    },
+    {
+      "name": "end",
+      "targetTime": 8.275000000000002
+    }
+  ],
+  "seed": 4126679654
+}
