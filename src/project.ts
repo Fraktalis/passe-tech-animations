@@ -63,19 +63,35 @@ import summaryPipeline from './scenes/llm/summary-pipeline?scene';
 import temperature from './scenes/llm/temperature?scene';
 import echelleParametres from './scenes/llm/echelle-parametres?scene';
 import cosineSimilarite from './scenes/llm/cosine-similarite?scene';
+import innerOuterLoop from './scenes/loop/inner-outer-loop?scene';
+import llmPile from './scenes/loop/llm-pile?scene';
+import quatreFiltres from './scenes/loop/quatre-filtres?scene';
+import ralphWiggumSession from './scenes/loop/ralph-wiggum-session?scene';
+import verifierAgent from './scenes/loop/verifier-agent?scene';
+import whileLoopBash from './scenes/loop/while-loop-bash?scene';
+import noExitCondition from './scenes/loop/no-exit-condition?scene';
+import verifierLimits from './scenes/loop/verifier-limits?scene';
+import selfImprovementVsTask from './scenes/loop/self-improvement-vs-task?scene';
+import selfImprovementDrift from './scenes/loop/self-improvement-drift?scene';
+import requeteHttpCycle from './scenes/http-streaming/requete-http-cycle?scene';
+import quatreProprietesHttp from './scenes/http-streaming/quatre-proprietes-http?scene';
+import mytheConnexionsCourtes from './scenes/http-streaming/mythe-connexions-courtes?scene';
+import sseFlux from './scenes/http-streaming/sse-flux?scene';
+import websocketUpgrade from './scenes/http-streaming/websocket-upgrade?scene';
+import websocketScaling from './scenes/http-streaming/websocket-scaling?scene';
+import streamableHttp from './scenes/http-streaming/streamable-http?scene';
+import mcpRevisionAvantApres from './scenes/http-streaming/mcp-revision-avant-apres?scene';
+
 
 export default makeProject({
   scenes: [
-    // neurone,
-    // consoleMixage,
-    // descenteGradient,
-    // retropropagation,
-    // interpretabilite,
-    // tokenisation,
-    // attention,
-    // summaryPipeline,
-    temperature,
-    // echelleParametres,
-    // cosineSimilarite,
+    quatreProprietesHttp,
+    mytheConnexionsCourtes,
+    requeteHttpCycle,
+    sseFlux,
+    websocketUpgrade,
+    websocketScaling,
+    streamableHttp,
+    mcpRevisionAvantApres,
   ],
 });
