@@ -1,47 +1,42 @@
-# 🎬 Motion Canvas – Animations pour mes vidéos Passe-Tech
+# 🎬 Motion Canvas – Animations Passe-Tech
 
-Ce dépôt rassemble les animations Motion Canvas que j’utilise dans mes vidéos YouTube Passe-Tech.
-L’objectif est de garder un espace propre, versionné et reproductible pour toutes les scènes animées : schémas, transitions, explications techniques, timelines et autres visuels pédagogiques.
+Animations Motion Canvas utilisées dans les vidéos YouTube [Passe-Tech](https://www.youtube.com/@passe-tech) 🍉.
 
 ## 📂 Contenu
 
-**/scenes** – Les fichiers `.tsx` contenant les animations Motion Canvas.
-
-**/assets** – Icônes, images, SVG ou éléments graphiques utilisés dans les animations.
-
-**/exports** – Rendus vidéo ou séquences exportées pour le montage.
-
-**/scripts** – Code auxiliaire ou fonctions réutilisables pour accélérer la création de nouvelles animations.
+- **`src/scenes/`** — Scènes Motion Canvas (`.tsx`), une par séquence animée.
+- **`src/components/`** — Composants réutilisables entre scènes.
+- **`src/img/`** — Icônes, images et éléments graphiques utilisés dans les animations.
+- **`src/theme.ts`** — Palette et constantes visuelles de la charte Passe-Tech.
+- **`src/project.ts`** / **`src/project.meta`** — Config du projet Motion Canvas.
+- **`src/applyRecursivelyToPath.ts`** — Utilitaire pour appliquer une transformation à un chemin SVG/vectoriel de façon récursive.
+- **`passe_tech_kit_html_css.html`** — Kit de marque (HTML/CSS) : couleurs, typographies, éléments d'identité visuelle Passe-Tech.
 
 ## 🚀 Utilisation
 
-Installer Motion Canvas :
-
-`````` bash
+```bash
 npm install
-npm run dev
-``````
+npm run start
+```
 
+Ouvrir l'URL locale fournie par Vite. Modifier ou créer une scène dans `src/scenes/`.
 
-Ouvrir l’URL locale fournie par Motion Canvas.
-Modifier ou créer une scène dans /scenes.
-Exporter la séquence via l’interface
+Build de production :
 
-🎨 Pourquoi Motion Canvas ?
+```bash
+npm run build
+```
 
-J’utilise Motion Canvas pour créer des visuels qui rendent mes vidéos :
+## 🎨 Pourquoi Motion Canvas ?
 
-- plus pédagogiques,
-- plus rythmées,
-- plus agréables à suivre sans surcharger le montage, et adaptées à l’univers Passe-Tech.
+Coder les animations plutôt que les monter dans After Effects les rend versionnables, réutilisables d'une vidéo à l'autre, et cohérentes avec l'identité "ingénierie" de la chaîne.
 
-De plus, j'aime le fait de coder mes animations, ça rend le tout plus réutilisable et versionnable qu'avec After Effects ou autre.
+## 🤝 Contribution
 
-🤝 Contribution
+Dépôt personnel, pas de process de contribution externe à ce stade.
 
-Ce dépôt est avant tout personnel.
+## 📜 Licence
 
-📜 Licence
+Le code de ce dépôt (`src/`, config) est sous licence **MIT** — voir [`LICENSE`](./LICENSE).
 
-Libre de lecture.
-La réutilisation des animations est autorisée à condition de créditer la chaîne Passe-Tech.
+Le kit de marque Passe-Tech (`passe_tech_kit_html_css.html`, logo, identité visuelle) n'est **pas couvert par cette licence** et reste protégé par le droit d'auteur : tous droits réservés.
