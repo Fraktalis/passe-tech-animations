@@ -140,7 +140,6 @@ export class ConnectionArrow extends Line {
       endArrow:   true,
       arrowSize,
       lineDash:   dashed ? [8, 6] : [],
-      smoothness: 0.6,
       ...rest,
     });
   }

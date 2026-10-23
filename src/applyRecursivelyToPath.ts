@@ -37,23 +37,23 @@ export const applyRecursivelyToSVGSubPath = (svgNode: SVGComponent, params: Modi
 function getAllKeysConditionally(obj: any, includeSelf = true, includePrototypeChain = true, includeTop = false, includeEnumerables = true, includeNonenumerables = true, includeStrings = true, includeSymbols = true) {
     
     // Boolean (mini-)functions to determine any given key's eligibility:
-    const isEnumerable = (obj, key) => Object.propertyIsEnumerable.call(obj, key);
-    const isString = (key) => typeof key === 'string';
-    const isSymbol = (key) => typeof key === 'symbol';
-    const includeBasedOnEnumerability = (obj, key) => (includeEnumerables && isEnumerable(obj, key)) || (includeNonenumerables && !isEnumerable(obj, key));
-    const includeBasedOnKeyType = (key) => (includeStrings && isString(key)) || (includeSymbols && isSymbol(key));
-    const include = (obj, key) => includeBasedOnEnumerability(obj, key) && includeBasedOnKeyType(key);
-    const notYetRetrieved = (keys, key) => !keys.includes(key);
+    const isEnumerable = (obj: object, key: PropertyKey) => Object.propertyIsEnumerable.call(obj, key);
+    const isString = (key: PropertyKey) => typeof key === 'string';
+    const isSymbol = (key: PropertyKey) => typeof key === 'symbol';
+    const includeBasedOnEnumerability = (obj: object, key: PropertyKey) => (includeEnumerables && isEnumerable(obj, key)) || (includeNonenumerables && !isEnumerable(obj, key));
+    const includeBasedOnKeyType = (key: PropertyKey) => (includeStrings && isString(key)) || (includeSymbols && isSymbol(key));
+    const include = (obj: object, key: PropertyKey) => includeBasedOnEnumerability(obj, key) && includeBasedOnKeyType(key);
+    const notYetRetrieved = (keys: PropertyKey[], key: PropertyKey) => !keys.includes(key);
     
     // filter function putting all the above together:
-    const filterFn = key => notYetRetrieved(keys, key) && include(obj, key);
+    const filterFn = (key: PropertyKey) => notYetRetrieved(keys, key) && include(obj, key);
     
     // conditional chooses one of two functions to determine whether to exclude the top level or not:
-    const stopFn = includeTop ? (obj => obj === null) : (obj => Object.getPrototypeOf(obj) === null);
+    const stopFn = includeTop ? ((obj: object | null) => obj === null) : ((obj: object) => Object.getPrototypeOf(obj) === null);
     
     // and now the loop to collect and filter everything:
-    let keys = [];
-    while (!stopFn(obj, includeTop)) {
+    let keys: PropertyKey[] = [];
+    while (!stopFn(obj)) {
         if (includeSelf) {
             const ownKeys = Reflect.ownKeys(obj).filter(filterFn);
             keys = keys.concat(ownKeys);

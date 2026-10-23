@@ -4,7 +4,7 @@ import { all, createRef, easeInOutCubic, sequence, waitUntil } from '@motion-can
 import htmlRaw from "../img/html-svgrepo-com.svg?raw"
 import cssRaw from "../img/css-svgrepo-com.svg?raw"
 import jsRaw from "../img/js-svgrepo-com.svg?raw"
-import { applyRecursivelyToSVGSubPath } from '../applyRecursivelyToPath';
+import { applyRecursivelyToSVGSubPath } from '../../applyRecursivelyToPath';
 
 export default makeScene2D(function* (view) {
   // Create your animations here
@@ -174,8 +174,8 @@ export default makeScene2D(function* (view) {
   yield* line.end(1, 0.8);
   yield* line.start(1, 0.8);
 
-  yield* line.end(0);
-  yield* line.start(0);
+  line.end(0);
+  line.start(0);
 
 
   const html = new SVG({
@@ -201,7 +201,7 @@ export default makeScene2D(function* (view) {
 
   yield* waitUntil("1996");
 
-  yield* html.position(server().position);
+  html.position(server().position);
 
   yield* line.end(1, 0.8);
   yield* line.start(1, 0.8);
@@ -234,10 +234,10 @@ export default makeScene2D(function* (view) {
 
   yield* waitUntil("1997");
 
-  yield* html.position(server().position);
-  yield* css.position(server().position);
-  yield* line.end(0);
-  yield* line.start(0);
+  html.position(server().position);
+  css.position(server().position);
+  line.end(0);
+  line.start(0);
 
 
     const js = new SVG({
@@ -276,11 +276,11 @@ export default makeScene2D(function* (view) {
   yield* waitUntil("2000");
 
 
-  yield* html.position(controller().position);
-  yield* css.position(controller().position);
-  yield* js.position(controller().position);
-  yield* line.end(0);
-  yield* line.start(0);
+  html.position(controller().position);
+  css.position(controller().position);
+  js.position(controller().position);
+  line.end(0);
+  line.start(0);
 
   yield* all(
     client().width(view.width() / 5, 1),
@@ -305,8 +305,8 @@ export default makeScene2D(function* (view) {
   yield* line.start(1, 0.6);
 
   yield* line.points([server().position, controller().position], 0.6)
-  yield* line.end(0);
-  yield* line.start(0);
+  line.end(0);
+  line.start(0);
   
 
   yield* line.end(1, 0.6);
@@ -315,14 +315,14 @@ export default makeScene2D(function* (view) {
   yield* controller().shadowBlur(500, 0.6);
 
   yield* line.points([model().position, controller().position], 0.6)
-  yield* line.end(0);
-  yield* line.start(0);
+  line.end(0);
+  line.start(0);
   yield* line.end(1, 0.6);
   yield* line.start(1, 0.6);
 
   yield* line.points([vue().position, controller().position], 0.6)
-  yield* line.end(0);
-  yield* line.start(0);
+  line.end(0);
+  line.start(0);
   yield* line.end(1, 0.6);
   yield* line.start(1, 0.6);
 

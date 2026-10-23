@@ -159,7 +159,7 @@ export default makeScene2D(function* (view) {
 
   yield* waitFor(0.5);
 
-yield* line().points([server().position, browser().position]);
+line().points([server().position(), browser().position()]);
   yield* line().y(-25, 2)
   yield* line().stroke("#2563EB", 0.6)
 
@@ -181,7 +181,7 @@ yield* line().points([server().position, browser().position]);
    yield* waitFor(0.5);
 
 
-     yield* line().points([server().position, browser().position]);
+     line().points([server().position(), browser().position()]);
   yield* line().y(-125, 2)
   yield* line().stroke("#4ADE80", 0.6)
 

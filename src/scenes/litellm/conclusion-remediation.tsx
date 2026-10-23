@@ -4,7 +4,7 @@
 // Structure identique à payload-decode : panel éditeur + Code + overlay
 
 import {makeScene2D} from '@motion-canvas/2d';
-import {Code, LezerHighlighter, lines} from '@motion-canvas/2d';
+import {Code, CodeRange, LezerHighlighter, lines} from '@motion-canvas/2d';
 import {Grid, Layout, Rect, Txt} from '@motion-canvas/2d/lib/components';
 import {all, createRef, DEFAULT, waitFor, waitUntil} from '@motion-canvas/core';
 import {parser} from '@lezer/python';
@@ -90,11 +90,11 @@ export default makeScene2D(function* (view) {
   // ── Helper : positionne l'overlay sur une sélection de lignes ─────────────
   // Identique à payload-decode — repositionne sync, puis on animate opacity
   function placeOverlay(
-    range: [[number, number], [number, number]][],
+    range: CodeRange,
     accentColor: string,
     labelText: string,
   ) {
-    const bboxes = codeRef().getSelectionBBox(range);
+    const bboxes = codeRef().getSelectionBBox([range]);
     if (!bboxes.length) return;
 
     let x1 = Infinity, y1 = Infinity, x2 = -Infinity, y2 = -Infinity;

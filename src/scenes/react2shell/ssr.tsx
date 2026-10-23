@@ -4,7 +4,7 @@ import { all, createRef, easeInOutCubic, sequence, waitUntil } from '@motion-can
 import htmlRaw from "../img/html-svgrepo-com.svg?raw"
 import cssRaw from "../img/css-svgrepo-com.svg?raw"
 import jsRaw from "../img/js-svgrepo-com.svg?raw"
-import { applyRecursivelyToSVGSubPath } from '../applyRecursivelyToPath';
+import { applyRecursivelyToSVGSubPath } from '../../applyRecursivelyToPath';
 
 export default makeScene2D(function* (view) {
   // Create your animations here

@@ -177,7 +177,7 @@ score = "niveau max";`;
 
       {/* Register rows */}
       {regRows.map((row, i) => (
-        <Layout key={i}>
+        <Layout key={`register-row-${i}`}>
           <Rect
             ref={row.bg}
             x={RCX} y={RY(i)}

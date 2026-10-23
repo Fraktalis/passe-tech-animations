@@ -122,7 +122,7 @@ export default makeScene2D(function* (view) {
 
         {/* Body */}
         <Rect grow={1} width={'100%'} layout direction={'column'} gap={() => vH() * 0.016}
-          padding={() => vW() * 0.014} alignItems={'flex-start'} justifyContent={'center'}>
+          padding={() => vW() * 0.014} alignItems={'start'} justifyContent={'center'}>
 
           <Txt text="Limite : 256 MB" fill={COLORS.cream}
             fontSize={() => vW() * 0.010} fontWeight={600} fontFamily={'Space Grotesk'} />
@@ -177,7 +177,7 @@ export default makeScene2D(function* (view) {
 
         {/* Body */}
         <Rect grow={1} width={'100%'} layout direction={'column'} gap={() => vH() * 0.016}
-          padding={() => vW() * 0.014} alignItems={'flex-start'} justifyContent={'center'}>
+          padding={() => vW() * 0.014} alignItems={'start'} justifyContent={'center'}>
 
           <Txt text="Quota : 25% d'un cœur" fill={COLORS.cream}
             fontSize={() => vW() * 0.010} fontWeight={600} fontFamily={'Space Grotesk'} />
@@ -232,7 +232,7 @@ export default makeScene2D(function* (view) {
 
         {/* Body */}
         <Rect grow={1} width={'100%'} layout direction={'column'} gap={() => vH() * 0.016}
-          padding={() => vW() * 0.014} alignItems={'flex-start'} justifyContent={'center'}>
+          padding={() => vW() * 0.014} alignItems={'start'} justifyContent={'center'}>
 
           <Txt text="Débit max : 10 MB/s" fill={COLORS.cream}
             fontSize={() => vW() * 0.010} fontWeight={600} fontFamily={'Space Grotesk'} />

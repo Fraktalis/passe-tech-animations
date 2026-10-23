@@ -3,7 +3,7 @@
 // Couche 1 → Python one-liner  · Couche 2 → JSON fichiers  · Couche 3 → clé RSA
 
 import {makeScene2D} from '@motion-canvas/2d';
-import {Code, LezerHighlighter, lines} from '@motion-canvas/2d';
+import {Code, CodeRange, LezerHighlighter, lines} from '@motion-canvas/2d';
 import {Grid, Layout, Rect, Txt} from '@motion-canvas/2d/lib/components';
 import {all, createRef, DEFAULT, waitFor, waitUntil} from '@motion-canvas/core';
 import {parser} from '@lezer/python';
@@ -129,8 +129,9 @@ export default makeScene2D(function* (view) {
 
   // ── Helper : positionne l'overlay sur le résultat de getSelectionBBox ─────
   // range : CodeRange[] tel que retourné par findAllRanges / lines()
-  function placeOverlay(range: [[number, number], [number, number]][]) {
-    const bboxes = codeRef().getSelectionBBox(range);
+  function placeOverlay(range: CodeRange | CodeRange[]) {
+    const ranges = typeof range[0][0] === 'number' ? [range as CodeRange] : (range as CodeRange[]);
+    const bboxes = codeRef().getSelectionBBox(ranges);
     if (!bboxes.length) return;
 
     let x1 = Infinity, y1 = Infinity, x2 = -Infinity, y2 = -Infinity;

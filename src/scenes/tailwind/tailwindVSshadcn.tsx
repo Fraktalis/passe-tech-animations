@@ -103,7 +103,7 @@ export default makeScene2D(function* (view) {
 
     yield* waitFor(0.5);
 
-    yield* componentCode().reparent(myProject());
+    componentCode().reparent(myProject());
 
     // 3. TRANSFERT (L'effet Shadcn)
     yield* all(

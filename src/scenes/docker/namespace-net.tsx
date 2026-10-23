@@ -119,7 +119,7 @@ export default makeScene2D(function* (view) {
           direction={'column'}
           gap={() => vH() * 0.012}
           padding={() => vW() * 0.014}
-          alignItems={'flex-start'}
+          alignItems={'start'}
           justifyContent={'center'}
         >
           <Txt text="Isolation des processus" fill={COLORS.cream} fontSize={() => vW() * 0.010} fontWeight={600} fontFamily={'Space Grotesk'} />
@@ -166,7 +166,7 @@ export default makeScene2D(function* (view) {
           direction={'column'}
           gap={() => vH() * 0.012}
           padding={() => vW() * 0.014}
-          alignItems={'flex-start'}
+          alignItems={'start'}
           justifyContent={'center'}
         >
           <Txt text="Interfaces réseau" fill={COLORS.cream} fontSize={() => vW() * 0.010} fontWeight={600} fontFamily={'Space Grotesk'} />
@@ -213,7 +213,7 @@ export default makeScene2D(function* (view) {
           direction={'column'}
           gap={() => vH() * 0.012}
           padding={() => vW() * 0.014}
-          alignItems={'flex-start'}
+          alignItems={'start'}
           justifyContent={'center'}
         >
           <Txt text="Arbre de montage isolé" fill={COLORS.cream} fontSize={() => vW() * 0.010} fontWeight={600} fontFamily={'Space Grotesk'} />
@@ -356,7 +356,7 @@ export default makeScene2D(function* (view) {
           direction={'column'}
           gap={() => vH() * 0.012}
           padding={() => vW() * 0.014}
-          alignItems={'flex-start'}
+          alignItems={'start'}
           justifyContent={'center'}
         >
           <Txt text="Queues de messages" fill={COLORS.cream} fontSize={() => vW() * 0.010} fontWeight={600} fontFamily={'Space Grotesk'} />
@@ -401,7 +401,7 @@ export default makeScene2D(function* (view) {
           direction={'column'}
           gap={() => vH() * 0.012}
           padding={() => vW() * 0.014}
-          alignItems={'flex-start'}
+          alignItems={'start'}
           justifyContent={'center'}
         >
           <Txt text="Hostname indépendant" fill={COLORS.cream} fontSize={() => vW() * 0.010} fontWeight={600} fontFamily={'Space Grotesk'} />
