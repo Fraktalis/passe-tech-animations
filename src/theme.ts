@@ -40,5 +40,26 @@ export const PALETTE = {
   dsGreen:      '#4ADE80',  // vert spec DS (≠ brand vert #6DFF8A)
 } as const;
 
+/**
+ * Entité → couleur. La couleur suit l'entité, jamais son rang : une même
+ * entité garde la même couleur d'une scène à l'autre, quel que soit le nombre
+ * de séries affichées. À étendre ici, pas inline dans les scènes.
+ *
+ * Validateur dataviz (fond bg, mode sombre) : `blue` et `cyan` sont à ΔE 6,6
+ * en vision normale — ne jamais les afficher comme deux catégories voisines
+ * sans label direct ou forme distincte. Idem jaune/vert pour les protanopes.
+ */
+export const ENTITY_COLOR = {
+  network:  PALETTE.cyan,   // connexion, transit, protocoles réseau (HTTP, TCP)
+  process:  PALETTE.blue,   // processus racine, acteur principal
+  danger:   PALETTE.rose,   // risque, attaque, erreur
+  safe:     PALETTE.vert,   // protégé, validé
+  warning:  PALETTE.amber,  // avertissement
+  accent:   PALETTE.jaune,  // point d'attention, mise en avant
+  inactive: PALETTE.ghost,  // éléments estompés
+} as const;
+
+export type EntityKey = keyof typeof ENTITY_COLOR;
+
 export type PaletteKey   = keyof typeof PALETTE;
 export type PaletteColor = typeof PALETTE[PaletteKey];
