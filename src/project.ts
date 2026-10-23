@@ -74,6 +74,7 @@ import verifierLimits from './scenes/loop/verifier-limits?scene';
 import selfImprovementVsTask from './scenes/loop/self-improvement-vs-task?scene';
 import selfImprovementDrift from './scenes/loop/self-improvement-drift?scene';
 import requeteHttpCycle from './scenes/http-streaming/requete-http-cycle?scene';
+import osiHttpTcp from './scenes/http-streaming/osi-http-tcp?scene';
 import quatreProprietesHttp from './scenes/http-streaming/quatre-proprietes-http?scene';
 import mytheConnexionsCourtes from './scenes/http-streaming/mythe-connexions-courtes?scene';
 import sseFlux from './scenes/http-streaming/sse-flux?scene';
@@ -82,16 +83,19 @@ import websocketScaling from './scenes/http-streaming/websocket-scaling?scene';
 import streamableHttp from './scenes/http-streaming/streamable-http?scene';
 import mcpRevisionAvantApres from './scenes/http-streaming/mcp-revision-avant-apres?scene';
 
+import audio from "./audio/C0191_HOOK_prise2.mp3";
 
 export default makeProject({
   scenes: [
-    quatreProprietesHttp,
-    mytheConnexionsCourtes,
-    requeteHttpCycle,
-    sseFlux,
-    websocketUpgrade,
-    websocketScaling,
-    streamableHttp,
+    //  osiHttpTcp,
+    // quatreProprietesHttp,
+    // mytheConnexionsCourtes,
+    // requeteHttpCycle,
+    // sseFlux,
+    // websocketUpgrade,
+    // websocketScaling,
+    // streamableHttp,
     mcpRevisionAvantApres,
   ],
+  // audio
 });

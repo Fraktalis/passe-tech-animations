@@ -1,0 +1,30 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "intro",
+      "targetTime": 0
+    },
+    {
+      "name": "osiPyramid",
+      "targetTime": 1.5
+    },
+    {
+      "name": "httpFocus",
+      "targetTime": 3.6799999999999993
+    },
+    {
+      "name": "tcpFocus",
+      "targetTime": 6.179999999999999
+    },
+    {
+      "name": "handshake",
+      "targetTime": 9.629999999999999
+    },
+    {
+      "name": "endScene",
+      "targetTime": 16.430000000000003
+    }
+  ],
+  "seed": 1869514601
+}
