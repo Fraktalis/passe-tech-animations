@@ -3,31 +3,31 @@
   "timeEvents": [
     {
       "name": "intro",
-      "targetTime": 0
+      "targetTime": 0.10325304561827083
     },
     {
       "name": "avant",
-      "targetTime": 0.8
+      "targetTime": 1.9613856596639478
     },
     {
       "name": "effacement",
-      "targetTime": 2.24
+      "targetTime": 4.9704519666867855
     },
     {
       "name": "apres",
-      "targetTime": 4.39
+      "targetTime": 9.32207848949592
     },
     {
       "name": "gateway-route",
-      "targetTime": 6.789999999999999
+      "targetTime": 14.22533153511419
     },
     {
       "name": "callback-bascule",
-      "targetTime": 10.290000000000003
+      "targetTime": 21.3027713193279
     },
     {
       "name": "end",
-      "targetTime": 12.740000000000002
+      "targetTime": 26.30602436494617
     }
   ],
   "seed": 194637582

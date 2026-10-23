@@ -7,47 +7,75 @@
     },
     {
       "name": "cycle-1",
-      "targetTime": 1.47
+      "targetTime": 2.5403546918035977
     },
     {
       "name": "payload",
-      "targetTime": 10.110000000000001
+      "targetTime": 6.959376282789195
     },
     {
       "name": "focus-request",
-      "targetTime": 17.962000000000067
+      "targetTime": 13.817714201817532
+    },
+    {
+      "name": "focus-method",
+      "targetTime": 15.217714201817532
+    },
+    {
+      "name": "verb-post",
+      "targetTime": 16.617714201817535
+    },
+    {
+      "name": "verb-get",
+      "targetTime": 18.467714201817532
+    },
+    {
+      "name": "focus-auth",
+      "targetTime": 19.71771420181753
     },
     {
       "name": "separation",
-      "targetTime": 19.56200000000007
+      "targetTime": 24.40124445361043
     },
     {
       "name": "status-line",
-      "targetTime": 23.762000000000068
+      "targetTime": 29.970990243612786
     },
     {
       "name": "response-headers",
-      "targetTime": 25.36200000000007
+      "targetTime": 33.424731736749784
     },
     {
       "name": "body",
-      "targetTime": 26.96200000000007
+      "targetTime": 40.599336310348356
+    },
+    {
+      "name": "status-4xx",
+      "targetTime": 45.14799572590558
+    },
+    {
+      "name": "status-5xx",
+      "targetTime": 46.86914752598362
+    },
+    {
+      "name": "status-2xx",
+      "targetTime": 48.82587522610068
     },
     {
       "name": "payload-dissolve",
-      "targetTime": 29.162000000000074
+      "targetTime": 50.37587522610068
     },
     {
       "name": "cycles-rapides",
-      "targetTime": 5.055000000000001
+      "targetTime": 51.67587522610068
     },
     {
       "name": "silence-serveur",
-      "targetTime": 8.412999999999998
+      "targetTime": 58.3918752261007
     },
     {
       "name": "end",
-      "targetTime": 13.163000000000002
+      "targetTime": 67.8918752261007
     }
   ],
   "seed": 618402935

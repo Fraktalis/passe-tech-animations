@@ -3,35 +3,35 @@
   "timeEvents": [
     {
       "name": "setup",
-      "targetTime": 0
+      "targetTime": 0.18857050518440227
     },
     {
       "name": "request",
-      "targetTime": 2.95
+      "targetTime": 6.277141010368804
     },
     {
       "name": "highlight-upgrade",
-      "targetTime": 4.530000000000001
+      "targetTime": 9.965138424885131
     },
     {
       "name": "switching",
-      "targetTime": 7.780000000000002
+      "targetTime": 16.766851233180176
     },
     {
       "name": "frames",
-      "targetTime": 10.530000000000003
+      "targetTime": 22.53084994043834
     },
     {
       "name": "blind",
-      "targetTime": 13.21
+      "targetTime": 28.041706344585858
     },
     {
       "name": "pulse",
-      "targetTime": 15.55
+      "targetTime": 32.98570505184402
     },
     {
       "name": "end",
-      "targetTime": 18.390000000000004
+      "targetTime": 38.816561455991554
     }
   ],
   "seed": 728341956

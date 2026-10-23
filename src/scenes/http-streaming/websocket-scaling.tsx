@@ -40,15 +40,13 @@ export default makeScene2D(function* (view) {
   const redisY     = () => vH() * 0.36;
   const redisTopY  = () => redisY() - vH() * 0.075;
 
-  // Chemins des sockets persistants (contournent le LB)
-  const socketPath = (socketIndex: number): [number, number][] => {
-    const detourXs = [-0.31, 0.115, 0.31];
-    return [
-      [clientX(socketIndex), clientY() + vH() * 0.035],
-      [vW() * detourXs[socketIndex], -vH() * (socketIndex === 1 ? 0.20 : 0.16)],
-      [instanceX(socketIndex), instanceTopY()],
-    ];
-  };
+  // Chemins des sockets persistants (contournent le LB par l'extérieur, à sa hauteur)
+  const socketDetourXs = [-0.32, 0.18, 0.34];
+  const socketPath = (socketIndex: number): [number, number][] => [
+    [clientX(socketIndex), clientY() + vH() * 0.035],
+    [vW() * socketDetourXs[socketIndex], lbY()],
+    [instanceX(socketIndex), instanceTopY()],
+  ];
   // Chemins instance → Redis
   const redisPath = (instanceIndex: number): [number, number][] => [
     [instanceX(instanceIndex), instanceBottomY()],
@@ -173,7 +171,8 @@ export default makeScene2D(function* (view) {
       <Line key={`socket-${socketIndex}`} ref={socketLines[socketIndex]}
         points={() => socketPath(socketIndex)}
         radius={() => vW() * 0.02}
-        stroke={PALETTE.cyan} lineWidth={2}
+        stroke={PALETTE.cyan} lineWidth={2.5}
+        lineDash={() => [vW() * 0.008, vW() * 0.006]}
         end={0} opacity={0}
       />
     ))}
@@ -216,11 +215,11 @@ export default makeScene2D(function* (view) {
     ))}
     <DiagramNode key="redis-node" ref={redisNode}
       iconName="mdi:database"
-      label="REDIS"
+      label="REDIS / NATS"
       sublabel="pub/sub"
       color={PALETTE.amber}
       initialState="active"
-      width={() => vW() * 0.11} height={() => vH() * 0.15}
+      width={() => vW() * 0.16} height={() => vH() * 0.15}
       x={0} y={redisY}
       opacity={0}
     />

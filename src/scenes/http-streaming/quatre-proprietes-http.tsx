@@ -511,342 +511,342 @@ export default makeScene2D(function* (view) {
   // ── ANIMATION ──────────────────────────────────────────────────────────────
 
   yield* waitUntil('intro');
-  yield* gridRef().opacity(0.07, 1.6);
+  yield* gridRef().opacity(0.07, 1.0667);
 
   // ═══ Démo 1 : REQUÊTE-RÉPONSE ═══════════════════════════════════════════════
   yield* waitUntil('p1-demo');
-  yield* sequence(0.3,
-    titleOne().opacity(1, 0.9),
-    demoOneClient().opacity(1, 0.9),
-    demoOneServer().opacity(1, 0.9),
+  yield* sequence(0.2,
+    titleOne().opacity(1, 0.6),
+    demoOneClient().opacity(1, 0.6),
+    demoOneServer().opacity(1, 0.6),
   );
-  yield* waitFor(0.4);
+  yield* waitFor(0.2667);
   demoOneRequestArrow().opacity(1);
-  yield* demoOneRequestArrow().end(1, 1, easeInOutCubic);
+  yield* demoOneRequestArrow().end(1, 0.6667, easeInOutCubic);
   demoOneResponseArrow().opacity(1);
-  yield* demoOneResponseArrow().end(1, 1, easeInOutCubic);
-  yield* waitFor(0.6);
+  yield* demoOneResponseArrow().end(1, 0.6667, easeInOutCubic);
+  yield* waitFor(0.4);
 
   // 3 cycles requête → réponse
   for (let requestIndex = 0; requestIndex < 3; requestIndex++) {
     demoOneRequestPacket().position([D1_CLIENT_X() + D1_HALF_W() + vW() * 0.045, D1_REQUEST_Y()]);
-    yield* demoOneRequestPacket().opacity(1, 0.24);
-    yield* demoOneRequestPacket().flyTo([D1_SERVER_X() - D1_HALF_W() - vW() * 0.045, D1_REQUEST_Y()], 0.9);
+    yield* demoOneRequestPacket().opacity(1, 0.16);
+    yield* demoOneRequestPacket().flyTo([D1_SERVER_X() - D1_HALF_W() - vW() * 0.045, D1_REQUEST_Y()], 0.6);
     yield* all(
-      demoOneRequestPacket().opacity(0, 0.24),
-      demoOneServer().setState('active', 0.24),
+      demoOneRequestPacket().opacity(0, 0.16),
+      demoOneServer().setState('active', 0.16),
     );
     demoOneResponsePacket().position([D1_SERVER_X() - D1_HALF_W() - vW() * 0.045, D1_RESPONSE_Y()]);
-    yield* demoOneResponsePacket().opacity(1, 0.24);
-    yield* demoOneResponsePacket().flyTo([D1_CLIENT_X() + D1_HALF_W() + vW() * 0.045, D1_RESPONSE_Y()], 0.9);
+    yield* demoOneResponsePacket().opacity(1, 0.16);
+    yield* demoOneResponsePacket().flyTo([D1_CLIENT_X() + D1_HALF_W() + vW() * 0.045, D1_RESPONSE_Y()], 0.6);
     yield* all(
-      demoOneResponsePacket().opacity(0, 0.24),
-      demoOneServer().setState('idle', 0.4),
+      demoOneResponsePacket().opacity(0, 0.16),
+      demoOneServer().setState('idle', 0.2667),
     );
-    yield* waitFor(0.3);
+    yield* waitFor(0.2);
   }
 
   // Le serveur tente d'initier → avorte
   yield* waitUntil('p1-abort');
   demoOnePushArrow().opacity(1);
-  yield* demoOnePushArrow().end(0.45, 1, easeInOutCubic);
-  yield* demoOneServer().setState('error', 0.2);
-  yield* waitFor(0.6);
+  yield* demoOnePushArrow().end(0.45, 0.6667, easeInOutCubic);
+  yield* demoOneServer().setState('error', 0.1333);
+  yield* waitFor(0.4);
   yield* all(
-    demoOnePushArrow().end(0, 0.7, easeInOutCubic),
-    demoOnePushArrow().opacity(0, 0.8),
+    demoOnePushArrow().end(0, 0.4667, easeInOutCubic),
+    demoOnePushArrow().opacity(0, 0.5333),
   );
-  yield* demoOneServer().setState('idle', 0.6);
-  yield* waitFor(1);
+  yield* demoOneServer().setState('idle', 0.4);
+  yield* waitFor(0.6667);
 
   // Parking quadrant haut-gauche
   yield* waitUntil('p1-park');
   yield* all(
-    demoOneWrap().scale(PARKED_SCALE, 1.6, easeInOutCubic),
-    demoOneWrap().position([QUAD_LEFT_X(), QUAD_TOP_Y() + PARKED_OFFSET_Y()], 1.6, easeInOutCubic),
-    panelOne().opacity(1, 1.2),
+    demoOneWrap().scale(PARKED_SCALE, 1.0667, easeInOutCubic),
+    demoOneWrap().position([QUAD_LEFT_X(), QUAD_TOP_Y() + PARKED_OFFSET_Y()], 1.0667, easeInOutCubic),
+    panelOne().opacity(1, 0.8),
   );
-  yield* waitFor(0.8);
+  yield* waitFor(0.5333);
 
   // ═══ Démo 2 : STATELESS ═════════════════════════════════════════════════════
   yield* waitUntil('p2-demo');
   // La grille se met en veille pendant que la démo joue en plein écran
-  yield* demoOneWrap().opacity(DIMMED_OPACITY, 0.8);
-  yield* sequence(0.3,
-    titleTwo().opacity(1, 0.9),
-    demoTwoClient().opacity(1, 0.9),
-    demoTwoServerMain().opacity(1, 0.9),
-    demoTwoGauge().opacity(1, 0.8),
+  yield* demoOneWrap().opacity(DIMMED_OPACITY, 0.5333);
+  yield* sequence(0.2,
+    titleTwo().opacity(1, 0.6),
+    demoTwoClient().opacity(1, 0.6),
+    demoTwoServerMain().opacity(1, 0.6),
+    demoTwoGauge().opacity(1, 0.5333),
   );
-  yield* waitFor(0.4);
+  yield* waitFor(0.2667);
   demoTwoArrowMain().opacity(1);
-  yield* demoTwoArrowMain().end(1, 1, easeInOutCubic);
-  yield* waitFor(0.4);
+  yield* demoTwoArrowMain().end(1, 0.6667, easeInOutCubic);
+  yield* waitFor(0.2667);
 
   // Requête n°1 avec contexte attaché — la mémoire du serveur reste vide
   demoTwoRequestPacket().position([D2_CLIENT_X() + D2_NODE_W() / 2 + vW() * 0.04, 0]);
   yield* all(
-    demoTwoRequestPacket().opacity(1, 0.3),
-    demoTwoContextBadge().opacity(1, 0.3),
+    demoTwoRequestPacket().opacity(1, 0.2),
+    demoTwoContextBadge().opacity(1, 0.2),
   );
-  yield* demoTwoRequestPacket().flyTo([D2_SERVER_X() - D2_NODE_W() / 2 - vW() * 0.04, 0], 1.1);
+  yield* demoTwoRequestPacket().flyTo([D2_SERVER_X() - D2_NODE_W() / 2 - vW() * 0.04, 0], 0.7333);
   yield* all(
-    demoTwoRequestPacket().opacity(0, 0.24),
-    demoTwoContextBadge().opacity(0, 0.24),
-    demoTwoServerMain().setState('active', 0.3),
+    demoTwoRequestPacket().opacity(0, 0.16),
+    demoTwoContextBadge().opacity(0, 0.16),
+    demoTwoServerMain().setState('active', 0.2),
   );
   // La jauge pulse à vide
-  yield* demoTwoGauge().stroke(PALETTE.cream, 0.5);
-  yield* demoTwoGauge().stroke(PALETTE.secondary, 0.8);
+  yield* demoTwoGauge().stroke(PALETTE.cream, 0.3333);
+  yield* demoTwoGauge().stroke(PALETTE.secondary, 0.5333);
   demoTwoResponsePacket().position([D2_SERVER_X() - D2_NODE_W() / 2 - vW() * 0.04, vH() * 0.06]);
-  yield* demoTwoResponsePacket().opacity(1, 0.24);
-  yield* demoTwoResponsePacket().flyTo([D2_CLIENT_X() + D2_NODE_W() / 2 + vW() * 0.04, vH() * 0.06], 1);
+  yield* demoTwoResponsePacket().opacity(1, 0.16);
+  yield* demoTwoResponsePacket().flyTo([D2_CLIENT_X() + D2_NODE_W() / 2 + vW() * 0.04, vH() * 0.06], 0.6667);
   yield* all(
-    demoTwoResponsePacket().opacity(0, 0.24),
-    demoTwoServerMain().setState('idle', 0.4),
+    demoTwoResponsePacket().opacity(0, 0.16),
+    demoTwoServerMain().setState('idle', 0.2667),
   );
-  yield* waitFor(0.6);
+  yield* waitFor(0.4);
 
   // Requête n°2 sur un serveur cloné — même réponse
   yield* waitUntil('p2-clone');
-  yield* demoTwoCloneTop().opacity(1, 0.9);
-  yield* waitFor(0.4);
+  yield* demoTwoCloneTop().opacity(1, 0.6);
+  yield* waitFor(0.2667);
   demoTwoArrowTop().opacity(1);
-  yield* demoTwoArrowTop().end(1, 0.9, easeInOutCubic);
+  yield* demoTwoArrowTop().end(1, 0.6, easeInOutCubic);
   demoTwoRequestPacket().position([D2_CLIENT_X() + D2_NODE_W() / 2 + vW() * 0.04, -vH() * 0.03]);
   yield* all(
-    demoTwoRequestPacket().opacity(1, 0.3),
-    demoTwoContextBadge().opacity(1, 0.3),
+    demoTwoRequestPacket().opacity(1, 0.2),
+    demoTwoContextBadge().opacity(1, 0.2),
   );
-  yield* demoTwoRequestPacket().flyTo([D2_SERVER_X() - D2_NODE_W() / 2 - vW() * 0.04, D2_CLONE_TOP_Y()], 1.1);
+  yield* demoTwoRequestPacket().flyTo([D2_SERVER_X() - D2_NODE_W() / 2 - vW() * 0.04, D2_CLONE_TOP_Y()], 0.7333);
   yield* all(
-    demoTwoRequestPacket().opacity(0, 0.24),
-    demoTwoContextBadge().opacity(0, 0.24),
-    demoTwoCloneTop().setState('active', 0.3),
+    demoTwoRequestPacket().opacity(0, 0.16),
+    demoTwoContextBadge().opacity(0, 0.16),
+    demoTwoCloneTop().setState('active', 0.2),
   );
   demoTwoResponsePacket().position([D2_SERVER_X() - D2_NODE_W() / 2 - vW() * 0.04, D2_CLONE_TOP_Y() + vH() * 0.06]);
-  yield* demoTwoResponsePacket().opacity(1, 0.24);
-  yield* demoTwoResponsePacket().flyTo([D2_CLIENT_X() + D2_NODE_W() / 2 + vW() * 0.04, vH() * 0.06], 1);
+  yield* demoTwoResponsePacket().opacity(1, 0.16);
+  yield* demoTwoResponsePacket().flyTo([D2_CLIENT_X() + D2_NODE_W() / 2 + vW() * 0.04, vH() * 0.06], 0.6667);
   yield* all(
-    demoTwoResponsePacket().opacity(0, 0.24),
-    demoTwoCloneTop().setState('idle', 0.4),
+    demoTwoResponsePacket().opacity(0, 0.16),
+    demoTwoCloneTop().setState('idle', 0.2667),
   );
-  yield* waitFor(0.6);
+  yield* waitFor(0.4);
 
   // Duplication ×3 — les requêtes se répartissent
   yield* waitUntil('p2-scale');
-  yield* demoTwoCloneBottom().opacity(1, 0.9);
+  yield* demoTwoCloneBottom().opacity(1, 0.6);
   demoTwoArrowBottom().opacity(1);
-  yield* demoTwoArrowBottom().end(1, 0.9, easeInOutCubic);
+  yield* demoTwoArrowBottom().end(1, 0.6, easeInOutCubic);
   const distributionTargetsY = [D2_CLONE_BOTTOM_Y(), 0];
   const distributionNodes = [demoTwoCloneBottom, demoTwoServerMain];
   for (let requestIndex = 0; requestIndex < 2; requestIndex++) {
     demoTwoRequestPacket().position([D2_CLIENT_X() + D2_NODE_W() / 2 + vW() * 0.04, vH() * 0.03 * (requestIndex === 0 ? 1 : 0)]);
     yield* all(
-      demoTwoRequestPacket().opacity(1, 0.24),
-      demoTwoContextBadge().opacity(1, 0.24),
+      demoTwoRequestPacket().opacity(1, 0.16),
+      demoTwoContextBadge().opacity(1, 0.16),
     );
     yield* demoTwoRequestPacket().flyTo([D2_SERVER_X() - D2_NODE_W() / 2 - vW() * 0.04, distributionTargetsY[requestIndex]], 0.9);
     yield* all(
-      demoTwoRequestPacket().opacity(0, 0.2),
-      demoTwoContextBadge().opacity(0, 0.2),
-      distributionNodes[requestIndex]().setState('active', 0.24),
+      demoTwoRequestPacket().opacity(0, 0.1333),
+      demoTwoContextBadge().opacity(0, 0.1333),
+      distributionNodes[requestIndex]().setState('active', 0.16),
     );
-    yield* distributionNodes[requestIndex]().setState('idle', 0.4);
+    yield* distributionNodes[requestIndex]().setState('idle', 0.2667);
   }
-  yield* waitFor(0.8);
+  yield* waitFor(0.5333);
 
   // Parking quadrant haut-droite
   yield* waitUntil('p2-park');
   yield* all(
-    demoTwoWrap().scale(PARKED_SCALE, 1.6, easeInOutCubic),
-    demoTwoWrap().position([QUAD_RIGHT_X(), QUAD_TOP_Y() + PARKED_OFFSET_Y()], 1.6, easeInOutCubic),
-    panelTwo().opacity(1, 1.2),
-    demoOneWrap().opacity(1, 1.2),
+    demoTwoWrap().scale(PARKED_SCALE, 1.0667, easeInOutCubic),
+    demoTwoWrap().position([QUAD_RIGHT_X(), QUAD_TOP_Y() + PARKED_OFFSET_Y()], 1.0667, easeInOutCubic),
+    panelTwo().opacity(1, 0.8),
+    demoOneWrap().opacity(1, 0.8),
   );
-  yield* waitFor(0.8);
+  yield* waitFor(0.5333);
 
   // ═══ Démo 3 : INTERFACE UNIFORME ════════════════════════════════════════════
   yield* waitUntil('p3-demo');
   // La grille se met en veille pendant que la démo joue en plein écran
   yield* all(
-    demoOneWrap().opacity(DIMMED_OPACITY, 0.8),
-    demoTwoWrap().opacity(DIMMED_OPACITY, 0.8),
+    demoOneWrap().opacity(DIMMED_OPACITY, 0.5333),
+    demoTwoWrap().opacity(DIMMED_OPACITY, 0.5333),
   );
-  yield* sequence(0.3,
-    titleThree().opacity(1, 0.9),
-    demoThreeClient().opacity(1, 0.9),
-    demoThreeProxy().opacity(1, 0.9),
-    demoThreeServer().opacity(1, 0.9),
+  yield* sequence(0.2,
+    titleThree().opacity(1, 0.6),
+    demoThreeClient().opacity(1, 0.6),
+    demoThreeProxy().opacity(1, 0.6),
+    demoThreeServer().opacity(1, 0.6),
   );
-  yield* waitFor(0.4);
+  yield* waitFor(0.2667);
   demoThreeArrowIn().opacity(1);
-  yield* demoThreeArrowIn().end(1, 0.9, easeInOutCubic);
+  yield* demoThreeArrowIn().end(1, 0.6, easeInOutCubic);
   demoThreeArrowOut().opacity(1);
-  yield* demoThreeArrowOut().end(1, 0.9, easeInOutCubic);
-  yield* waitFor(0.6);
+  yield* demoThreeArrowOut().end(1, 0.6, easeInOutCubic);
+  yield* waitFor(0.4);
 
   // L'enveloppe part du client vers le proxy
-  yield* demoThreeEnvelope().opacity(1, 0.5);
-  yield* demoThreeEnvelope().x(TRIPLE_MIDDLE_X(), 1.4, easeInOutCubic);
+  yield* demoThreeEnvelope().opacity(1, 0.3333);
+  yield* demoThreeEnvelope().x(TRIPLE_MIDDLE_X(), 0.9333, easeInOutCubic);
 
   // Le proxy lit le bandeau headers — le body reste estompé
   yield* waitUntil('p3-inspect');
-  yield* demoThreeProxy().setState('active', 0.3);
+  yield* demoThreeProxy().setState('active', 0.2);
   demoThreeReadArrow().opacity(1);
-  yield* demoThreeReadArrow().end(1, 0.7, easeInOutCubic);
+  yield* demoThreeReadArrow().end(1, 0.4667, easeInOutCubic);
   yield* all(
-    demoThreeHeaderBand().fill(PALETTE.cyan + '55', 0.5),
-    demoThreeHeaderBand().lineWidth(3, 0.5),
+    demoThreeHeaderBand().fill(PALETTE.cyan + '55', 0.3333),
+    demoThreeHeaderBand().lineWidth(3, 0.3333),
   );
-  yield* waitFor(1.2);
+  yield* waitFor(0.8);
   yield* all(
-    demoThreeHeaderBand().fill(PALETTE.cyan + '22', 0.6),
-    demoThreeHeaderBand().lineWidth(1.5, 0.6),
+    demoThreeHeaderBand().fill(PALETTE.cyan + '22', 0.4),
+    demoThreeHeaderBand().lineWidth(1.5, 0.4),
   );
 
   // ... et route quand même la requête
   yield* waitUntil('p3-route');
   yield* all(
-    demoThreeReadArrow().opacity(0, 0.6),
-    demoThreeProxy().setState('idle', 0.6),
+    demoThreeReadArrow().opacity(0, 0.4),
+    demoThreeProxy().setState('idle', 0.4),
   );
-  yield* demoThreeEnvelope().x(TRIPLE_RIGHT_X(), 1.4, easeInOutCubic);
-  yield* demoThreeServer().setState('active', 0.3);
-  yield* waitFor(0.8);
-  yield* demoThreeServer().setState('idle', 0.5);
+  yield* demoThreeEnvelope().x(TRIPLE_RIGHT_X(), 0.9333, easeInOutCubic);
+  yield* demoThreeServer().setState('active', 0.2);
+  yield* waitFor(0.5333);
+  yield* demoThreeServer().setState('idle', 0.3333);
 
   // Parking quadrant bas-gauche
   yield* waitUntil('p3-park');
   yield* all(
-    demoThreeWrap().scale(PARKED_SCALE, 1.6, easeInOutCubic),
-    demoThreeWrap().position([QUAD_LEFT_X(), QUAD_BOTTOM_Y() + PARKED_OFFSET_Y()], 1.6, easeInOutCubic),
-    panelThree().opacity(1, 1.2),
-    demoOneWrap().opacity(1, 1.2),
-    demoTwoWrap().opacity(1, 1.2),
+    demoThreeWrap().scale(PARKED_SCALE, 1.0667, easeInOutCubic),
+    demoThreeWrap().position([QUAD_LEFT_X(), QUAD_BOTTOM_Y() + PARKED_OFFSET_Y()], 1.0667, easeInOutCubic),
+    panelThree().opacity(1, 0.8),
+    demoOneWrap().opacity(1, 0.8),
+    demoTwoWrap().opacity(1, 0.8),
   );
-  yield* waitFor(0.8);
+  yield* waitFor(0.5333);
 
   // ═══ Démo 4 : CACHEABLE ═════════════════════════════════════════════════════
   yield* waitUntil('p4-demo');
   // La grille se met en veille pendant que la démo joue en plein écran
   yield* all(
-    demoOneWrap().opacity(DIMMED_OPACITY, 0.8),
-    demoTwoWrap().opacity(DIMMED_OPACITY, 0.8),
-    demoThreeWrap().opacity(DIMMED_OPACITY, 0.8),
+    demoOneWrap().opacity(DIMMED_OPACITY, 0.5333),
+    demoTwoWrap().opacity(DIMMED_OPACITY, 0.5333),
+    demoThreeWrap().opacity(DIMMED_OPACITY, 0.5333),
   );
-  yield* sequence(0.3,
-    titleFour().opacity(1, 0.9),
-    demoFourClient().opacity(1, 0.9),
-    demoFourCdn().opacity(1, 0.9),
-    demoFourServer().opacity(1, 0.9),
+  yield* sequence(0.2,
+    titleFour().opacity(1, 0.6),
+    demoFourClient().opacity(1, 0.6),
+    demoFourCdn().opacity(1, 0.6),
+    demoFourServer().opacity(1, 0.6),
   );
-  yield* waitFor(0.4);
+  yield* waitFor(0.2667);
   demoFourArrowIn().opacity(1);
-  yield* demoFourArrowIn().end(1, 0.9, easeInOutCubic);
+  yield* demoFourArrowIn().end(1, 0.6, easeInOutCubic);
   demoFourArrowOut().opacity(1);
-  yield* demoFourArrowOut().end(1, 0.9, easeInOutCubic);
-  yield* waitFor(0.6);
+  yield* demoFourArrowOut().end(1, 0.6, easeInOutCubic);
+  yield* waitFor(0.4);
 
   // Requête n°1 : traverse le CDN jusqu'à l'origine
-  yield* demoFourRequestPacket().opacity(1, 0.24);
-  yield* demoFourRequestPacket().flyTo([TRIPLE_MIDDLE_X(), -vH() * 0.06], 0.9);
-  yield* demoFourRequestPacket().flyTo([TRIPLE_RIGHT_X() - D3_HALF_W() - vW() * 0.045, -vH() * 0.06], 0.9);
+  yield* demoFourRequestPacket().opacity(1, 0.16);
+  yield* demoFourRequestPacket().flyTo([TRIPLE_MIDDLE_X(), -vH() * 0.06], 0.6);
+  yield* demoFourRequestPacket().flyTo([TRIPLE_RIGHT_X() - D3_HALF_W() - vW() * 0.045, -vH() * 0.06], 0.6);
   yield* all(
-    demoFourRequestPacket().opacity(0, 0.24),
-    demoFourServer().setState('active', 0.3),
+    demoFourRequestPacket().opacity(0, 0.16),
+    demoFourServer().setState('active', 0.2),
   );
 
   // La réponse revient avec max-age=3600 et se clone dans le CDN
-  yield* demoFourResponseGroup().opacity(1, 0.4);
-  yield* demoFourResponseGroup().x(TRIPLE_MIDDLE_X(), 1.2, easeInOutCubic);
+  yield* demoFourResponseGroup().opacity(1, 0.2667);
+  yield* demoFourResponseGroup().x(TRIPLE_MIDDLE_X(), 0.8, easeInOutCubic);
   yield* all(
-    demoFourCachedCopy().opacity(1, 0.7),
-    demoFourCdn().setState('active', 0.4),
+    demoFourCachedCopy().opacity(1, 0.4667),
+    demoFourCdn().setState('active', 0.2667),
   );
-  yield* waitFor(0.6);
+  yield* waitFor(0.4);
   yield* all(
-    demoFourResponseGroup().x(TRIPLE_LEFT_X() + D3_HALF_W() + vW() * 0.05, 1.2, easeInOutCubic),
-    demoFourServer().setState('idle', 0.6),
+    demoFourResponseGroup().x(TRIPLE_LEFT_X() + D3_HALF_W() + vW() * 0.05, 0.8, easeInOutCubic),
+    demoFourServer().setState('idle', 0.4),
   );
   yield* all(
-    demoFourResponseGroup().opacity(0, 0.3),
-    demoFourCdn().setState('idle', 0.5),
+    demoFourResponseGroup().opacity(0, 0.2),
+    demoFourCdn().setState('idle', 0.3333),
   );
-  yield* waitFor(0.6);
+  yield* waitFor(0.4);
 
   // Requête n°2 : la flèche s'arrête au CDN — le trajet vers l'origine reste vide
   yield* waitUntil('p4-cache-hit');
   demoFourRequestPacket().position([TRIPLE_LEFT_X() + D3_HALF_W() + vW() * 0.045, -vH() * 0.06]);
-  yield* demoFourRequestPacket().opacity(1, 0.24);
-  yield* demoFourRequestPacket().flyTo([TRIPLE_MIDDLE_X(), -vH() * 0.06], 0.9);
+  yield* demoFourRequestPacket().opacity(1, 0.16);
+  yield* demoFourRequestPacket().flyTo([TRIPLE_MIDDLE_X(), -vH() * 0.06], 0.6);
   yield* all(
-    demoFourRequestPacket().opacity(0, 0.24),
-    demoFourCdn().setState('success', 0.4),
-    demoFourArrowOut().opacity(0.15, 1),
-    demoFourServer().opacity(0.35, 1),
+    demoFourRequestPacket().opacity(0, 0.16),
+    demoFourCdn().setState('success', 0.2667),
+    demoFourArrowOut().opacity(0.15, 0.6667),
+    demoFourServer().opacity(0.35, 0.6667),
   );
-  yield* demoFourCachedCopy().scale(1.15, 0.4, easeInOutCubic);
-  yield* demoFourCachedCopy().scale(1, 0.4, easeInOutCubic);
+  yield* demoFourCachedCopy().scale(1.15, 0.2667, easeInOutCubic);
+  yield* demoFourCachedCopy().scale(1, 0.2667, easeInOutCubic);
   demoFourResponseGroup().position([TRIPLE_MIDDLE_X(), vH() * 0.08]);
-  yield* demoFourResponseGroup().opacity(1, 0.3);
-  yield* demoFourResponseGroup().x(TRIPLE_LEFT_X() + D3_HALF_W() + vW() * 0.05, 1.1, easeInOutCubic);
-  yield* demoFourResponseGroup().opacity(0, 0.3);
-  yield* demoFourCdn().setState('idle', 0.6);
-  yield* waitFor(0.8);
+  yield* demoFourResponseGroup().opacity(1, 0.2);
+  yield* demoFourResponseGroup().x(TRIPLE_LEFT_X() + D3_HALF_W() + vW() * 0.05, 0.7333, easeInOutCubic);
+  yield* demoFourResponseGroup().opacity(0, 0.2);
+  yield* demoFourCdn().setState('idle', 0.4);
+  yield* waitFor(0.5333);
 
   // Parking quadrant bas-droite
   yield* waitUntil('p4-park');
   yield* all(
-    demoFourWrap().scale(PARKED_SCALE, 1.6, easeInOutCubic),
-    demoFourWrap().position([QUAD_RIGHT_X(), QUAD_BOTTOM_Y() + PARKED_OFFSET_Y()], 1.6, easeInOutCubic),
-    panelFour().opacity(1, 1.2),
-    demoOneWrap().opacity(1, 1.2),
-    demoTwoWrap().opacity(1, 1.2),
-    demoThreeWrap().opacity(1, 1.2),
+    demoFourWrap().scale(PARKED_SCALE, 1.0667, easeInOutCubic),
+    demoFourWrap().position([QUAD_RIGHT_X(), QUAD_BOTTOM_Y() + PARKED_OFFSET_Y()], 1.0667, easeInOutCubic),
+    panelFour().opacity(1, 0.8),
+    demoOneWrap().opacity(1, 0.8),
+    demoTwoWrap().opacity(1, 0.8),
+    demoThreeWrap().opacity(1, 0.8),
   );
-  yield* waitFor(0.8);
+  yield* waitFor(0.5333);
 
   // ═══ Grille complète : pulse d'ensemble ═════════════════════════════════════
   yield* waitUntil('grid-pulse');
   yield* all(
-    demoOneWrap().scale(PARKED_SCALE * 1.05, 0.7, easeInOutCubic),
-    demoTwoWrap().scale(PARKED_SCALE * 1.05, 0.7, easeInOutCubic),
-    demoThreeWrap().scale(PARKED_SCALE * 1.05, 0.7, easeInOutCubic),
-    demoFourWrap().scale(PARKED_SCALE * 1.05, 0.7, easeInOutCubic),
-    panelOne().stroke(PALETTE.cyan + '88', 0.7),
-    panelTwo().stroke(PALETTE.cyan + '88', 0.7),
-    panelThree().stroke(PALETTE.cyan + '88', 0.7),
-    panelFour().stroke(PALETTE.cyan + '88', 0.7),
+    demoOneWrap().scale(PARKED_SCALE * 1.05, 0.4667, easeInOutCubic),
+    demoTwoWrap().scale(PARKED_SCALE * 1.05, 0.4667, easeInOutCubic),
+    demoThreeWrap().scale(PARKED_SCALE * 1.05, 0.4667, easeInOutCubic),
+    demoFourWrap().scale(PARKED_SCALE * 1.05, 0.4667, easeInOutCubic),
+    panelOne().stroke(PALETTE.cyan + '88', 0.4667),
+    panelTwo().stroke(PALETTE.cyan + '88', 0.4667),
+    panelThree().stroke(PALETTE.cyan + '88', 0.4667),
+    panelFour().stroke(PALETTE.cyan + '88', 0.4667),
   );
   yield* all(
-    demoOneWrap().scale(PARKED_SCALE, 0.8, easeInOutCubic),
-    demoTwoWrap().scale(PARKED_SCALE, 0.8, easeInOutCubic),
-    demoThreeWrap().scale(PARKED_SCALE, 0.8, easeInOutCubic),
-    demoFourWrap().scale(PARKED_SCALE, 0.8, easeInOutCubic),
-    panelOne().stroke(PALETTE.ghost, 1),
-    panelTwo().stroke(PALETTE.ghost, 1),
-    panelThree().stroke(PALETTE.ghost, 1),
-    panelFour().stroke(PALETTE.ghost, 1),
+    demoOneWrap().scale(PARKED_SCALE, 0.5333, easeInOutCubic),
+    demoTwoWrap().scale(PARKED_SCALE, 0.5333, easeInOutCubic),
+    demoThreeWrap().scale(PARKED_SCALE, 0.5333, easeInOutCubic),
+    demoFourWrap().scale(PARKED_SCALE, 0.5333, easeInOutCubic),
+    panelOne().stroke(PALETTE.ghost, 0.6667),
+    panelTwo().stroke(PALETTE.ghost, 0.6667),
+    panelThree().stroke(PALETTE.ghost, 0.6667),
+    panelFour().stroke(PALETTE.ghost, 0.6667),
   );
-  yield* waitFor(3);
+  yield* waitFor(2);
 
   // ── Fade-out ───────────────────────────────────────────────────────────────
   yield* waitUntil('end');
   yield* all(
-    gridRef().opacity(0, 1),
-    demoOneWrap().opacity(0, 1),
-    demoTwoWrap().opacity(0, 1),
-    demoThreeWrap().opacity(0, 1),
-    demoFourWrap().opacity(0, 1),
-    panelOne().opacity(0, 1),
-    panelTwo().opacity(0, 1),
-    panelThree().opacity(0, 1),
-    panelFour().opacity(0, 1),
-    titleOne().opacity(0, 1),
-    titleTwo().opacity(0, 1),
-    titleThree().opacity(0, 1),
-    titleFour().opacity(0, 1),
+    gridRef().opacity(0, 0.6667),
+    demoOneWrap().opacity(0, 0.6667),
+    demoTwoWrap().opacity(0, 0.6667),
+    demoThreeWrap().opacity(0, 0.6667),
+    demoFourWrap().opacity(0, 0.6667),
+    panelOne().opacity(0, 0.6667),
+    panelTwo().opacity(0, 0.6667),
+    panelThree().opacity(0, 0.6667),
+    panelFour().opacity(0, 0.6667),
+    titleOne().opacity(0, 0.6667),
+    titleTwo().opacity(0, 0.6667),
+    titleThree().opacity(0, 0.6667),
+    titleFour().opacity(0, 0.6667),
   );
-  yield* waitFor(0.6);
+  yield* waitFor(0.4);
 });

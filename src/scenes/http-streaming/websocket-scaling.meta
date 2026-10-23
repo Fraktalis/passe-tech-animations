@@ -3,39 +3,39 @@
   "timeEvents": [
     {
       "name": "topologie",
-      "targetTime": 0
+      "targetTime": 0.5414272256987254
     },
     {
       "name": "round-robin",
-      "targetTime": 2.3600000000000003
+      "targetTime": 5.80285445139745
     },
     {
       "name": "websocket",
-      "targetTime": 6.74
+      "targetTime": 15.068186528716259
     },
     {
       "name": "case-cochee",
-      "targetTime": 9.09
+      "targetTime": 20.345708902794897
     },
     {
       "name": "echec-diffusion",
-      "targetTime": 11.259999999999998
+      "targetTime": 25.22713612849362
     },
     {
       "name": "redis",
-      "targetTime": 12.609999999999998
+      "targetTime": 27.963231276873532
     },
     {
       "name": "diffusion-complete",
-      "targetTime": 14.059999999999997
+      "targetTime": 31.404658502572257
     },
     {
       "name": "scale-out",
-      "targetTime": 19.199999999999992
+      "targetTime": 42.00951483799146
     },
     {
       "name": "end",
-      "targetTime": 24.25999999999998
+      "targetTime": 52.23780028313118
     }
   ],
   "seed": 902384171

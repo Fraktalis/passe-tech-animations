@@ -3,43 +3,43 @@
   "timeEvents": [
     {
       "name": "rails",
-      "targetTime": 0
+      "targetTime": 0.6205073240443014
     },
     {
       "name": "lien-1991",
-      "targetTime": 1.7000000000000002
+      "targetTime": 4.873704894605217
     },
     {
       "name": "rupture",
-      "targetTime": 3.3
+      "targetTime": 8.49236165555274
     },
     {
       "name": "thread-par-connexion",
-      "targetTime": 4.65
+      "targetTime": 11.431594090379896
     },
     {
       "name": "pages-complexes",
-      "targetTime": 9.100000000000001
+      "targetTime": 20.690442742620633
     },
     {
       "name": "keep-alive",
-      "targetTime": 13.429999999999994
+      "targetTime": 36.76806126682249
     },
     {
       "name": "c10k",
-      "targetTime": 16.879999999999995
+      "targetTime": 45.42769580755921
     },
     {
       "name": "event-loop",
-      "targetTime": 20.990000000000002
+      "targetTime": 54.27659942976934
     },
     {
       "name": "query-2026",
-      "targetTime": 27.119999999999987
+      "targetTime": 66.74623397050601
     },
     {
       "name": "end",
-      "targetTime": 31.069999999999986
+      "targetTime": 74.99562487173385
     }
   ],
   "seed": 481237529

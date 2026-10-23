@@ -55,6 +55,10 @@ export default makeScene2D(function* (view) {
 
   const milestoneYears = [1997, 1999, 2004, 2009];
   const milestoneNames = ['keep-alive', 'C10K', 'nginx', 'node'];
+  // keep-alive (RFC 2068, 1997) est un changement de PROTOCOLE — les connexions
+  // persistent par défaut en HTTP/1.1. C10K/nginx/node restent des techniques
+  // d'IMPLÉMENTATION pour absorber la charge, elles.
+  const milestoneRails: ('proto' | 'impl')[] = ['proto', 'impl', 'impl', 'impl'];
   const milestoneDots   = milestoneYears.map(() => createRef<Circle>());
   const milestoneLabels = milestoneYears.map(() => createRef<Txt>());
 
@@ -181,8 +185,9 @@ export default makeScene2D(function* (view) {
     {milestoneYears.map((milestoneYear, milestoneIndex) => (
       <Circle key={`milestone-dot-${milestoneYear}`} ref={milestoneDots[milestoneIndex]}
         size={() => vW() * 0.009}
-        fill={PALETTE.amber}
-        x={() => yearX(milestoneYear)} y={implRailY}
+        fill={milestoneRails[milestoneIndex] === 'proto' ? PALETTE.dsRose : PALETTE.amber}
+        x={() => yearX(milestoneYear)}
+        y={() => milestoneRails[milestoneIndex] === 'proto' ? protoRailY() : implRailY()}
         opacity={0}
       />
     ))}
@@ -193,7 +198,10 @@ export default makeScene2D(function* (view) {
         fill={PALETTE.ghost}
         fontSize={() => vW() * 0.010}
         fontFamily={'JetBrains Mono, DM Mono, monospace'}
-        x={() => yearX(milestoneYear)} y={() => implRailY() + vH() * 0.06}
+        x={() => yearX(milestoneYear)}
+        y={() => milestoneRails[milestoneIndex] === 'proto'
+          ? protoRailY() - vH() * 0.06
+          : implRailY() + vH() * 0.06}
         opacity={0}
       />
     ))}
@@ -256,8 +264,7 @@ export default makeScene2D(function* (view) {
         icon={resourceIndex === 1 ? 'mdi:code-braces' : 'mdi:image-outline'}
         size={() => vW() * 0.022}
         color={PALETTE.ghost}
-        x={clientX}
-        y={() => stageY() + vH() * (0.10 + resourceIndex * 0.065)}
+        x={serverLeftX} y={stageY}
         opacity={0}
       />
     ))}
@@ -518,7 +525,6 @@ export default makeScene2D(function* (view) {
   handshakeCounter().text('handshakes: 0');
   yield* handshakeCounter().opacity(1, 0.6);
   for (let resourceIndex = 0; resourceIndex < 3; resourceIndex++) {
-    yield* resourceIcons[resourceIndex]().opacity(1, 0.4);
     // Long préambule répétitif — un handshake TCP complet avant la moindre requête.
     yield* miniHandshake(0.6);
     // … puis un échange minuscule : le GET part vite, une fois la voie ouverte.
@@ -526,6 +532,10 @@ export default makeScene2D(function* (view) {
     requestDot().opacity(1);
     yield* requestDot().position(new Vector2(serverLeftX(), stageY()), 0.4);
     requestDot().opacity(0);
+    // La ressource revient du serveur vers le client, en retour du GET — elle s'accumule dans la pile.
+    const resourceRestY = stageY() + vH() * (0.10 + resourceIndex * 0.065);
+    yield* resourceIcons[resourceIndex]().opacity(1, 0.15);
+    yield* resourceIcons[resourceIndex]().position(new Vector2(clientX(), resourceRestY), 0.5, easeInOutCubic);
     yield* handshakeCounter().opacity(0, 0.24);
     handshakeCounter().text(`handshakes: ${resourceIndex + 1}`);
     yield* handshakeCounter().opacity(1, 0.24);

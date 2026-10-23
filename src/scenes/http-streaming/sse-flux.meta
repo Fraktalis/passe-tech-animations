@@ -3,35 +3,35 @@
   "timeEvents": [
     {
       "name": "setup",
-      "targetTime": 0
+      "targetTime": 0.47052518756698825
     },
     {
       "name": "sse-request",
-      "targetTime": 1.97
+      "targetTime": 4.692840300107182
     },
     {
       "name": "stream-open",
-      "targetTime": 3.82
+      "targetTime": 9.192733118971063
     },
     {
       "name": "events",
-      "targetTime": 4.720000000000001
+      "targetTime": 11.651468381564847
     },
     {
       "name": "ligne-vide",
-      "targetTime": 8.17000000000001
+      "targetTime": 21.769046087888555
     },
     {
       "name": "proxy",
-      "targetTime": 12.52000000000001
+      "targetTime": 31.03367631296894
     },
     {
       "name": "rebond-client",
-      "targetTime": 16.36000000000001
+      "targetTime": 39.184201500535934
     },
     {
       "name": "end",
-      "targetTime": 19.91
+      "targetTime": 46.47241157556271
     }
   ],
   "seed": 274815063
