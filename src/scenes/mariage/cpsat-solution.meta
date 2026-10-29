@@ -1,0 +1,22 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "solveur",
+      "targetTime": 0.22891177951494357
+    },
+    {
+      "name": "tables",
+      "targetTime": 2.7393882708358652
+    },
+    {
+      "name": "validation",
+      "targetTime": 6.809864762156787
+    },
+    {
+      "name": "chambres",
+      "targetTime": 14.007450075526211
+    }
+  ],
+  "seed": 1776218733
+}

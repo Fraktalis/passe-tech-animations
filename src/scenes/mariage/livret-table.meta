@@ -1,0 +1,22 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "tables",
+      "targetTime": 0
+    },
+    {
+      "name": "fiche",
+      "targetTime": 1.3
+    },
+    {
+      "name": "legende",
+      "targetTime": 4.040000000000001
+    },
+    {
+      "name": "meme-fichier",
+      "targetTime": 7.49
+    }
+  ],
+  "seed": 1042406695
+}

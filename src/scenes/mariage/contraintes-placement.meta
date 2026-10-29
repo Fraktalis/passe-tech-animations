@@ -1,0 +1,26 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "invites",
+      "targetTime": 0.41204120312689846
+    },
+    {
+      "name": "ensemble",
+      "targetTime": 2.315647118059774
+    },
+    {
+      "name": "regrouper",
+      "targetTime": 5.065035388895637
+    },
+    {
+      "name": "separer",
+      "targetTime": 7.797314837682999
+    },
+    {
+      "name": "a-la-main",
+      "targetTime": 10.146703108518862
+    }
+  ],
+  "seed": 1184555925
+}

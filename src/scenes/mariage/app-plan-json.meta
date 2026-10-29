@@ -1,0 +1,26 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "json",
+      "targetTime": 0
+    },
+    {
+      "name": "edition",
+      "targetTime": 5.220000000000001
+    },
+    {
+      "name": "lecture-seule",
+      "targetTime": 8.22
+    },
+    {
+      "name": "survol",
+      "targetTime": 10.620000000000001
+    },
+    {
+      "name": "lumieres",
+      "targetTime": 16.119999999999997
+    }
+  ],
+  "seed": 2150150067
+}

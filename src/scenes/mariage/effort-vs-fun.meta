@@ -1,0 +1,18 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "effort",
+      "targetTime": 1.3
+    },
+    {
+      "name": "gain",
+      "targetTime": 3.8100000000000014
+    },
+    {
+      "name": "fun",
+      "targetTime": 5.110000000000001
+    }
+  ],
+  "seed": 3760706936
+}

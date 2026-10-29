@@ -1,0 +1,22 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "doublons",
+      "targetTime": 0
+    },
+    {
+      "name": "fenetres",
+      "targetTime": 5.550000000000002
+    },
+    {
+      "name": "nettoyage",
+      "targetTime": 10.150000000000004
+    },
+    {
+      "name": "low-poly",
+      "targetTime": 19.89
+    }
+  ],
+  "seed": 4196090890
+}

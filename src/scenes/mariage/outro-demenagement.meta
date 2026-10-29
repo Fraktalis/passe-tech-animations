@@ -1,0 +1,14 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "nouveau-projet",
+      "targetTime": 0
+    },
+    {
+      "name": "premieres-taches",
+      "targetTime": 6.919999999999996
+    }
+  ],
+  "seed": 608573748
+}

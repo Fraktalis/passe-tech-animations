@@ -1,0 +1,22 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "fiancailles",
+      "targetTime": 0
+    },
+    {
+      "name": "salon",
+      "targetTime": 4.1
+    },
+    {
+      "name": "un-an",
+      "targetTime": 5.249999999999999
+    },
+    {
+      "name": "question",
+      "targetTime": 10.949999999999998
+    }
+  ],
+  "seed": 455475116
+}

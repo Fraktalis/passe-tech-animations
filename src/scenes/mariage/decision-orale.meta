@@ -1,0 +1,26 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "oral",
+      "targetTime": 0
+    },
+    {
+      "name": "envol",
+      "targetTime": 2.9000000000000004
+    },
+    {
+      "name": "deux-versions",
+      "targetTime": 5.420000000000001
+    },
+    {
+      "name": "six-mois",
+      "targetTime": 6.720000000000001
+    },
+    {
+      "name": "ecrits-restent",
+      "targetTime": 11.92
+    }
+  ],
+  "seed": 3853561453
+}

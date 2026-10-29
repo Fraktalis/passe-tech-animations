@@ -1,0 +1,26 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "discussion",
+      "targetTime": 0.17863522686673813
+    },
+    {
+      "name": "vibe",
+      "targetTime": 3.6902822436584493
+    },
+    {
+      "name": "transcription",
+      "targetTime": 6.857270453733477
+    },
+    {
+      "name": "resume",
+      "targetTime": 10.448917470525153
+    },
+    {
+      "name": "telephone",
+      "targetTime": 15.588235083958526
+    }
+  ],
+  "seed": 865717549
+}

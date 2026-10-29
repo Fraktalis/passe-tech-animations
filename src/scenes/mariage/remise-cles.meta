@@ -1,0 +1,18 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "tableau",
+      "targetTime": 0
+    },
+    {
+      "name": "arrivee",
+      "targetTime": 2.1
+    },
+    {
+      "name": "depart",
+      "targetTime": 4.560000000000002
+    }
+  ],
+  "seed": 3951557328
+}

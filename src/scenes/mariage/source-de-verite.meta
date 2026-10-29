@@ -1,0 +1,18 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "source",
+      "targetTime": 0
+    },
+    {
+      "name": "un-seul-ecrivain",
+      "targetTime": 4.15
+    },
+    {
+      "name": "ia-comparee",
+      "targetTime": 7.099999999999998
+    }
+  ],
+  "seed": 1684325009
+}

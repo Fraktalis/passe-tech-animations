@@ -1,0 +1,22 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "points-saillants",
+      "targetTime": 0
+    },
+    {
+      "name": "correspondances",
+      "targetTime": 3.2
+    },
+    {
+      "name": "graphe",
+      "targetTime": 8.370000000000008
+    },
+    {
+      "name": "piste-de-danse",
+      "targetTime": 14.490000000000032
+    }
+  ],
+  "seed": 509751519
+}

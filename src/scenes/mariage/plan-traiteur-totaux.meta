@@ -1,0 +1,22 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "plan",
+      "targetTime": 0
+    },
+    {
+      "name": "totaux",
+      "targetTime": 1.1850000000000007
+    },
+    {
+      "name": "fusion",
+      "targetTime": 3.885000000000001
+    },
+    {
+      "name": "verification",
+      "targetTime": 5.785000000000002
+    }
+  ],
+  "seed": 560483518
+}

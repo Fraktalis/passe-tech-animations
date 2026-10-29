@@ -1,0 +1,26 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "vikunja",
+      "targetTime": 0
+    },
+    {
+      "name": "adoption",
+      "targetTime": 4.1
+    },
+    {
+      "name": "obsidian",
+      "targetTime": 6.8999999999999995
+    },
+    {
+      "name": "ia",
+      "targetTime": 10.15
+    },
+    {
+      "name": "syncthing",
+      "targetTime": 14.050000000000004
+    }
+  ],
+  "seed": 3496620968
+}

@@ -1,0 +1,18 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "ellipse",
+      "targetTime": 0
+    },
+    {
+      "name": "accumulation",
+      "targetTime": 8.700000000000003
+    },
+    {
+      "name": "entrainement",
+      "targetTime": 12.35
+    }
+  ],
+  "seed": 1754380315
+}

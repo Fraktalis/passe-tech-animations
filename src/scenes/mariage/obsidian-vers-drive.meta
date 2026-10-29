@@ -1,0 +1,26 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "config",
+      "targetTime": 0.8
+    },
+    {
+      "name": "simultane",
+      "targetTime": 4.999999999999999
+    },
+    {
+      "name": "drive",
+      "targetTime": 7.819999999999997
+    },
+    {
+      "name": "deux-versions",
+      "targetTime": 10.12
+    },
+    {
+      "name": "bascule",
+      "targetTime": 11.819999999999999
+    }
+  ],
+  "seed": 3371568522
+}

@@ -1,0 +1,46 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "video",
+      "targetTime": 0
+    },
+    {
+      "name": "suspense",
+      "targetTime": 1.4
+    },
+    {
+      "name": "ffmpeg",
+      "targetTime": 3.3
+    },
+    {
+      "name": "tri",
+      "targetTime": 5.2
+    },
+    {
+      "name": "colmap",
+      "targetTime": 7.1
+    },
+    {
+      "name": "lichtfeld",
+      "targetTime": 9
+    },
+    {
+      "name": "gaussiennes",
+      "targetTime": 10.9
+    },
+    {
+      "name": "blender",
+      "targetTime": 12.8
+    },
+    {
+      "name": "threejs",
+      "targetTime": 14.7
+    },
+    {
+      "name": "carte",
+      "targetTime": 16.6
+    }
+  ],
+  "seed": 3642878899
+}

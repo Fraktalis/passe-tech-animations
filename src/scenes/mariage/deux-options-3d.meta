@@ -1,0 +1,22 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "fork",
+      "targetTime": 0.19105465369098845
+    },
+    {
+      "name": "option-laser",
+      "targetTime": 3.432109307381977
+    },
+    {
+      "name": "option-splats",
+      "targetTime": 11.562549813645688
+    },
+    {
+      "name": "choix",
+      "targetTime": 14.877305435345775
+    }
+  ],
+  "seed": 2088071997
+}

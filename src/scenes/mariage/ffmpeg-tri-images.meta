@@ -1,0 +1,18 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "decoupe",
+      "targetTime": 0.05051804215791355
+    },
+    {
+      "name": "tri",
+      "targetTime": 4.396295105394782
+    },
+    {
+      "name": "recouvrement",
+      "targetTime": 6.759442658092174
+    }
+  ],
+  "seed": 3146972732
+}

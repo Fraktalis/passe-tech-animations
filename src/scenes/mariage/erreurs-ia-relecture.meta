@@ -1,0 +1,22 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "relecture",
+      "targetTime": 0.8
+    },
+    {
+      "name": "diffs",
+      "targetTime": 5.800000000000002
+    },
+    {
+      "name": "compteur",
+      "targetTime": 9.400000000000004
+    },
+    {
+      "name": "tampon",
+      "targetTime": 12.859999999999998
+    }
+  ],
+  "seed": 232659316
+}

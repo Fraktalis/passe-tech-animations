@@ -1,0 +1,22 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "deux-semaines",
+      "targetTime": 0
+    },
+    {
+      "name": "sources",
+      "targetTime": 2.6
+    },
+    {
+      "name": "claude",
+      "targetTime": 4.9
+    },
+    {
+      "name": "sept-documents",
+      "targetTime": 7.950000000000001
+    }
+  ],
+  "seed": 633639337
+}
