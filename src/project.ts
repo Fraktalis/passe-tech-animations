@@ -47,11 +47,11 @@ import mariageSourceDeVerite from './scenes/mariage/source-de-verite?scene';
 import mariageEffortVsFun from './scenes/mariage/effort-vs-fun?scene';
 import mariageOutroDemenagement from './scenes/mariage/outro-demenagement?scene';
 
-import audio from "../sfx/obsidian-vers-drive.wav";
+import audio from "../sfx/frise-projet.wav";
 
 export default makeProject({
   scenes: [
-    // mariageFriseProjet,
+    mariageFriseProjet,
     // mariageQuestionsPrestataires,
     // mariageDecisionOrale,
     // mariageSystemeBriques,
@@ -73,7 +73,7 @@ export default makeProject({
     // mariageRemiseCles,
     // mariagePlanTraiteurTotaux,
     // mariageErreursIaRelecture,
-    mariageObsidianVersDrive,
+    // mariageObsidianVersDrive,
     // mariageSourceDeVerite,
     // mariageEffortVsFun,
     // mariageOutroDemenagement,
