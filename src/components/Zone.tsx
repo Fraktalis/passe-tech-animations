@@ -34,6 +34,8 @@ export type ZonePreset = 'network' | 'cloud' | 'trusted' | 'untrusted' | 'sandbo
 export interface ZoneProps extends RectProps {
   /** Label affiché en haut à gauche, caps, monospace. */
   label?: string;
+  /** Taille du label ; par défaut proportionnelle à la largeur de la zone. */
+  labelFontSize?: () => number;
   /** @deprecated Utiliser `color` + `lineDash` directement. */
   preset?: ZonePreset;
   /** Surcharge la couleur du preset. */
@@ -70,6 +72,7 @@ export class Zone extends Rect {
 
   public constructor({
     label,
+    labelFontSize,
     preset,
     color,
     children,
@@ -96,7 +99,7 @@ export class Zone extends Rect {
           key={`zone-label-${id}`}
           text={label}
           fill={themeColor + 'AA'}
-          fontSize={() => this.width() * 0.035}
+          fontSize={labelFontSize ?? (() => this.width() * 0.035)}
           fontFamily={'JetBrains Mono, DM Mono, monospace'}
           fontWeight={700}
           // offset={[-1, -1]} ancre le coin haut-gauche du texte sur (x, y)
