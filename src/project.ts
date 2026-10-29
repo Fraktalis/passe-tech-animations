@@ -1,8 +1,14 @@
 import {makeProject} from '@motion-canvas/core';
-import {Code, LezerHighlighter} from '@motion-canvas/2d';
+import {Code, Icon, LezerHighlighter} from '@motion-canvas/2d';
 import {parser} from '@lezer/javascript';
 
 Code.defaultHighlighter = new LezerHighlighter(parser);
+
+// Icônes servies par le cache disque de vite.config.ts (iconifyCache) au lieu de l'API
+// Iconify directe, qui rate-limite (429) les rendus. getSrc est protégé, d'où le cast.
+(Icon.prototype as any).getSrc = function (this: Icon) {
+  return `/iconify/${this.icon().replace(':', '/')}.svg?color=${encodeURIComponent(this.color().hex())}`;
+};
 
 // ── Scènes de test des composants (≥ 2026-05-20) ────────────────────────────
 import testConnectionArrow from './scenes/_components/test-connection-arrow?scene';
@@ -10,92 +16,67 @@ import testInfoCard         from './scenes/_components/test-info-card?scene';
 import testConnectedNode    from './scenes/_components/test-connected-node?scene';
 import testAnnotationBox    from './scenes/_components/test-annotation-box?scene';
 import testDs               from './scenes/_components/test-ds?scene';
+import testSfx              from './scenes/_components/test-sfx?scene';
 
-import mainScene from './scenes/_misc/openclaw-flow?scene';
-import mainScene2 from './scenes/_misc/bitShift?scene';
-import controlVsData from './scenes/_misc/llm-control-vs-data?scene';
-import namespacePid from './scenes/docker/namespace-pid?scene';
-import namespaceNet from './scenes/docker/namespace-net?scene';
-import cgroups from './scenes/docker/cgroups?scene';
-import subscribeCta from './scenes/_shared/subscribe-cta?scene';
-import dockerRecipe from './scenes/docker/docker-recipe?scene';
-import bioDocker from './scenes/docker/bio-docker?scene';
-import isolationEras from './scenes/docker/isolation-eras?scene';
-import wasmPipeline from './scenes/wasm/wasm-pipeline?scene';
-import nbodyComplexity from './scenes/wasm/nbody-complexity?scene';
-import wasmHistory from './scenes/wasm/wasm-history?scene';
-import jitCompiler from './scenes/wasm/jit-compiler?scene';
-import nbodyIntro from './scenes/wasm/nbody-intro?scene';
-import cl1Pipeline from './scenes/cl1/cl1-pipeline?scene';
-import cl1DlVsBio from './scenes/cl1/cl1-dl-vs-bio?scene';
-import pthDiagram from './scenes/litellm/pth-diagram?scene';
-import pthExecChain from './scenes/litellm/pth-exec-chain?scene';
-import payloadFiles from './scenes/litellm/payload-files?scene';
-import kubePwn from './scenes/litellm/kube-pwn?scene';
-import terminalDemo from './scenes/_misc/terminal-demo?scene';
-import install_terminal from './scenes/litellm/install_terminal?scene';
-import payloadDecode from './scenes/litellm/payload-decode?scene';
-import teampcpTimeline from './scenes/litellm/teampcp-timeline?scene';
-import conclusionRemediation from './scenes/litellm/conclusion-remediation?scene';
-import mythosExploitChain from './scenes/mythos/exploit-chain?scene';
-import mythosWhiteboxVsBlackbox from './scenes/mythos/whitebox-vs-blackbox?scene';
-import glasswingHeartbleedXz from './scenes/glasswing/heartbleed-xz?scene';
-import rpIntro from './scenes/reverse-proxy/rp-intro?scene';
-import lbBalancer from './scenes/reverse-proxy/lb-balancer?scene';
-import apiGateway from './scenes/reverse-proxy/api-gateway?scene';
-import lbOsi from './scenes/reverse-proxy/lb-osi?scene';
-import dockerSocketEscape from './scenes/docker/docker-socket-escape?scene';
-import codeBadge from './scenes/_shared/code-badge?scene';
-import userNamespace from './scenes/docker/user-namespace?scene';
-import latestDanger from './scenes/docker/latest-danger?scene';
-import capabilities from './scenes/docker/capabilities?scene';
-import layerSecrets from './scenes/docker/layer-secrets?scene';
-import digestPinning from './scenes/docker/digest-pinning?scene';
-import nonRootUser from './scenes/docker/non-root-user?scene';
-import tokenisation from './scenes/llm/tokenisation?scene';
-import attention from './scenes/llm/attention?scene';
-import neurone from './scenes/llm/neurone?scene';
-import consoleMixage from './scenes/llm/console-mixage?scene';
-import descenteGradient from './scenes/llm/descente-gradient?scene';
-import retropropagation from './scenes/llm/retropropagation?scene';
-import interpretabilite from './scenes/llm/interpretabilite?scene';
-import summaryPipeline from './scenes/llm/summary-pipeline?scene';
-import temperature from './scenes/llm/temperature?scene';
-import echelleParametres from './scenes/llm/echelle-parametres?scene';
-import cosineSimilarite from './scenes/llm/cosine-similarite?scene';
-import innerOuterLoop from './scenes/loop/inner-outer-loop?scene';
-import llmPile from './scenes/loop/llm-pile?scene';
-import quatreFiltres from './scenes/loop/quatre-filtres?scene';
-import ralphWiggumSession from './scenes/loop/ralph-wiggum-session?scene';
-import verifierAgent from './scenes/loop/verifier-agent?scene';
-import whileLoopBash from './scenes/loop/while-loop-bash?scene';
-import noExitCondition from './scenes/loop/no-exit-condition?scene';
-import verifierLimits from './scenes/loop/verifier-limits?scene';
-import selfImprovementVsTask from './scenes/loop/self-improvement-vs-task?scene';
-import selfImprovementDrift from './scenes/loop/self-improvement-drift?scene';
-import requeteHttpCycle from './scenes/http-streaming/requete-http-cycle?scene';
-import osiHttpTcp from './scenes/http-streaming/osi-http-tcp?scene';
-import quatreProprietesHttp from './scenes/http-streaming/quatre-proprietes-http?scene';
-import mytheConnexionsCourtes from './scenes/http-streaming/mythe-connexions-courtes?scene';
-import sseFlux from './scenes/http-streaming/sse-flux?scene';
-import websocketUpgrade from './scenes/http-streaming/websocket-upgrade?scene';
-import websocketScaling from './scenes/http-streaming/websocket-scaling?scene';
-import streamableHttp from './scenes/http-streaming/streamable-http?scene';
-import mcpRevisionAvantApres from './scenes/http-streaming/mcp-revision-avant-apres?scene';
 
-import audio from "./audio/C0191_HOOK_prise2.mp3";
+
+// ── Vidéo « Mariage ingénieur » ──────────────────────────────────────────────
+import mariageFriseProjet from './scenes/mariage/frise-projet?scene';
+import mariageQuestionsPrestataires from './scenes/mariage/questions-prestataires?scene';
+import mariageDecisionOrale from './scenes/mariage/decision-orale?scene';
+import mariageSystemeBriques from './scenes/mariage/systeme-briques?scene';
+import mariagePipelineVibe from './scenes/mariage/pipeline-vibe?scene';
+import mariageContraintesPlacement from './scenes/mariage/contraintes-placement?scene';
+import mariageCpsatSolution from './scenes/mariage/cpsat-solution?scene';
+import mariageDeuxOptions3d from './scenes/mariage/deux-options-3d?scene';
+import mariagePipelineJumeau from './scenes/mariage/pipeline-jumeau?scene';
+import mariageFfmpegTriImages from './scenes/mariage/ffmpeg-tri-images?scene';
+import mariageParallaxe from './scenes/mariage/parallaxe?scene';
+import mariageColmapPointsIlots from './scenes/mariage/colmap-points-ilots?scene';
+import mariageGaussiennes from './scenes/mariage/gaussiennes?scene';
+import mariageBlenderClaudeDefauts from './scenes/mariage/blender-claude-defauts?scene';
+import mariageAppPlanJson from './scenes/mariage/app-plan-json?scene';
+import mariageSiteRsvp from './scenes/mariage/site-rsvp?scene';
+import mariageDocumentsSourceUnique from './scenes/mariage/documents-source-unique?scene';
+import mariageLivretTable from './scenes/mariage/livret-table?scene';
+import mariageRemiseCles from './scenes/mariage/remise-cles?scene';
+import mariagePlanTraiteurTotaux from './scenes/mariage/plan-traiteur-totaux?scene';
+import mariageErreursIaRelecture from './scenes/mariage/erreurs-ia-relecture?scene';
+import mariageObsidianVersDrive from './scenes/mariage/obsidian-vers-drive?scene';
+import mariageSourceDeVerite from './scenes/mariage/source-de-verite?scene';
+import mariageEffortVsFun from './scenes/mariage/effort-vs-fun?scene';
+import mariageOutroDemenagement from './scenes/mariage/outro-demenagement?scene';
+
+import audio from "../sfx/obsidian-vers-drive.wav";
 
 export default makeProject({
   scenes: [
-    //  osiHttpTcp,
-    // quatreProprietesHttp,
-    // mytheConnexionsCourtes,
-    // requeteHttpCycle,
-    // sseFlux,
-    // websocketUpgrade,
-    // websocketScaling,
-    // streamableHttp,
-    mcpRevisionAvantApres,
+    // mariageFriseProjet,
+    // mariageQuestionsPrestataires,
+    // mariageDecisionOrale,
+    // mariageSystemeBriques,
+    // mariagePipelineVibe,
+    // mariageContraintesPlacement,
+    // mariageCpsatSolution,
+    // mariageDeuxOptions3d,
+    // mariagePipelineJumeau,
+    // mariageFfmpegTriImages,
+    // mariageParallaxe,
+    // mariageColmapPointsIlots,
+    // mariageGaussiennes,
+    // mariageBlenderClaudeDefauts,
+    // mariageAppPlanJson,
+    // mariageSiteRsvp,
+    // testSfx,
+    // mariageDocumentsSourceUnique,
+    // mariageLivretTable,
+    // mariageRemiseCles,
+    // mariagePlanTraiteurTotaux,
+    // mariageErreursIaRelecture,
+    mariageObsidianVersDrive,
+    // mariageSourceDeVerite,
+    // mariageEffortVsFun,
+    // mariageOutroDemenagement,
   ],
-  // audio
+  audio
 });
