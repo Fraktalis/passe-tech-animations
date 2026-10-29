@@ -20,6 +20,7 @@ import {
   easeInCubic,
 } from '@motion-canvas/core';
 import {PALETTE} from '../../theme';
+import {sfx, sfxFill, sfxReset, sfxFlush} from '../../sfx';
 
 const MONO = 'JetBrains Mono, DM Mono, monospace';
 const HOUR_BLOCK_COUNT = 14;
@@ -165,12 +166,14 @@ export default makeScene2D(function* (view) {
   </>);
 
   // ── ANIMATION ──────────────────────────────────────────────────────────────
+  sfxReset();
   yield* gridRef().opacity(0.07, 0.8);
   yield* chartFrame().opacity(1, 0.5);
 
   // 1. effort — les heures s'empilent très haut
   yield* waitUntil('effort');
   yield* effortLabel().opacity(1, 0.3);
+  hourBlockRefs.forEach((_, blockIndex) => sfx('tick', 0.8, 0.12 * blockIndex));
   yield* sequence(0.12, ...hourBlockRefs.map(hourBlockRef =>
     all(
       hourBlockRef().opacity(1, 0.2),
@@ -182,15 +185,20 @@ export default makeScene2D(function* (view) {
   // 2. gain — une barre minuscule
   yield* waitUntil('gain');
   yield* gainLabel().opacity(1, 0.3);
+  sfx('tick');
   yield* gainBar().height(vH() * 0.03, 0.5, easeOutCubic);
   yield* waitFor(0.5);
 
   // 3. fun — dépasse le cadre, la caméra recule, la barre sort de l'écran
   yield* waitUntil('fun');
   yield* funLabel().opacity(1, 0.3);
+  sfxFill(0, 1, 1.2, {ease: easeOutCubic, steps: 8});
+  sfx('emphasis', 0.7, 1.2);
   yield* funBar().height(vH() * 0.55, 1.2, easeOutCubic);
   yield* chartFrame().stroke(PALETTE.jaune, 0.3);
   const cameraScale = 0.4;
+  sfx('travel', 0.5);
+  sfx('success', 0.7, 2.4);
   yield* all(
     funBar().height(vH() * 3.5, 2.4, easeInCubic),
     cameraLayout().scale(cameraScale, 2.4, easeInOutCubic),
@@ -198,4 +206,5 @@ export default makeScene2D(function* (view) {
     chartFrame().height(vH() * 0.7, 2.4, easeInOutCubic),
   );
   yield* waitFor(0.6);
+  sfxFlush('effort-vs-fun');
 });

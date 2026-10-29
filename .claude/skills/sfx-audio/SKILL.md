@@ -12,7 +12,7 @@ Les sons sont synthétisés (`src/sfx/library.mjs`), jamais choisis un par un da
 Un seul son par temps fort de l'animation, pas un son par objet qui apparaît. Référence : `systeme-briques.tsx`, `site-rsvp.tsx`, `documents-source-unique.tsx` (≈ 10–20 appels par scène).
 
 - **Pas de `appear` / `disappear` / `transition`** pour des fondus d'opacité : trop de sons, Alex les a refusés (2026-10-29). Les apparitions de nœuds restent muettes.
-- Pas de `tick` en boucle sur chaque icône ou chaque secousse.
+- `tick` : bon pour les actions de frappe ou d'empilement discrètes (texte tapé, console, blocs qui s'empilent, ex. `effort-vs-fun`), car très discret. Éviter en revanche un `tick` sur chaque icône qui apparaît ou chaque secousse.
 - Un déplacement groupé (plusieurs fichiers qui glissent) = un `travel` par objet au plus, décalés comme l'animation.
 
 | Intention | Quand |
@@ -46,7 +46,7 @@ sfxFlush('nom-de-la-scene');      // dernière ligne
 
 ## Générer le WAV
 
-1. `src/project.ts` : ne garder que la scène voulue dans `scenes` (sauvegarder le fichier avant, le restaurer après).
+1. `src/project.ts` : ne garder que la scène voulue dans `scenes` (sauvegarder le fichier avant avec `git stash`/copie dans le scratchpad, **pas dans `/tmp`** : chemin différent entre Python et bash sous Windows ; le restaurer après).
 2. Lancer le preview (`preview_start` `motion-canvas`, port 9000 ou le suivant libre).
 3. **Lancer la lecture** (bouton Play) et attendre la fin de la scène : `sfxFlush` n'écrit `sfx/<scène>.json` que si la scène va jusqu'au bout. Un simple rechargement ou un hot-reload laisse parfois un JSON périmé : vérifier que son contenu reflète les derniers `sfx()`.
 4. `node scripts/render-sfx.mjs sfx/<scène>.json` → `sfx/<scène>.wav` (mono 48 kHz, ~16 bits, affiche nb de sons / durée / crête).
