@@ -166,6 +166,16 @@ Scènes de référence pour chaque composant : `src/scenes/_components/test-*.ts
 
 ---
 
+### Sound effects — librairie `src/sfx/` (≥ 2026-10-29)
+
+Les bruitages sont générés par synthèse, jamais choisis son par son dans les scènes.
+- Les scènes appellent des **intentions** : `sfx('travel')`, `sfx('draw')`, `sfx('land')`… (liste dans `src/sfx/index.ts`). Jamais de forme d'onde, de fréquence ou de volume absolu dans une scène.
+- Les sons, la gamme (la mineur pentatonique), le bus (passe-bas + réverb) et les niveaux vivent dans `src/sfx/library.mjs` uniquement. Pour changer un son, on le change là.
+- Caractère : doux mais techno, pas de musique de fond, rien d'agressif.
+- Chaque scène : `sfxReset()` au début, `sfxFlush('nom-de-la-scène')` à la fin. Ouvrir le preview écrit `sfx/<scène>.json` ; `node scripts/render-sfx.mjs sfx/<scène>.json` produit le WAV.
+- Banc d'essai : `src/scenes/_components/test-sfx.tsx`.
+- **Parcimonie** : un son par temps fort, jamais un `appear`/`tick` par objet qui apparaît. Procédure complète de génération : skill `sfx-audio` (`.claude/skills/sfx-audio/`).
+
 ## Notes de production (dans `.ft-note`)
 
 Les pieds de slides contiennent des notes destinées à Alex uniquement (pas à l'audience). Exemples de patterns utiles :
