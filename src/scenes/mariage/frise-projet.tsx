@@ -25,6 +25,7 @@ import {
   waitUntil,
 } from '@motion-canvas/core';
 import {PALETTE} from '../../theme';
+import {sfx, sfxFill, sfxReset, sfxFlush} from '../../sfx';
 
 /** ⚠ Valeur d'exemple : à remplacer par le vrai nombre de tâches Vikunja. */
 const TASK_TOTAL = 240;
@@ -312,7 +313,9 @@ export default makeScene2D(function* (view) {
   // ── ANIMATION ──────────────────────────────────────────────────────────────
 
   // 1. fiancailles — trois ans gris, compteur figé à 0
+  sfxReset();
   yield* waitUntil('fiancailles');
+  [1, 2, 3].forEach(yearNumber => sfx('tick', 0.8, 0.8 + yearDuration * yearNumber));
   yield* all(
     gridRef().opacity(0.07, 0.8),
     ringIcon().opacity(1, 0.6),
@@ -333,6 +336,8 @@ export default makeScene2D(function* (view) {
   // 2. salon — le point jaune tombe, le segment suivant va s'allumer
   yield* waitUntil('salon');
   salonDot().opacity(1);
+  sfx('land', 1, 0.55);
+  sfx('emphasis', 0.7, 0.55);
   yield* salonDot().y(friseY(), 0.55, easeInCubic);
   salonRipple().scale(1);
   salonRipple().opacity(1);
@@ -348,12 +353,14 @@ export default makeScene2D(function* (view) {
   // 3. un-an — la frise jaune file, tout s'empile de plus en plus vite
   yield* waitUntil('un-an');
   yellowLine().opacity(1);
+  sfxFill(0, 1, yellowDuration, {ease: easeInCubic, steps: 16});
   yield* all(
     yellowLine().end(1, yellowDuration, linear),
     taskCount(TASK_TOTAL, yellowDuration, easeInCubic),
     spawnMicroIcons(),
   );
   heartIcon().opacity(1);
+  sfx('activate');
   yield* all(
     heartIcon().scale(1, 0.5, easeOutCubic),
     arriveeLabel().opacity(1, 0.5),
@@ -363,6 +370,8 @@ export default makeScene2D(function* (view) {
   // 4. question — tout se condense en une icône projet face à l'anneau
   yield* waitUntil('question');
   const projectTargetX = vW() * 0.14;
+  sfx('travel', 0.5);
+  sfx('emphasis', 0.7, 1.0);
   yield* all(
     ...microIcons.map(microIcon => all(
       microIcon.x(projectTargetX, 1.0, easeInOutCubic),
@@ -392,4 +401,5 @@ export default makeScene2D(function* (view) {
     questionSign().opacity(1, 0.5),
   );
   yield* waitFor(1.2);
+  sfxFlush('frise-projet');
 });
